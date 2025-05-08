@@ -1,35 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.jsx
+// Puedes empezar a limpiar los imports que no uses (useState, logos, App.css si quieres)
+
+// *** Importamos nuestro componente PizzaList desde su nueva ubicación ***
+// Asumiendo que está en src/components/menu/PizzaList.jsx
+import PizzaList from './Components/menu/PizzaList';
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  // ... limpia aquí cualquier estado o código de ejemplo que no necesites ...
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {/* Encabezado principal */}
+      <h1>Nuestro Menú de Pizzas</h1>
+
+      {/* *** Usamos nuestro componente PizzaList aquí *** */}
+      {/* Este componente se encargará de obtener los datos y renderizar todos los PizzaItems */}
+      <PizzaList />
+      {/* ************************************************************************** */}
+
+
+      {/* Puedes comentar o eliminar el código de ejemplo de Vite/React que estaba aquí */}
+      {/* ... código comentado ... */}
+
+      {/* Aquí puedes añadir el Footer o la sección de Contacto después */}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
