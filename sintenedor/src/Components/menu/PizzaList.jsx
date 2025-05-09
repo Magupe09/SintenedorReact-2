@@ -2,6 +2,8 @@
 import React from 'react';
 // Importamos PizzaItem desde la misma carpeta 'menu'
 import PizzaItem from './PizzaItem';
+import listStyles from './PizzaList.module.css';
+
 // Importamos la función para obtener el arreglo de pizzas desde donde la guardaste
 // Asumiendo que guardaste tus datos en src/data/pizzas.js
 import { getPizzasArray } from '../../data/pizzas'; // La ruta sube dos niveles (../..), entra a data, e importa getPizzasArray
@@ -19,7 +21,7 @@ function PizzaList() {
   // Retornamos la estructura JSX para la lista de pizzas
   return (
     // Este div puede servir como contenedor para aplicar estilos de grid después
-    <div className="pizza-list-container">
+    <div className={listStyles['pizza-list-container']}>
       {/* Usamos el método map() para recorrer el arreglo 'pizzas' */}
       {pizzas.map(pizza => (
         // Para cada objeto 'pizza' en el arreglo, renderizamos un PizzaItem.

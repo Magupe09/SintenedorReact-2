@@ -2,7 +2,7 @@
 
 /* Estilos para el contenedor principal de cada pizza */
 .pizza-item {
-    background-color: red;
+    
     border: 1px solid #ccc; /* Borde gris suave */
     padding: 15px; /* Espacio dentro del borde */
     margin: 10px; /* Espacio alrededor de cada item (para separarlos en la lista/grid) */
@@ -16,6 +16,7 @@
   
     /* Un ancho fijo para empezar, luego el grid en PizzaList controlará el layout */
     width: 220px;
+    height: 294px;
   }
   
   /* Estilos para la imagen de la pizza */
