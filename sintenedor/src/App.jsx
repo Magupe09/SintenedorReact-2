@@ -4,6 +4,7 @@
 // *** Importamos nuestro componente PizzaList desde su nueva ubicación ***
 // Asumiendo que está en src/components/menu/PizzaList.jsx
 import PizzaList from './Components/menu/PizzaList';
+import appStyles from './App.module.css';
 
 
 function App() {
@@ -11,19 +12,22 @@ function App() {
 
   return (
     <>
-      {/* Encabezado principal */}
-      <h1>Nuestro Menú de Pizzas</h1>
+      <div className={appStyles.container}>
+        {/* Encabezado principal */}
+        <h1>Nuestro Menú de Pizzas</h1>
 
-      {/* *** Usamos nuestro componente PizzaList aquí *** */}
-      {/* Este componente se encargará de obtener los datos y renderizar todos los PizzaItems */}
-      <PizzaList />
-      {/* ************************************************************************** */}
+        {/* *** Usamos nuestro componente PizzaList aquí *** */}
+        {/* Este componente se encargará de obtener los datos y renderizar todos los PizzaItems */}
+        <PizzaList />
+        {/* ************************************************************************** */}
 
 
-      {/* Puedes comentar o eliminar el código de ejemplo de Vite/React que estaba aquí */}
-      {/* ... código comentado ... */}
+        {/* Puedes comentar o eliminar el código de ejemplo de Vite/React que estaba aquí */}
+        {/* ... código comentado ... */}
 
-      {/* Aquí puedes añadir el Footer o la sección de Contacto después */}
+        {/* Aquí puedes añadir el Footer o la sección de Contacto después */}
+      </div>
+
     </>
   );
 }

@@ -1,48 +1,46 @@
 /* src/Components/menu/PizzaItem.module.css */
 
-/* Estilos para el contenedor principal de cada pizza */
 .pizza-item {
-    
-    border: 1px solid #ccc; /* Borde gris suave */
-    padding: 15px; /* Espacio dentro del borde */
-    margin: 10px; /* Espacio alrededor de cada item (para separarlos en la lista/grid) */
-    border-radius: 8px; /* Esquinas ligeramente redondeadas */
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    text-align: center; /* Centra el contenido (imagen, texto) */
-    background-color: #fff; /* Fondo blanco */
-    display: flex; /* Usamos flexbox para controlar la disposición interna si es necesario */
-    flex-direction: column; /* Apila los elementos verticalmente */
-    align-items: center; /* Centra horizontalmente los elementos dentro del flex container */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  display: flex;
+  flex-direction: column; /* Apila la imagen y el nuevo div de texto verticalmente */
+  /* Elimina text-align: center; si quieres que el texto interno se alinee a la izquierda */
+  /* text-align: center; */ /* Puedes eliminar esta línea */
+
+  /* Muy importante: Oculta cualquier parte de la imagen que se salga de los bordes redondeados del contenedor */
+  overflow: hidden;
+
+  /* Ajusta el ancho si lo necesitas. El grid en PizzaList ya le da un ancho base. */
+  width: 320px; /* Mantenemos el ancho base del item */
+  height: 340px;
+
+  cursor: pointer; /* Añade un cursor de mano para indicar que es clickeable */
+  transition: transform 0.2s ease-in-out; /* Suave transición al pasar el mouse */
+}
+
+/* Opcional: Efecto al pasar el mouse */
+.pizza-item:hover {
+  transform: translateY(-5px); /* Levanta ligeramente el item */
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 5); /* Aumenta la sombra */
+}
+
+
+.pizza-item-image {
+  width: 100%; /* La imagen ocupa todo el ancho de su contenedor (.pizza-item) */
+  height: 100%; /* Define una altura fija para las imágenes (ajústala si lo necesitas) */
+  object-fit: cover; /* Cubre el área definida sin deformar la imagen */
+  /* Elimina border-radius aquí si ya usas overflow: hidden en .pizza-item */
+  /* border-radius: 4px; */
+  margin-bottom: 0; /* Elimina el margen inferior si el texto va inmediatamente debajo en otro div */
+}
+
+.pizza-item h3 {
+  margin-top: 0;
+  margin-bottom: 5px; /* Reduce el margen */
+  color: #333;
+  font-size: 1.1em; /* Ajusta tamaño */
   
-    /* Un ancho fijo para empezar, luego el grid en PizzaList controlará el layout */
-    width: 220px;
-    height: 294px;
-  }
-  
-  /* Estilos para la imagen de la pizza */
-  .pizza-item-image {
-    max-width: 100%; /* Asegura que la imagen no sea más ancha que su contenedor */
-    height: 140px; /* Altura fija para que todas las imágenes tengan el mismo tamaño */
-    object-fit: cover; /* Recorta la imagen si es necesario para cubrir el área sin deformarse */
-    border-radius: 4px; /* Esquinas redondeadas para la imagen */
-    margin-bottom: 12px; /* Espacio entre la imagen y el texto */
-  }
-  
-  /* Estilos para el título (nombre de la pizza) */
-  .pizza-item h3 {
-    margin-top: 0; /* Elimina el margen superior por defecto */
-    margin-bottom: 8px; /* Espacio debajo del título */
-    color: #333; /* Color de texto oscuro */
-    font-size: 1.2em; /* Tamaño de fuente */
-  }
-  
-  /* Estilos para los párrafos (ingredientes, precio) */
-  .pizza-item p {
-    margin-top: 0;
-    margin-bottom: 5px; /* Espacio entre párrafos */
-    color: #666; /* Color de texto gris */
-    font-size: 0.95em; /* Tamaño de fuente ligeramente más pequeño */
-    line-height: 1.4; /* Espaciado entre líneas */
-    text-align: left; /* Alinea el texto a la izquierda dentro del div */
-    width: 100%; /* Asegura que el párrafo use todo el ancho disponible (dentro del padding) */
-  }
+}
