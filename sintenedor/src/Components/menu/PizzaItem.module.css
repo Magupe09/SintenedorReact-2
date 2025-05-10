@@ -5,6 +5,7 @@
   border-radius: 8px;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
   background-color: #fff;
+  gap: 2px;
   display: flex;
   flex-direction: column; /* Apila la imagen y el nuevo div de texto verticalmente */
   /* Elimina text-align: center; si quieres que el texto interno se alinee a la izquierda */
@@ -14,8 +15,8 @@
   overflow: hidden;
 
   /* Ajusta el ancho si lo necesitas. El grid en PizzaList ya le da un ancho base. */
-  width: 320px; /* Mantenemos el ancho base del item */
-  height: 340px;
+  max-width:300px; /* Mantenemos el ancho base del item */
+  aspect-ratio: 2 / 3;
 
   cursor: pointer; /* Añade un cursor de mano para indicar que es clickeable */
   transition: transform 0.2s ease-in-out; /* Suave transición al pasar el mouse */
@@ -39,7 +40,7 @@
 
 .pizza-item h3 {
   margin-top: 0;
-  margin-bottom: 5px; /* Reduce el margen */
+  margin-bottom: 0px; /* Reduce el margen */
   color: #333;
   font-size: 1.1em; /* Ajusta tamaño */
   

@@ -1,0 +1,70 @@
+/* src/Components/common/Modal.module.css */
+
+/* Estilos para el fondo oscuro (overlay) */
+.modal-overlay{
+    position: fixed; /* Fija el overlay en relación a la ventana del navegador */
+    top: 0; /* Lo pega al borde superior */
+    left: 0; /* Lo pega al borde izquierdo */
+    width: 100%; /* Ocupa todo el ancho de la ventana */
+    height: 100%; /* Ocupa toda la altura de la ventana */
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo negro semi-transparente (ajusta 0.7 para más/menos opacidad) */
+  
+    /* Usamos flexbox para CENTRAR FÁCILMENTE la caja del modal dentro del overlay */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente los items hijos (el modal-box) */
+    align-items: center; /* Centra verticalmente los items hijos (el modal-box) */
+  
+    z-index: 1000; /* Asegura que esté por encima de la mayoría del contenido */
+  
+    /* Añadir transiciones aquí después para suavizar la aparición/desaparición */
+  }
+  
+  /* Estilos para la caja principal del modal (el contenido) */
+  .modal-box {
+    background-color: white; /* Fondo blanco para la caja */
+    padding: 30px; /* Espacio dentro de la caja */
+    border-radius: 10px; /* Esquinas redondeadas */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Sombra */
+  
+    /* Controlamos el tamaño de la caja del modal */
+    max-width: 90%; /* Ancho máximo: 90% del ancho del overlay (viewport) */
+    width: 500px; /* Ancho preferido */
+    max-height: 90vh; /* Altura máxima: 90% de la altura de la ventana (vh = viewport height) */
+  
+    /* Permite scroll interno si el contenido excede el max-height */
+    overflow-y: auto;
+  
+    z-index: 1001; /* Asegura que esté por encima del overlay */
+  
+    /* Con display: flex en el overlay, no necesitas position/top/left/transform para centrar la caja.
+       Las propiedades justify-content y align-items en el overlay se encargan de eso.
+       Si NO USAS flexbox en el overlay, la técnica position: fixed/top/left/transform es la alternativa.
+       Vamos a asumir que usaste flexbox en el overlay como te sugerí.
+    */
+  }
+  
+  /* ... estilos adicionales para contenido como modal-header, modal-image, etc. (añadidos después) ... */
+.modal-header { 
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    /* Estilos para el encabezado (nombre y cerrar) */ }
+.close-button {
+    width: 45px;
+    height: 40px;
+    background-color: #fff;
+     /* Estilos para el botón 'x' */ }
+.modal-body { /* Estilos para el cuerpo principal (imagen, ingredientes, precios) */ }
+.modal-image { /* Estilos para la imagen dentro del modal */
+    width: 100%; /* La imagen ocupa todo el ancho de su contenedor (.pizza-item) */
+    height: 300px; /* Define una altura fija para las imágenes (ajústala si lo necesitas) */
+    object-fit: cover; /* Cubre el área definida sin deformar la imagen */
+    /* Elimina border-radius aquí si ya usas overflow: hidden en .pizza-item */
+    /* border-radius: 4px; */
+    margin-bottom: 0; 
+    border-radius: 10px;
+}
+.price-list { /* Estilos para la lista ul de precios */ }
+.price-item { /* Estilos para cada li de precio */ }
+/* .modal-footer { } /* Si añades un footer */
+/* .add-to-cart-button { } /* Si añades el botón */

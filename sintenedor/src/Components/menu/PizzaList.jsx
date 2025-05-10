@@ -8,7 +8,7 @@ import listStyles from './PizzaList.module.css';
 // Asumiendo que guardaste tus datos en src/data/pizzas.js
 import { getPizzasArray } from '../../data/pizzas'; // La ruta sube dos niveles (../..), entra a data, e importa getPizzasArray
 
-function PizzaList() {
+function PizzaList({ onPizzaClick }) {
   // Obtenemos el arreglo de pizzas usando tu función
   const pizzas = getPizzasArray();
 
@@ -30,6 +30,7 @@ function PizzaList() {
         <PizzaItem
           key={pizza.id} // Usa el id único de cada pizza como key
           pizza={pizza} // Le pasamos el objeto pizza completo al componente PizzaItem
+          onPizzaClick={onPizzaClick}
         />
       ))}
     </div>

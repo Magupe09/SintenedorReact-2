@@ -1,7 +1,11 @@
+body{
+  background-color: #DD1C1A;
+}
+
 .container {
   max-width: 1000px;
   margin: 0 auto;
   padding: 1rem;
   text-align: center;
-  background-color: white;
+  background-color: #DD1C1A;
 }
