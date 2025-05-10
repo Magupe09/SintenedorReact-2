@@ -1,0 +1,7 @@
+:root {
+    /* === Paleta de Colores Base === */
+    --color-primary: #DD1C1A;       /* Un naranja típico para color principal */
+    --color-secondary: #FAFFFD;     /* Un verde para acciones secundarias o éxito */
+    --color-third: #F0C808;  
+    --color-four:#020202;
+}  

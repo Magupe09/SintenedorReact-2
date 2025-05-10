@@ -21,7 +21,7 @@
   
   /* Estilos para la caja principal del modal (el contenido) */
   .modal-box {
-    background-color: white; /* Fondo blanco para la caja */
+    background-color: var(--color-primary); /* Fondo blanco para la caja */
     padding: 30px; /* Espacio dentro de la caja */
     border-radius: 10px; /* Esquinas redondeadas */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Sombra */
@@ -52,9 +52,11 @@
 .close-button {
     width: 45px;
     height: 40px;
-    background-color: #fff;
+    background-color: var(--color-third);
      /* Estilos para el botón 'x' */ }
-.modal-body { /* Estilos para el cuerpo principal (imagen, ingredientes, precios) */ }
+.modal-body { 
+
+    /* Estilos para el cuerpo principal (imagen, ingredientes, precios) */ }
 .modal-image { /* Estilos para la imagen dentro del modal */
     width: 100%; /* La imagen ocupa todo el ancho de su contenedor (.pizza-item) */
     height: 300px; /* Define una altura fija para las imágenes (ajústala si lo necesitas) */
