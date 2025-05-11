@@ -21,22 +21,10 @@ function Modal({ pizza, onClose }) {
       {/* La caja principal del modal - evita que el clic dentro lo cierre */}
       <div className={styles['modal-box']} onClick={(e) => e.stopPropagation()}>
 
-        {/* *** Contenido Detallado de la Pizza (REEMPLAZA el contenido temporal) *** */}
-
-        {/* Encabezado del modal con título y botón de cerrar */}
-        {/* Usamos una clase para estilizar esta sección después */}
+        
         <div className={styles['modal-header']}>
           <h3>{nombre}</h3> {/* Muestra el nombre de la pizza */}
-          {/* Botón de cerrar - usa una 'x' (&times;) */}
-          <button onClick={onClose} className={styles['close-button']}>&times;</button>
-        </div>
-
-        {/* Cuerpo principal del modal con imagen e info */}
-        {/* Usamos una clase para estilizar esta sección después */}
-        <div className={styles['modal-body']}>
-          {/* Imagen de la pizza en el modal - usa la prop imagen */}
-          {imagen && <img src={imagen} alt={`Pizza ${nombre}`} className={styles['modal-image']} />} {/* Usa una clase para estilizar la imagen en el modal */}
-
+          
           {/* Ingredientes - usa la propiedad ingredientes del objeto pizza */}
           {/* .join(', ') convierte el arreglo de ingredientes en una cadena de texto separada por comas */}
           <p><strong>Ingredientes:</strong> {ingredientes.join(', ')}</p>
@@ -57,6 +45,15 @@ function Modal({ pizza, onClose }) {
               </li>
             ))}
           </ul>
+        </div>
+
+        <div className={styles['modal-body']}>
+          
+          {/* Botón de cerrar - usa una 'x' (&times;) */}
+          <button onClick={onClose} className={styles['close-button']}>&times;</button>
+          {/* Imagen de la pizza en el modal - usa la prop imagen */}
+          {imagen && <img src={imagen} alt={`Pizza ${nombre}`} className={styles['modal-image']} />} {/* Usa una clase para estilizar la imagen en el modal */}
+
 
           {/* *** Placeholder para mostrar el precio total calculado por cantidad (¡futuro!) *** */}
           {/* <p>Precio Total Seleccionado: $XX.XX</p> */}
@@ -69,7 +66,7 @@ function Modal({ pizza, onClose }) {
           {/* </div> */}
         </div>
 
-        {/* Fin del contenido detallado */}
+       
 
       </div> {/* Fin modal-box */}
 

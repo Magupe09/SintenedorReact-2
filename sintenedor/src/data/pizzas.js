@@ -23,7 +23,7 @@ export const pizzasData = {
     },
     quesos: {
       id: 'quesos',
-      nombre: "Cuatro Quesos",
+      nombre: "Quesos",
       imagen: "/img/cuatro-quesos.webp",
       ingredientes: ["Mozzarella", "Gorgonzola", "Parmesano", "Ricotta"],
       precios: {
