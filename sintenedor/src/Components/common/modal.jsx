@@ -21,10 +21,10 @@ function Modal({ pizza, onClose }) {
       {/* La caja principal del modal - evita que el clic dentro lo cierre */}
       <div className={styles['modal-box']} onClick={(e) => e.stopPropagation()}>
 
-        
+
         <div className={styles['modal-header']}>
           <h3>{nombre}</h3> {/* Muestra el nombre de la pizza */}
-          
+
           {/* Ingredientes - usa la propiedad ingredientes del objeto pizza */}
           {/* .join(', ') convierte el arreglo de ingredientes en una cadena de texto separada por comas */}
           <p><strong>Ingredientes:</strong> {ingredientes.join(', ')}</p>
@@ -48,7 +48,7 @@ function Modal({ pizza, onClose }) {
         </div>
 
         <div className={styles['modal-body']}>
-          
+
           {/* Botón de cerrar - usa una 'x' (&times;) */}
           <button onClick={onClose} className={styles['close-button']}>&times;</button>
           {/* Imagen de la pizza en el modal - usa la prop imagen */}
@@ -62,15 +62,15 @@ function Modal({ pizza, onClose }) {
           {/* *** Placeholder para el botón de añadir al carrito (¡futuro!) *** */}
           {/* Puedes añadir un div.modal-footer para agrupar botones si quieres */}
           {/* <div className={styles['modal-footer']}> */}
-            {/* <button className={styles['add-to-cart-button']}>Añadir al Carrito</button> */}
+          {/* <button className={styles['add-to-cart-button']}>Añadir al Carrito</button> */}
           {/* </div> */}
         </div>
 
-       
+
 
       </div> {/* Fin modal-box */}
 
-    </div> 
+    </div>
   );
 }
 

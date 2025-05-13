@@ -5,7 +5,6 @@
   border-radius: 8px;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
   background-color: #fff;
-  gap: 2px;
   display: flex;
   flex-direction: column; /* Apila la imagen y el nuevo div de texto verticalmente */
   /* Elimina text-align: center; si quieres que el texto interno se alinee a la izquierda */
