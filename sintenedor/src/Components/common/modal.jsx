@@ -1,10 +1,15 @@
 // src/Components/common/Modal.jsx
 import React from 'react';
-import styles from './Modal.module.css'; // Importamos los estilos para el modal
+import styles from './Modal.module.css';
+import { useState } from 'react';
 
-// El componente Modal recibe las props 'pizza' y 'onClose'
 function Modal({ pizza, onClose }) {
-  // Si no hay datos de pizza, no renderizamos nada (medida de seguridad)
+  const [controles,setControles]=useState({personal: 0, mediana: 0, familiar: 0 });
+
+
+  function handleIncreaseQuantity(size){}
+  function handleDecreaseQuantity(size){}
+
   if (!pizza) {
     return null;
   }
@@ -37,11 +42,13 @@ function Modal({ pizza, onClose }) {
             {/* map itera sobre cada par [tamaño, precio] */}
             {Object.entries(precios).map(([size, price]) => (
               // key es importante para las listas en React; el 'size' (ej. 'personal') es único
-              <li key={size} className={styles['price-item']}> {/* Usa una clase para estilizar cada item de precio */}
+              <li key={size} className={styles['price-item']}>
+               {/* Usa una clase para estilizar cada item de precio */}
                 {/* Capitalizamos la primera letra del tamaño y mostramos el precio formateado */}
-                {size.charAt(0).toUpperCase() + size.slice(1)}: ${price.toFixed(2)}
+                {size.charAt(0).toUpperCase() + size.slice(1)}: ${price.toFixed(3)}
                 {/* *** Placeholder para los botones de cantidad +/- para ESTE TAMAÑO (¡futuro!) *** */}
                 {/* Por ahora, solo mostramos el precio fijo */}
+              
               </li>
             ))}
           </ul>
@@ -65,6 +72,9 @@ function Modal({ pizza, onClose }) {
           {/* <button className={styles['add-to-cart-button']}>Añadir al Carrito</button> */}
           {/* </div> */}
         </div>
+        
+        <button>-</button>
+
 
 
 
