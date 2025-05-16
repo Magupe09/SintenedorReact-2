@@ -4,33 +4,59 @@ import styles from './Modal.module.css';
 import { useState } from 'react';
 
 function Modal({ pizza, onClose }) {
-  const [controles,setControles]=useState({personal: 0, mediana: 0, familiar: 0 });
+  const [controles, setControles] = useState({ personal: 0, mediana: 0, familiar: 0 });
 
 
-  function handleIncreaseQuantity(size){
-    console.log("Aumentamos el valor",size)
+  function handleIncreaseQuantity(size) {
+
     setControles(prevControles => {
-       return{
-        ...prevControles,
-        [size]: prevControles[size]+1
+      // console.log("Aumentamos el valor",prevControles[size])
+      const currentQty = prevControles[size];
+      console.log(currentQty)
+      if (currentQty < 0) {
+        return {
+          ...prevControles,
+          [size]: prevControles[size] + 1
 
-       };
+        };
+      } else {
+        return {
 
-       })
+          ...prevControles,
+          [size]: prevControles[size] + 1
+        }
+
+      }
+
+
+
+    })
   }
-  function handleDecreaseQuantity(size){
-    
+  function handleDecreaseQuantity(size) {
+
     setControles(prevControles => {
-      return{
-       ...prevControles,
-       [size]: prevControles[size]-1
+      // console.log("Aumentamos el valor",prevControles[size])
+      const currentQty = prevControles[size];
+      console.log(currentQty)
+      if (currentQty > 0) {
+        return {
+          ...prevControles,
+          [size]: prevControles[size] - 1
 
-      };
+        };
+      } else {
+        return {
 
-      })
-      //console.log("Disminuimos el valor",controles)
+          ...prevControles
+        }
+
+      }
+
+
+
+    })
   }
-  
+
   if (!pizza) {
     return null;
   }
@@ -64,17 +90,17 @@ function Modal({ pizza, onClose }) {
             {Object.entries(precios).map(([size, price]) => (
               // key es importante para las listas en React; el 'size' (ej. 'personal') es único
               <li key={size} className={styles['price-item']}>
-               {/* Usa una clase para estilizar cada item de precio */}
+                {/* Usa una clase para estilizar cada item de precio */}
                 {/* Capitalizamos la primera letra del tamaño y mostramos el precio formateado */}
                 {size.charAt(0).toUpperCase() + size.slice(1)}: ${price.toFixed(3)}
                 {/* *** Placeholder para los botones de cantidad +/- para ESTE TAMAÑO (¡futuro!) *** */}
                 {/* Por ahora, solo mostramos el precio fijo */}
-                <button className='controles' onClick={()=>{handleIncreaseQuantity(size)}}>+</button>
-                <button className='controles' onClick={()=>handleDecreaseQuantity(size)}>-</button>
+                <button className='controles' onClick={() => { handleIncreaseQuantity(size) }}>+</button>
+                <button className='controles' onClick={() => handleDecreaseQuantity(size)}>-</button>
               </li>
-              
+
             ))}
-            
+
           </ul>
         </div>
 
@@ -96,8 +122,8 @@ function Modal({ pizza, onClose }) {
           {/* <button className={styles['add-to-cart-button']}>Añadir al Carrito</button> */}
           {/* </div> */}
         </div>
-        
-        
+
+
       </div> {/* Fin modal-box */}
 
     </div>
