@@ -7,9 +7,30 @@ function Modal({ pizza, onClose }) {
   const [controles,setControles]=useState({personal: 0, mediana: 0, familiar: 0 });
 
 
-  function handleIncreaseQuantity(size){}
-  function handleDecreaseQuantity(size){}
+  function handleIncreaseQuantity(size){
+    console.log("Aumentamos el valor",size)
+    setControles(prevControles => {
+       return{
+        ...prevControles,
+        [size]: prevControles[size]+1
 
+       };
+
+       })
+  }
+  function handleDecreaseQuantity(size){
+    
+    setControles(prevControles => {
+      return{
+       ...prevControles,
+       [size]: prevControles[size]-1
+
+      };
+
+      })
+      //console.log("Disminuimos el valor",controles)
+  }
+  
   if (!pizza) {
     return null;
   }
@@ -48,9 +69,12 @@ function Modal({ pizza, onClose }) {
                 {size.charAt(0).toUpperCase() + size.slice(1)}: ${price.toFixed(3)}
                 {/* *** Placeholder para los botones de cantidad +/- para ESTE TAMAÑO (¡futuro!) *** */}
                 {/* Por ahora, solo mostramos el precio fijo */}
-              
+                <button className='controles' onClick={()=>{handleIncreaseQuantity(size)}}>+</button>
+                <button className='controles' onClick={()=>handleDecreaseQuantity(size)}>-</button>
               </li>
+              
             ))}
+            
           </ul>
         </div>
 
@@ -73,11 +97,7 @@ function Modal({ pizza, onClose }) {
           {/* </div> */}
         </div>
         
-        <button>-</button>
-
-
-
-
+        
       </div> {/* Fin modal-box */}
 
     </div>
