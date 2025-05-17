@@ -6,31 +6,21 @@ import { useState } from 'react';
 function Modal({ pizza, onClose }) {
   const [controles, setControles] = useState({ personal: 0, mediana: 0, familiar: 0 });
 
-
+  function handleAddToCartClick(pizza,controles){
+    console.log(pizza,controles)
+  }
   function handleIncreaseQuantity(size) {
 
     setControles(prevControles => {
-      // console.log("Aumentamos el valor",prevControles[size])
-      const currentQty = prevControles[size];
-      console.log(currentQty)
-      if (currentQty < 0) {
-        return {
-          ...prevControles,
-          [size]: prevControles[size] + 1
 
-        };
-      } else {
-        return {
+      return {
+        ...prevControles,
+        [size]: prevControles[size] + 1
+      };
 
-          ...prevControles,
-          [size]: prevControles[size] + 1
-        }
+    });
 
-      }
-
-
-
-    })
+    console.log("FUnciona mao", controles[size], setControles[size]);
   }
   function handleDecreaseQuantity(size) {
 
@@ -45,10 +35,7 @@ function Modal({ pizza, onClose }) {
 
         };
       } else {
-        return {
-
-          ...prevControles
-        }
+        return prevControles
 
       }
 
@@ -95,8 +82,11 @@ function Modal({ pizza, onClose }) {
                 {size.charAt(0).toUpperCase() + size.slice(1)}: ${price.toFixed(3)}
                 {/* *** Placeholder para los botones de cantidad +/- para ESTE TAMAÑO (¡futuro!) *** */}
                 {/* Por ahora, solo mostramos el precio fijo */}
-                <button className='controles' onClick={() => { handleIncreaseQuantity(size) }}>+</button>
-                <button className='controles' onClick={() => handleDecreaseQuantity(size)}>-</button>
+                <div className={styles['quantity-controls']}>
+                  <button className={styles['buttonControls']} onClick={() => handleDecreaseQuantity(size)}>-</button>
+                  <span className={styles['span']} >{controles[size]}</span>
+                  <button className={styles['buttonControls']} onClick={() => handleIncreaseQuantity(size)}>+</button>
+                </div>
               </li>
 
             ))}
@@ -119,7 +109,7 @@ function Modal({ pizza, onClose }) {
           {/* *** Placeholder para el botón de añadir al carrito (¡futuro!) *** */}
           {/* Puedes añadir un div.modal-footer para agrupar botones si quieres */}
           {/* <div className={styles['modal-footer']}> */}
-          {/* <button className={styles['add-to-cart-button']}>Añadir al Carrito</button> */}
+          <button className={styles['add-to-cart-button']} onClick={() => handleAddToCartClick(pizza,controles)}>Añadir al Carrito</button>
           {/* </div> */}
         </div>
 

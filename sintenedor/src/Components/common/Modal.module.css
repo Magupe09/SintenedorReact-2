@@ -30,8 +30,8 @@
 
 /* Estilos para la caja principal del modal (el contenido) */
 .modal-box {
-   
-  display: grid; 
+
+  display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
   gap: 5px;
   background-color: var(--color-third);
@@ -73,15 +73,25 @@
   display: flex;
   flex-direction: column;
   text-align: center;
+
+  transition: transform 0.2s ease-in-out;
   /* Estilos para el encabezado (nombre y cerrar) */
 }
-.modal-header h3{
-  font-size: 2rem;
+
+.modal-header h3 {
+  font-size: 2.1rem;
   margin: 7px;
 }
-.modal-header h4{
+
+.modal-header p {
+
+  font-size: 17px;
+  margin: 7px;
+}
+
+.modal-header h4 {
   font-size: 2rem;
-  margin: -3px 0 ;
+  margin: -3px 0;
 }
 
 .close-button {
@@ -98,24 +108,27 @@
   z-index: 100;
   /* Estilos para el botón 'x' */
 }
-.close-button:hover{
-  transform: translateY(-5px); /* Levanta ligeramente el item */
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 5); /* Aumenta la sombra */
+
+.close-button:hover {
+  transform: translateY(-5px);
+  /* Levanta ligeramente el item */
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 5);
+  /* Aumenta la sombra */
 }
 
 .modal-body {
-   display: flex;
-   flex-direction: column;
-   align-items: end;
-   gap: 10px;
-   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 10px;
+  position: relative;
 }
 
 .modal-image {
   /* Estilos para la imagen dentro del modal */
   width: 100%;
   /* La imagen ocupa todo el ancho de su contenedor (.pizza-item) */
-  height: 327px;
+  height: 400px;
   /* Define una altura fija para las imágenes (ajústala si lo necesitas) */
   object-fit: cover;
   /* Cubre el área definida sin deformar la imagen */
@@ -128,31 +141,75 @@
   border-radius: 8px;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
 }
-.modal-image:hover{
-  transform: translateY(-5px); /* Levanta ligeramente el item */
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 5); /* Aumenta la sombra */
+
+.modal-image:hover {
+  transform: translateY(-5px);
+  /* Levanta ligeramente el item */
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 5);
+  /* Aumenta la sombra */
 }
 
 .price-list {
   list-style: none;
   padding: 0;
-  margin-top:16px ;
+  margin-top: 16px;
   margin-bottom: 15px;
   /* Estilos para la lista ul de precios */
 }
 
 .price-item {
   /* Estilos para cada li de precio */
-  /*display: flex; -- Ya lo definimos, solo asegúrate de que esté*/
-  justify-content: space-between; /* Separa texto/precio de controles de cantidad */
-  align-items: center; /* Alinea verticalmente */
-  padding: 0; /* Añade padding arriba/abajo */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* Separa texto/precio de controles de cantidad */
+  align-items: center;
+  /* Alinea verticalmente */
+  padding: 0;
+  /* Añade padding arriba/abajo */
   /* Añade un borde inferior para separar cada item */
   border-bottom: 1px solid var(--color-four);
-  font-size: 1rem; /* Tamaño base de la fuente para el item */
-  color: var(--color-text-dark, #333); /* Color de texto base para el item */
+  font-size: 1.2rem;
+  /* Tamaño base de la fuente para el item */
+  color: var(--color-four);
+  /* Color de texto base para el item */
+
   /* flex-wrap: wrap; -- Ya lo definimos, asegura que esté */
 }
 
-/* .modal-footer { } /* Si añades un footer */
+.quantity-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+
+  width: 40px;
+}
+
+.buttonControls {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 21px;
+  background-color: var(--color-four);
+  color: var(--color-third);
+  font-size: 1.8em;
+  border-radius: 20px;
+  transition: transform 0.2s ease-in-out;
+  top: 3px;
+  z-index: 100;
+}
+
+.buttonControls:hover {
+  transform: translateY(-5px);
+  /* Levanta ligeramente el item */
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 5);
+  /* Aumenta la sombra */
+}
+
+/* .modal-footer { } /* Si añades un footer
+
+*/
 /* .add-to-cart-button { } /* Si añades el botón */
