@@ -3,11 +3,29 @@ import React from 'react';
 import styles from './Modal.module.css';
 import { useState } from 'react';
 
-function Modal({ pizza, onClose }) {
+function Modal({ pizza, onClose,onAddToCart}) {
   const [controles, setControles] = useState({ personal: 0, mediana: 0, familiar: 0 });
 
   function handleAddToCartClick(pizza,controles){
     console.log(pizza,controles)
+    
+    
+    const pizzaInfo=pizza;
+    const selectedQuantities={};
+    let totalItemPrice=0;
+
+    for(const clave in controles){
+      
+      if(controles[clave]>0){
+        selectedQuantities[clave]= controles[clave];
+        totalItemPrice +=controles[clave] * pizza.precios[clave]
+      }
+    }
+    const item={pizzaInfo,selectedQuantities,totalItemPrice}
+    onAddToCart(item)
+
+
+
   }
   function handleIncreaseQuantity(size) {
 

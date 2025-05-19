@@ -113,6 +113,7 @@
   transform: translateY(-5px);
   /* Levanta ligeramente el item */
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 5);
+  cursor: pointer;
   /* Aumenta la sombra */
 }
 
@@ -200,6 +201,7 @@
   transition: transform 0.2s ease-in-out;
   top: 3px;
   z-index: 100;
+  cursor: pointer;
 }
 
 .buttonControls:hover {

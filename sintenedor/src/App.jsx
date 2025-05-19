@@ -11,8 +11,16 @@ import Modal from './Components/common/Modal';
 function App() {
   // Estado para controlar el modal y la pizza seleccionada
   const [isModalOpen, setIsModalOpen] = useState(false); // Booleano: true si modal abierto
-  const [selectedPizza, setSelectedPizza] = useState(null); // Objeto: datos de la pizza seleccionada
+  const [selectedPizza, setSelectedPizza] = useState(null);
+  const [carrito,setCarrito]=useState([]);
 
+  const handleAddToCart = (item) => {
+    setCarrito(prevCarrito => {
+      const newCarrito = [...prevCarrito, item];
+      console.log('Carrito actual:', newCarrito); // ¡Añade esto!
+      return newCarrito;
+    });
+  };
 
   // Función que se ejecuta al hacer clic en una pizza (actualiza estado para abrir modal)
   // Cambié el nombre del parámetro de 'pizzasData' a 'pizzaData' para mayor claridad
@@ -48,6 +56,7 @@ function App() {
         <Modal
           pizza={selectedPizza} // Pasamos los datos de la pizza seleccionada al Modal
           onClose={handleCloseModal} // Pasamos la función para que el Modal pueda cerrarse
+         onAddToCart={handleAddToCart}
         />
       )}
 
