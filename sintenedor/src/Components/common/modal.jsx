@@ -22,7 +22,12 @@ function Modal({ pizza, onClose,onAddToCart}) {
       }
     }
     const item={pizzaInfo,selectedQuantities,totalItemPrice}
-    onAddToCart(item)
+    if(item.totalItemPrice >0){
+      onAddToCart(item)
+    }else{
+        alert('Debes definir las cantidades. ')
+      }
+    
 
 
 
