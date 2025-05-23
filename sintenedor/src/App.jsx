@@ -6,7 +6,7 @@ import { useState } from 'react';
 // *** Asegúrate de que las rutas y capitalización sean CORRECTAS según tu explorador de archivos ***
 import PizzaList from './Components/menu/PizzaList'; // O tu ruta correcta
 import appStyles from './App.module.css'; // o App.css
-import Modal from './Components/common/Modal'; 
+import Modal from './Components/common/Modal';
 import CartModal from './Components/common/CartModal';
 
 function App() {
@@ -14,13 +14,27 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false); // Booleano: true si modal abierto
   const [isCartModalOpen, setIsCartModalOpen] = useState(false); // Booleano: true si CartModal abierto
   const [selectedPizza, setSelectedPizza] = useState(null);
-  const [carrito,setCarrito]=useState([]);
+  const [carrito, setCarrito] = useState([]);
 
-  const handleAddToCart = (item) => {
+  const handleAddToCart = (newItem) => {
     setCarrito(prevCarrito => {
-      const newCarrito = [...prevCarrito, item];
-      console.log('Carrito actual:', newCarrito); // ¡Añade esto!
-      return newCarrito;
+      const existingItem = prevCarrito.findIndex(item => item.pizzaInfo.id === newItem.pizzaInfo.id);
+
+      if (existingItem !== -1) {
+        const updatedCarrito = [...prevCarrito];
+        let updatedItem = { ...updatedCarrito[existingItem] };
+        for (const [clave, valor] of Object.entries(newItem.selectedQuantities)) {
+          updatedItem.selectedQuantities[clave] || 0 + valor;
+
+          updatedItem.totalItemPrice = updatedItem.pizzaInfo.precio[clave] * updatedItem.selectedQuantities[clave];
+
+          
+        }
+
+        updatedCarrito[existingItem] = updatedItem;
+        return updatedCarrito;
+      }
+      return [...prevCarrito, newItem];
     });
   };
 
@@ -60,14 +74,14 @@ function App() {
       {isCartModalOpen && (
         <CartModal
           carrito={carrito} // Estado del carrito
-          onClose={handleCloseCartModal} 
+          onClose={handleCloseCartModal}
         />
       )}
       {isModalOpen && (
         <Modal
           pizza={selectedPizza} // Pasamos los datos de la pizza seleccionada al Modal
           onClose={handleCloseModal} // Pasamos la función para que el Modal pueda cerrarse
-         onAddToCart={handleAddToCart}
+          onAddToCart={handleAddToCart}
         />
       )}
 
