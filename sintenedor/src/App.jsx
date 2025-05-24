@@ -17,19 +17,20 @@ function App() {
   const [carrito, setCarrito] = useState([]);
 
   const handleAddToCart = (newItem) => {
+    console.log('handleAddToCart: Nuevo item recibido:', newItem);
     setCarrito(prevCarrito => {
       const existingItem = prevCarrito.findIndex(item => item.pizzaInfo.id === newItem.pizzaInfo.id);
 
       if (existingItem !== -1) {
         const updatedCarrito = [...prevCarrito];
-        let updatedItem = { ...updatedCarrito[existingItem] };
+        let updatedItem = { ...updatedCarrito[existingItem], selectedQuantities: { ...updatedCarrito[existingItem].selectedQuantities } };
         for (const [clave, valor] of Object.entries(newItem.selectedQuantities)) {
-          updatedItem.selectedQuantities[clave] || 0 + valor;
+          updatedItem.selectedQuantities[clave]=(updatedItem.selectedQuantities[clave] || 0 )+ valor;
 
-          updatedItem.totalItemPrice = updatedItem.pizzaInfo.precio[clave] * updatedItem.selectedQuantities[clave];
+          updatedItem.totalItemPrice += valor * updatedItem.pizzaInfo.precios[clave];
 
-          
         }
+
 
         updatedCarrito[existingItem] = updatedItem;
         return updatedCarrito;

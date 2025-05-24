@@ -15,7 +15,7 @@ const CartModal = ({ carrito, onClose }) => { // <-- ¡CORREGIDO! Recibes las pr
             // Por ahora, solo mostramos el nombre de la pizza.
             // Más adelante haremos el componente CartItem.jsx
             <li className={styles['cart-item']} key={index}>
-              {item.pizzaInfo.nombre} - {JSON.stringify(item.selectedQuantities)} - Total: ${item.totalItemPrice.toFixed(2)}
+              {item.pizzaInfo.nombre} - {JSON.stringify(item.selectedQuantities)} Aqui - Total: ${item.totalItemPrice.toFixed(2)}
             </li>
           ))}
         </ul>
