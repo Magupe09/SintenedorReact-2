@@ -16,6 +16,20 @@ function App() {
   const [selectedPizza, setSelectedPizza] = useState(null);
   const [carrito, setCarrito] = useState([]);
 
+  console.log('App.jsx: isCartModalOpen vale:', isCartModalOpen);
+
+
+
+
+
+  const handleRemoveFromCart = (pizzaIdToRemove) => {
+    console.log("Eliminamos la ultima pizza")
+    setCarrito(prevCarrito => {
+      // Esto crea un nuevo array de carrito sin la pizza que tiene el id que queremos eliminar
+      return prevCarrito.filter(item => item.pizzaInfo.id !== pizzaIdToRemove);
+    });
+  }
+
   const handleAddToCart = (newItem) => {
     console.log('handleAddToCart: Nuevo item recibido:', newItem);
     setCarrito(prevCarrito => {
@@ -25,7 +39,7 @@ function App() {
         const updatedCarrito = [...prevCarrito];
         let updatedItem = { ...updatedCarrito[existingItem], selectedQuantities: { ...updatedCarrito[existingItem].selectedQuantities } };
         for (const [clave, valor] of Object.entries(newItem.selectedQuantities)) {
-          updatedItem.selectedQuantities[clave]=(updatedItem.selectedQuantities[clave] || 0 )+ valor;
+          updatedItem.selectedQuantities[clave] = (updatedItem.selectedQuantities[clave] || 0) + valor;
 
           updatedItem.totalItemPrice += valor * updatedItem.pizzaInfo.precios[clave];
 
@@ -76,6 +90,7 @@ function App() {
         <CartModal
           carrito={carrito} // Estado del carrito
           onClose={handleCloseCartModal}
+         onRemoveFromCart={handleRemoveFromCart}
         />
       )}
       {isModalOpen && (
@@ -83,6 +98,7 @@ function App() {
           pizza={selectedPizza} // Pasamos los datos de la pizza seleccionada al Modal
           onClose={handleCloseModal} // Pasamos la función para que el Modal pueda cerrarse
           onAddToCart={handleAddToCart}
+          onRemoveFromCart={handleRemoveFromCart}
         />
       )}
 

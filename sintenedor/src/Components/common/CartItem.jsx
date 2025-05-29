@@ -1,17 +1,18 @@
 import React from 'react';
+import styles from './CartItem.module.css';
 
 function CartItem({ item, onRemoveFromCart }) {
-
+    console.log('CartItem.jsx: onRemoveFromCart recibida vale:', onRemoveFromCart);
     return (
-        <div className="cart-item">
+        <div className={styles['cart-item']}>
             <img src={item.pizzaInfo.imagen} alt={item.pizzaInfo.nombre} />
-            <div className="cart-item-details">
+            <div className={styles['cart-item-details']}>
                 <h3>{item.pizzaInfo.nombre}</h3>
-                <p>Cantidad: {item.selectedQuantities.cantidad}</p>
-                <p>Precio: ${Object.entries(item.pizzaInfo.precios).map(([clave,valor]) => (
-                    <p key={clave}>{clave}: ${valor}</p>
+                
+                {Object.entries(item.selectedQuantities).map(([clave,valor]) => (
+                    <span key={clave}>{clave}: ${valor}</span>
 
-            ))}</p>
+            ))}
                 <p>Total: ${item.totalItemPrice.toFixed(2)}</p>
                 <button onClick={() => onRemoveFromCart(item.pizzaInfo.id)}>Eliminar</button>
             </div>

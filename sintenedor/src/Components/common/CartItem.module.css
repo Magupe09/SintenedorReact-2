@@ -1,0 +1,10 @@
+.cart-item{
+    max-width: 400px;
+    max-height: 100vh;
+}
+.cart-item-details{
+    width: 400px;
+}
+img{
+    width: 100px;
+}

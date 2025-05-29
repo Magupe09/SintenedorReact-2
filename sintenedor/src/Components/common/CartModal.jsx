@@ -1,7 +1,9 @@
 import React from 'react'; // Solo necesitas React si no usas Hooks como useState aquí
 import styles from './CartModal.module.css';
+import CartItem from './CartItem';
 
-const CartModal = ({ carrito, onClose }) => { // <-- ¡CORREGIDO! Recibes las props desestructuradas
+const CartModal = ({ carrito, onClose, onRemoveFromCart,totalPrice }) => { 
+  console.log('CartModal.jsx: onRemoveFromCart recibida vale:', onRemoveFromCart);
   return (
     <div className={styles['cart-modal']}>
       <h2>Tu Carrito de Pizza</h2>
@@ -14,12 +16,18 @@ const CartModal = ({ carrito, onClose }) => { // <-- ¡CORREGIDO! Recibes las pr
           {carrito.map((item, index) => (
             // Por ahora, solo mostramos el nombre de la pizza.
             // Más adelante haremos el componente CartItem.jsx
-            <li className={styles['cart-item']} key={index}>
-              {item.pizzaInfo.nombre} - {JSON.stringify(item.selectedQuantities)} Aqui - Total: ${item.totalItemPrice.toFixed(2)}
+            <li className={styles['cart-item']} key={item.pizzaInfo.id}>
+              <CartItem
+                item={item} 
+                onRemoveFromCart={onRemoveFromCart} 
+              />
             </li>
           ))}
         </ul>
+        
       )}
+      
+      <span>{totalPrice}</span>
     </div>
   );
 };
