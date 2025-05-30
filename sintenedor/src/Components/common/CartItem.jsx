@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './CartItem.module.css';
 
 function CartItem({ item, onRemoveFromCart }) {
-    console.log('CartItem.jsx: onRemoveFromCart recibida vale:', onRemoveFromCart);
     return (
         <div className={styles['cart-item']}>
             <img src={item.pizzaInfo.imagen} alt={item.pizzaInfo.nombre} />

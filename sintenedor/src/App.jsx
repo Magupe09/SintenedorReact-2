@@ -16,9 +16,14 @@ function App() {
   const [selectedPizza, setSelectedPizza] = useState(null);
   const [carrito, setCarrito] = useState([]);
 
-  console.log('App.jsx: isCartModalOpen vale:', isCartModalOpen);
 
-
+const totalPrice = (carrito) => {
+    const suma = carrito.reduce((acumulador, valorActual) => {
+      return acumulador + valorActual.totalItemPrice;
+    }, 0);
+    // Falta devolver la suma
+    return suma
+  }
 
 
 
@@ -91,6 +96,7 @@ function App() {
           carrito={carrito} // Estado del carrito
           onClose={handleCloseCartModal}
          onRemoveFromCart={handleRemoveFromCart}
+         totalPrice={totalPrice(carrito)}
         />
       )}
       {isModalOpen && (
