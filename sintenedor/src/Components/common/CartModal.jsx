@@ -7,15 +7,17 @@ const CartModal = ({ carrito, onClose, onRemoveFromCart, totalPrice }) => {
   console.log('Valor de precio en CartModal:', precio);
   return (
     <div className={styles['cart-modal']}>
-    
-      <h2>Tu Carrito de Pizza</h2>
-      <button onClick={onClose}>Cerrar</button>
       {/* Aquí irá la lógica para mostrar los ítems del carrito */}
       {carrito.length === 0 ? (
         <p>Tu carrito está vacío.</p>
       ) : (
 
         <div className={styles['cart-summary']}>
+     
+          <h2>Tu Carrito de Pizza</h2>
+          
+        
+        <button className={styles['boton-close']} onClick={onClose}>Cerrar</button>
           <ul className={styles['cart-list']}>
             {carrito.map((item, index) => (
               // Por ahora, solo mostramos el nombre de la pizza.
@@ -31,7 +33,7 @@ const CartModal = ({ carrito, onClose, onRemoveFromCart, totalPrice }) => {
             ))}
           </ul>
 
-          <p>Total del Carrito: ${precio}</p> 
+          <p>Total del Carrito: ${precio}</p>
         </div>
 
       )
