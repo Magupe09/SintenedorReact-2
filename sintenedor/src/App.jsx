@@ -28,7 +28,7 @@ const totalPrice = (carrito) => {
 
 
   const handleRemoveFromCart = (pizzaIdToRemove) => {
-    console.log("Eliminamos la ultima pizza")
+    
     setCarrito(prevCarrito => {
       // Esto crea un nuevo array de carrito sin la pizza que tiene el id que queremos eliminar
       return prevCarrito.filter(item => item.pizzaInfo.id !== pizzaIdToRemove);
@@ -36,7 +36,7 @@ const totalPrice = (carrito) => {
   }
 
   const handleAddToCart = (newItem) => {
-    console.log('handleAddToCart: Nuevo item recibido:', newItem);
+    
     setCarrito(prevCarrito => {
       const existingItem = prevCarrito.findIndex(item => item.pizzaInfo.id === newItem.pizzaInfo.id);
 
@@ -65,7 +65,7 @@ const totalPrice = (carrito) => {
     setSelectedPizza(pizzaData); // Guarda los datos de LA pizza clicada en el estado
     // ***************************************************
     setIsModalOpen(true); // Abre el modal
-    console.log("¡Pizza clicada!", pizzaData); // Puedes dejarlo temporalmente para depurar o quitarlo
+    
   };
 
   // Función para cerrar el modal (actualiza estado para cerrar)

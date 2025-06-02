@@ -4,7 +4,6 @@ import CartItem from './CartItem';
 
 const CartModal = ({ carrito, onClose, onRemoveFromCart, totalPrice }) => {
   let precio = totalPrice
-  console.log('Valor de precio en CartModal:', precio);
   return (
     <div className={styles['cart-modal']}>
       {/* Aquí irá la lógica para mostrar los ítems del carrito */}

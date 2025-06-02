@@ -7,7 +7,6 @@ function Modal({ pizza, onClose,onAddToCart}) {
   const [controles, setControles] = useState({ personal: 0, mediana: 0, familiar: 0 });
 
   function handleAddToCartClick(pizza,controles){
-    console.log(pizza,controles)
     
     
     const pizzaInfo=pizza;
@@ -43,14 +42,13 @@ function Modal({ pizza, onClose,onAddToCart}) {
 
     });
 
-    console.log("FUnciona mao", controles[size], setControles[size]);
   }
   function handleDecreaseQuantity(size) {
 
     setControles(prevControles => {
       // console.log("Aumentamos el valor",prevControles[size])
       const currentQty = prevControles[size];
-      console.log(currentQty)
+    
       if (currentQty > 0) {
         return {
           ...prevControles,
