@@ -3,8 +3,10 @@ import React from 'react';
 import styles from './Modal.module.css';
 import { useState } from 'react';
 
+
 function Modal({ pizza, onClose,onAddToCart}) {
   const [controles, setControles] = useState({ personal: 0, mediana: 0, familiar: 0 });
+  const [isAnimating,setIsAnimating] = useState(false)
 
   function handleAddToCartClick(pizza,controles){
     
@@ -22,7 +24,11 @@ function Modal({ pizza, onClose,onAddToCart}) {
     }
     const item={pizzaInfo,selectedQuantities,totalItemPrice}
     if(item.totalItemPrice >0){
-      onAddToCart(item)
+      onAddToCart(item);
+      setIsAnimating(true); // Activa la animación
+      setTimeout(() => {
+        setIsAnimating(false); // Desactiva la animación después de un tiempo
+      }, 300);
     }else{
         alert('Debes definir las cantidades. ')
       }
@@ -130,7 +136,8 @@ function Modal({ pizza, onClose,onAddToCart}) {
           {/* *** Placeholder para el botón de añadir al carrito (¡futuro!) *** */}
           {/* Puedes añadir un div.modal-footer para agrupar botones si quieres */}
           {/* <div className={styles['modal-footer']}> */}
-          <button className={styles['add-to-cart-button']} onClick={() => handleAddToCartClick(pizza,controles)}>Añadir al Carrito</button>
+          <button className={`${styles['add-to-cart-button']} ${isAnimating ? styles['animate-pulse'] : ''}`}
+          onClick={() => handleAddToCartClick(pizza,controles)}>Añadir al Carrito</button>
           {/* </div> */}
         </div>
 

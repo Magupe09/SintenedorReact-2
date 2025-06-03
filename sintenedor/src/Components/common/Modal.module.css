@@ -68,29 +68,29 @@
 .modal-header {
   margin-bottom: 0px;
   background-color: var(--color-secondary);
-  gap: 15px;
+  gap: 5px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   text-align: center;
-
+  
   transition: transform 0.2s ease-in-out;
   /* Estilos para el encabezado (nombre y cerrar) */
 }
 
 .modal-header h3 {
-  font-size: 2.1rem;
+  font-size: 2rem;
   margin: 7px;
 }
 
 .modal-header p {
   
-  font-size: 2rem;
+  font-size: 1rem;
   margin: 7px;
 }
 
 .modal-header h4 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin: -3px 0;
 }
 
@@ -129,7 +129,7 @@
   /* Estilos para la imagen dentro del modal */
   width: 100%;
   /* La imagen ocupa todo el ancho de su contenedor (.pizza-item) */
-  height: 400px;
+  height: 332px;
   /* Define una altura fija para las imágenes (ajústala si lo necesitas) */
   object-fit: cover;
   /* Cubre el área definida sin deformar la imagen */
@@ -170,7 +170,7 @@
   /* Añade padding arriba/abajo */
   /* Añade un borde inferior para separar cada item */
   border-bottom: 1px solid var(--color-four);
-  font-size: 1.2rem;
+  font-size: 1rem;
   /* Tamaño base de la fuente para el item */
   color: var(--color-four);
   /* Color de texto base para el item */
@@ -211,7 +211,32 @@
   /* Aumenta la sombra */
 }
 
-/* .modal-footer { } /* Si añades un footer
 
-*/
-/* .add-to-cart-button { } /* Si añades el botón */
+.add-to-cart-button {
+  position: absolute;
+  bottom: 10px;
+  right: 5px;
+  transform: scale(1);
+  transition: transform 0.3s ease-out, background-color 0.3s ease-out;
+  transform-origin: center center;
+  /* Otros estilos base de tu botón aquí */
+  padding: 5px 10px;
+  background-color: var(--color-four); /* Un naranja agradable */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  /* Para que el botón no se mueva al escalar si está en un flex/grid */
+  flex-shrink: 0;
+}
+
+
+.animate-pulse {
+  transform: scale(1.2); /* Escala el botón un 5% más grande */
+  background-color: #4CAF50;
+  border: 2px solid var(--color-primary);
+  /* Puedes añadir un cambio de color si quieres, ej: */
+  /* background-color: #4CAF50; /* Verde de confirmación */
+}
