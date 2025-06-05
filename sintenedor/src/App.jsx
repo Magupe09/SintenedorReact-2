@@ -93,7 +93,8 @@ const totalPrice = (carrito) => {
 
       {isCartModalOpen && (
         <CartModal
-          carrito={carrito} // Estado del carrito
+          carrito={carrito} 
+          setCarrito={setCarrito}// Estado del carrito
           onClose={handleCloseCartModal}
          onRemoveFromCart={handleRemoveFromCart}
          totalPrice={totalPrice(carrito)}

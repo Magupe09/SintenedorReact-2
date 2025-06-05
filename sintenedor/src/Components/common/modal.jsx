@@ -7,6 +7,7 @@ import { useState } from 'react';
 function Modal({ pizza, onClose,onAddToCart}) {
   const [controles, setControles] = useState({ personal: 0, mediana: 0, familiar: 0 });
   const [isAnimating,setIsAnimating] = useState(false)
+  console.log("Objeto pizza que llega al Modal:", pizza);
 
   function handleAddToCartClick(pizza,controles){
     
@@ -23,6 +24,7 @@ function Modal({ pizza, onClose,onAddToCart}) {
       }
     }
     const item={pizzaInfo,selectedQuantities,totalItemPrice}
+    console.log('Item siendo añadido al carrito',item)
     if(item.totalItemPrice >0){
       onAddToCart(item);
       setIsAnimating(true); // Activa la animación
@@ -104,11 +106,8 @@ function Modal({ pizza, onClose,onAddToCart}) {
             {Object.entries(precios).map(([size, price]) => (
               // key es importante para las listas en React; el 'size' (ej. 'personal') es único
               <li key={size} className={styles['price-item']}>
-                {/* Usa una clase para estilizar cada item de precio */}
-                {/* Capitalizamos la primera letra del tamaño y mostramos el precio formateado */}
+               
                 {size.charAt(0).toUpperCase() + size.slice(1)}: ${price.toFixed(3)}
-                {/* *** Placeholder para los botones de cantidad +/- para ESTE TAMAÑO (¡futuro!) *** */}
-                {/* Por ahora, solo mostramos el precio fijo */}
                 <div className={styles['quantity-controls']}>
                   <button className={styles['buttonControls']} onClick={() => handleDecreaseQuantity(size)}>-</button>
                   <span className={styles['span']} >{controles[size]}</span>

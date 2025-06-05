@@ -1,6 +1,6 @@
 export const pizzasData = {
     marinera: {
-      id: 'marinera',
+      id: 'pizza-id-marinera',
       nombre: "Marinera",
       imagen: "img/marinera.webp",
       ingredientes: ["Tomate", "Mozzarella", "Albahaca fresca"],
@@ -11,7 +11,7 @@ export const pizzasData = {
       }
     },
     pepperoni: {
-      id: 'pepperoni',
+      id: 'pizza-id-pepperoni',
       nombre: "Pepperoni",
       imagen: "img/peperoni.webp",
       ingredientes: ["Tomate", "Mozzarella", "Pepperoni"],
@@ -22,7 +22,7 @@ export const pizzasData = {
       }
     },
     quesos: {
-      id: 'quesos',
+      id: 'pizza-id-quesos',
       nombre: "Quesos",
       imagen: "img/cuatro-quesos.webp",
       ingredientes: ["Mozzarella", "Gorgonzola", "Parmesano", "Ricotta"],
@@ -33,7 +33,7 @@ export const pizzasData = {
       }
     },
     barbacoa: {
-      id: 'barbacoa',
+      id: 'pizza-id-barbacoa',
       nombre: "Barbacoa",
       imagen: "img/barbacoa.webp",
       ingredientes: ["Tomate", "Mozzarella", "Carne de res", "Cebolla", "Salsa barbacoa"],
@@ -44,7 +44,7 @@ export const pizzasData = {
       }
     },
     hawaiana: {
-      id: 'hawaiana',
+      id: 'pizza-id-hawaiana',
       nombre: "Hawaiana",
       imagen: "img/hawaina.webp",
       ingredientes: ["Tomate", "Mozzarella", "Jamón", "Piña"],
@@ -55,7 +55,7 @@ export const pizzasData = {
       }
     },
     vegetariana: {
-      id: 'vegetariana',
+      id: 'pizza-id-vegetariana',
       nombre: "Vegetariana",
       imagen: "img/vegetariana.webp",
       ingredientes: ["Pimientos", "Champiñones", "Cebolla", "Aceitunas"],

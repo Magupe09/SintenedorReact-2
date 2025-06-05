@@ -180,10 +180,11 @@
 
 .quantity-controls {
   display: flex;
+  
   justify-content: center;
   align-items: center;
   gap: 18px;
-
+  
   width: 40px;
 }
 
