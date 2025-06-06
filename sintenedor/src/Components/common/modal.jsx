@@ -24,6 +24,7 @@ function Modal({ pizza, onClose,onAddToCart}) {
       }
     }
     const item={pizzaInfo,selectedQuantities,totalItemPrice}
+    console.log("DEBUG - Modal.jsx: Item antes de añadir al carrito:", JSON.parse(JSON.stringify(item)));
     console.log('Item siendo añadido al carrito',item)
     if(item.totalItemPrice >0){
       onAddToCart(item);

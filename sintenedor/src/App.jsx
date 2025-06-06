@@ -57,6 +57,17 @@ const totalPrice = (carrito) => {
       return [...prevCarrito, newItem];
     });
   };
+  
+
+
+
+
+
+
+
+
+
+  
 
   // Función que se ejecuta al hacer clic en una pizza (actualiza estado para abrir modal)
   // Cambié el nombre del parámetro de 'pizzasData' a 'pizzaData' para mayor claridad
