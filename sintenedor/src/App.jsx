@@ -36,13 +36,16 @@ const totalPrice = (carrito) => {
   }
 
   const handleAddToCart = (newItem) => {
-    
+    console.log("DEBUG - App.jsx: newItem recibido de Modal:", JSON.parse(JSON.stringify(newItem)));
     setCarrito(prevCarrito => {
       const existingItem = prevCarrito.findIndex(item => item.pizzaInfo.id === newItem.pizzaInfo.id);
 
       if (existingItem !== -1) {
         const updatedCarrito = [...prevCarrito];
         let updatedItem = { ...updatedCarrito[existingItem], selectedQuantities: { ...updatedCarrito[existingItem].selectedQuantities } };
+
+
+        console.log("DEBUG - App.jsx: Ítem EXISTENTE antes de fusionar cantidades:", JSON.parse(JSON.stringify(updatedItem)));
         for (const [clave, valor] of Object.entries(newItem.selectedQuantities)) {
           updatedItem.selectedQuantities[clave] = (updatedItem.selectedQuantities[clave] || 0) + valor;
 
@@ -52,9 +55,12 @@ const totalPrice = (carrito) => {
 
 
         updatedCarrito[existingItem] = updatedItem;
+        console.log("DEBUG - App.jsx: Carrito COMPLETO después de FUSIÓN (antes de setCarrito):", JSON.parse(JSON.stringify(updatedCarrito)));
         return updatedCarrito;
       }
-      return [...prevCarrito, newItem];
+      const newCarritoState =[...prevCarrito, newItem];
+      console.log("DEBUG - App.jsx: Carrito COMPLETO con ítem NUEVO (antes de setCarrito):", JSON.parse(JSON.stringify(newCarritoState)));
+      return newCarritoState
     });
   };
   

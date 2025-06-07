@@ -10,10 +10,10 @@ function CartItem({ item, onRemoveFromCart,onIncreaseItemQuantity,onDecreaseItem
                 {Object.entries(item.selectedQuantities).map(([size, quantity]) => (
                     <div key={size} className={styles['quantity-control-display']}> {/* Nuevo contenedor para agrupar */}
                         <div className={styles['item-quantity-buttons']}> {/* Botones para este tamaño */}
-                            <button onClick={() => onDecreaseItemQuantity(item.pizzaInfo.id, size)}>-</button> {/* Nueva prop */}
+                            <button onClick={() => onDecreaseItemQuantity(size)}>-</button> {/* Nueva prop */}
                             <span>{size.charAt(0).toUpperCase() + size.slice(1)}: ${quantity}</span>
 
-                            <button onClick={() => onIncreaseItemQuantity(item.pizzaInfo.id, size)}>+</button> {/* Nueva prop */}
+                            <button onClick={() => onIncreaseItemQuantity(size)}>+</button> {/* Nueva prop */}
                         </div>
                     </div>
                 ))}
