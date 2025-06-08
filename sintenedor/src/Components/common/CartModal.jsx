@@ -13,7 +13,6 @@ const CartModal = ({ carrito, setCarrito, onClose, onRemoveFromCart, totalPrice 
     console.log("  size:", size);       // Esperamos el tamaño (ej. 'personal', 'mediana')
     console.log("  type:", type);       // Esperamos el tipo de operación ('increase' o 'decrease')
 
-
     setCarrito(prevCarrito => {
       const updatedCarrito = prevCarrito.map(item => {
         if (item.pizzaInfo.id === pizzaId){
@@ -33,7 +32,7 @@ const CartModal = ({ carrito, setCarrito, onClose, onRemoveFromCart, totalPrice 
 
             if (currentQuantity > 0) { // Solo si la cantidad es mayor a 0
               finalQuantities[clave] = currentQuantity; // Mantenemos esta cantidad
-              newTotalItemPrice += currentQuantity * pricePerUnit; // Sumamos al precio total
+              newTotalItemPrice += currentQuantity *(pricePerUnit || 0); // Sumamos al precio total
             }
             // Si currentQuantity es 0, simplemente no lo añadimos a finalQuantities, así se "elimina"
           }
@@ -43,8 +42,15 @@ const CartModal = ({ carrito, setCarrito, onClose, onRemoveFromCart, totalPrice 
             totalItemPrice: newTotalItemPrice
           };
         }
-      })
-    })
+      });
+      const finalCarrito = updatedCarrito.filter(item =>
+        Object.keys(item.selectedQuantities).length > 0);
+        if(finalCarrito.length === 0){
+          onClose()
+        }
+        return finalCarrito
+    });
+  
     // Por ahora, solo loguearemos. La lógica de actualización la haremos después.
   };
   // --------------------------------------------------------

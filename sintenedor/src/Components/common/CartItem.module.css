@@ -6,6 +6,7 @@
     border-radius: 10px;
     overflow: hidden;
     max-width: 150px;
+    flex-basis: calc(100% - 10px);
     max-height: 350px;
     background-color: wheat;
     justify-content: center;

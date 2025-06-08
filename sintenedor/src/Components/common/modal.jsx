@@ -28,6 +28,7 @@ function Modal({ pizza, onClose,onAddToCart}) {
     console.log('Item siendo añadido al carrito',item)
     if(item.totalItemPrice >0){
       onAddToCart(item);
+      setControles({ personal: 0, mediana: 0, familiar: 0 });
       setIsAnimating(true); // Activa la animación
       setTimeout(() => {
         setIsAnimating(false); // Desactiva la animación después de un tiempo
