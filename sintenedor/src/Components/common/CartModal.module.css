@@ -20,13 +20,16 @@
    
     background-color: var(--color-secondary);
     width: 90%;
-    height: 80vh;
+    height: 85vh;
     margin-left: 5%;
     margin-top: 5%;
     border-radius: 10px;
     background-color: var(--color-four);
 }
 .cart-summary h2{
+    font-size: 1.5rem;
+}
+.cart-summary p{
     font-size: 1.5rem;
 }
 .boton-close{
@@ -62,4 +65,81 @@
     padding: 0;
     box-sizing: border-box;
    
+}
+
+
+
+
+
+/* Tus estilos actuales (para desktop o pantallas grandes) */
+
+/* ... (Todos los estilos que me pasaste antes para .cart-modal, .cart-summary, etc.) ... */
+
+
+/* --- Media Query para Tablets (ej. pantallas de hasta 900px de ancho) --- */
+@media (max-width: 900px) {
+
+    /* Ajustes para el Contenedor Principal del Modal */
+    .cart-modal {
+        /* Podrías hacer el modal un poco más pequeño si 95% es demasiado grande */
+        width: 90%; /* Un poco menos ancho */
+        height: 90vh; /* Un poco menos alto */
+    }
+
+    /* Ajustes para el Contenedor del Contenido del Carrito */
+    .cart-summary {
+        width: 95%; /* Dale un poco más de ancho relativo a su padre para aprovechar el espacio */
+        height: 85vh; /* Ajusta la altura si es necesario */
+        margin-left: 2.5%; /* Centra si cambias el width */
+        margin-top: 2.5%; /* Ajusta el margen superior */
+    }
+
+    /* Ajustes para Títulos y Párrafos (fuentes más pequeñas) */
+    .cart-summary h2,
+    .cart-summary p {
+        font-size: 1.2rem; /* Reducir el tamaño de la fuente para que quepa mejor */
+    }
+
+    /* Ajustes para el Botón de Cerrar */
+    .boton-close {
+        top: 5px; /* Más cerca de la esquina */
+        left: 5px; /* Más cerca de la esquina */
+        padding: 3px 8px; /* Un poco más pequeño */
+        font-size: 12px; /* Fuente más pequeña */
+    }
+
+    /* Ajustes para la Lista de Pizzas en el Carrito */
+    .cart-list {
+        padding: 10px; /* Reducir el padding interno */
+        margin: 0 5px; /* Reducir el margen lateral */
+        gap: 12px; /* Puedes aumentar o mantener el gap para dar más "aire" */
+        /* Considera cambiar flex-direction a 'column' para móviles o mantener 'row' con menos elementos por fila */
+        justify-content: center; /* Centrar los ítems si la fila no se llena */
+    }
+
+    /* Ajustes para los Ítems Individuales de Pizza */
+    .cart-item {
+        /* Ajusta el tamaño de cada ítem de pizza */
+        max-width: 250px; /* Haz los ítems más pequeños que en desktop (antes 280px, por ejemplo) */
+        /* Esto forzará menos ítems por fila en tablet, quizás 2 en lugar de 3 o 4 */
+        flex-basis: 250px; /* Mismo tamaño base */
+        /* grid-template-rows: 180px 110px; /* Si usas grid interno, ajusta los rows */
+        padding: 8px; /* Ajusta el padding interno si lo habías cambiado */
+    }
+
+    /* Si tu .cart-item tiene una imagen, también deberías ajustarla */
+    .cart-item .pizza-image { /* Asegúrate de usar la clase correcta para tu imagen */
+        max-width: 100%;
+        height: 150px; /* O ajusta el alto según tus grid-template-rows */
+        object-fit: contain; /* O 'cover' según tu preferencia */
+    }
+
+    /* Ajustes para los controles de cantidad (si tienes clases específicas) */
+    .cart-item .quantity-control {
+        font-size: 1rem; /* Ajusta el tamaño de la fuente */
+    }
+    .cart-item .quantity-control button {
+        padding: 4px 8px; /* Haz los botones de +/- más pequeños */
+        font-size: 0.9rem;
+    }
 }

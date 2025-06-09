@@ -31,8 +31,15 @@ const totalPrice = (carrito) => {
     
     setCarrito(prevCarrito => {
       // Esto crea un nuevo array de carrito sin la pizza que tiene el id que queremos eliminar
-      return prevCarrito.filter(item => item.pizzaInfo.id !== pizzaIdToRemove);
+      const updatedCarrito =prevCarrito.filter(item => item.pizzaInfo.id !== pizzaIdToRemove);
+      if(updatedCarrito.length === 0){
+        console.log("DEBUG - CartModal: Carrito vacío detectado. Llamando a onClose().");
+        handleCloseCartModal()
+      }
+      return updatedCarrito
     });
+    
+
   }
 
   const handleAddToCart = (newItem) => {
@@ -65,18 +72,6 @@ const totalPrice = (carrito) => {
   };
   
 
-
-
-
-
-
-
-
-
-  
-
-  // Función que se ejecuta al hacer clic en una pizza (actualiza estado para abrir modal)
-  // Cambié el nombre del parámetro de 'pizzasData' a 'pizzaData' para mayor claridad
   const handlePizzaClick = (pizzaData) => {
     // *** ¡CORRECCIÓN CLAVE! Usa la función SET del estado ***
     setSelectedPizza(pizzaData); // Guarda los datos de LA pizza clicada en el estado
@@ -95,9 +90,7 @@ const totalPrice = (carrito) => {
   };
 
   return (
-    <> {/* Fragment */}
-      {/* Contenedor principal centrado para el contenido del menú */
-      }
+    <> 
       <button onClick={() => setIsCartModalOpen(true)}></button>
       <div className={appStyles.container}>
         <h1>Nuestro Menú de Pizzas</h1>

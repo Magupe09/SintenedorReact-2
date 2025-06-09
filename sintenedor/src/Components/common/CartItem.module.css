@@ -91,3 +91,89 @@
     height: 100%;
     border-radius: 10px;
 }
+
+
+
+
+/* Tus estilos actuales (para desktop o pantallas grandes) */
+
+/* ... (Todos los estilos que me pasaste antes para .cart-modal, .cart-summary, etc.) ... */
+
+
+/* --- Media Query para Tablets (pantallas de hasta 900px de ancho) --- */
+@media (max-width: 900px) {
+
+    /* --- Contenedor de la Lista (mantener en una sola fila) --- */
+    .cart-list {
+    }
+
+    /* --- Ítem Individual de Pizza (.cart-item) --- */
+    .cart-item {
+        grid-template-rows: 114px 91px;
+        max-width: 120px;
+       
+        max-height: 200px;
+       
+    }
+
+    /* --- Ajustes de Estilos Internos del Ítem para Conservar Simetría --- */
+
+    /* Imagen de la Pizza */
+    .cart-item img {
+        height: 100%; /* La imagen debe ocupar el 100% de su fila (100px en este caso) */
+        width: 100%;
+        object-fit: cover; /* o 'contain' según tu preferencia para que la imagen se adapte bien */
+        
+    }
+
+    /* Contenedor de Detalles (nombre, precio, etc.) */
+    .cart-item-details {
+        /* Ajusta el padding o el espacio interno si lo deseas */
+        padding: 2px; /* Un poco menos de padding si es necesario */
+    }
+
+    /* Títulos y texto dentro de los detalles */
+    .cart-item-details h3 {
+        font-size: 0.8rem; /* <--- ¡Más pequeño! */
+        /* Asegúrate de que el texto largo se maneje bien con ellipsis */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .cart-item-details span,
+    .cart-item-details p {
+        font-size: 0.7rem; /* <--- ¡Más pequeño! */
+    }
+
+    /* Botones dentro del detalle (ej. eliminar, +/-) */
+    .cart-item-details button {
+        font-size: 0.7rem; /* <--- ¡Más pequeño! */
+        padding: 3px 6px; /* Ajusta el padding de los botones */
+    }
+
+    /* Si tienes controles de cantidad (+/-) con sus propias clases */
+    .quantity-control { /* Asegúrate de que esta es la clase correcta de tu div de +/- */
+        font-size: 0.7rem; /* Fuente más pequeña para los números de cantidad */
+    }
+    .quantity-control button {
+        padding: 2px 5px; /* Botones aún más pequeños */
+        font-size: 0.7rem;
+    }
+
+    /* Ajustes para el Botón de Cerrar del Modal */
+    /* Este es el boton del header del modal que me pasaste antes, no el de eliminar item */
+    .boton-close {
+        font-size: 12px;
+        padding: 5px 8px;
+        top: 5px;
+        left: 5px;
+    }
+
+    /* Puedes también hacer el título y el total del carrito más pequeños si lo deseas */
+    .cart-summary h2 {
+        font-size: 1.3rem; /* Más pequeño que el desktop */
+    }
+    .cart-summary p {
+        font-size: 1.3rem; /* Más pequeño que el desktop */
+    }
+}

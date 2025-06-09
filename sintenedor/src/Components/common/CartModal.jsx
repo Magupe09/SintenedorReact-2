@@ -46,8 +46,10 @@ const CartModal = ({ carrito, setCarrito, onClose, onRemoveFromCart, totalPrice 
       const finalCarrito = updatedCarrito.filter(item =>
         Object.keys(item.selectedQuantities).length > 0);
         if(finalCarrito.length === 0){
+          console.log("DEBUG - CartModal: Carrito vacío detectado. Llamando a onClose().");
           onClose()
         }
+
         return finalCarrito
     });
   
