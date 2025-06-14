@@ -101,18 +101,16 @@
 
 
 /* --- Media Query para Tablets (pantallas de hasta 900px de ancho) --- */
-@media (max-width: 900px) {
+@media (min-width: 350px) and (max-width: 900px) {
 
-    /* --- Contenedor de la Lista (mantener en una sola fila) --- */
-    .cart-list {
-    }
-
-    /* --- Ítem Individual de Pizza (.cart-item) --- */
     .cart-item {
-        grid-template-rows: 114px 91px;
-        max-width: 120px;
-       
-        max-height: 200px;
+        display: flex;
+        flex-direction: column;
+        
+        width: 150px;
+        height: 250px;
+        gap: 0px;
+        
        
     }
 
@@ -130,6 +128,7 @@
     .cart-item-details {
         /* Ajusta el padding o el espacio interno si lo deseas */
         padding: 2px; /* Un poco menos de padding si es necesario */
+        height: auto;
     }
 
     /* Títulos y texto dentro de los detalles */
@@ -176,4 +175,16 @@
     .cart-summary p {
         font-size: 1.3rem; /* Más pequeño que el desktop */
     }
+}
+
+@media (max-width: 350px) {
+    .cart-item {
+        background-color: red;
+        width: 200px;
+        max-height: 250px;
+        gap: 0px;
+        
+       
+    }
+  
 }

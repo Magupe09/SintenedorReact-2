@@ -120,11 +120,10 @@
     /* Ajustes para los Ítems Individuales de Pizza */
     .cart-item {
         /* Ajusta el tamaño de cada ítem de pizza */
-        max-width: 250px; /* Haz los ítems más pequeños que en desktop (antes 280px, por ejemplo) */
-        /* Esto forzará menos ítems por fila en tablet, quizás 2 en lugar de 3 o 4 */
-        flex-basis: 250px; /* Mismo tamaño base */
-        /* grid-template-rows: 180px 110px; /* Si usas grid interno, ajusta los rows */
-        padding: 8px; /* Ajusta el padding interno si lo habías cambiado */
+        width: 120px; /* Haz los ítems más pequeños que en desktop (antes 280px, por ejemplo) */
+        
+        height: 250px;
+        gap: 20px;
     }
 
     /* Si tu .cart-item tiene una imagen, también deberías ajustarla */
@@ -141,5 +140,13 @@
     .cart-item .quantity-control button {
         padding: 4px 8px; /* Haz los botones de +/- más pequeños */
         font-size: 0.9rem;
+    }
+}
+@media (max-width: 350px) {
+    .cart-summary h2{
+        font-size: 1rem;
+    }
+    .cart-summary p{
+        font-size: 1rem;
     }
 }
