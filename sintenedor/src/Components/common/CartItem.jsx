@@ -11,7 +11,7 @@ function CartItem({ item, onRemoveFromCart,onIncreaseItemQuantity,onDecreaseItem
                     <div key={size} className={styles['quantity-control-display']}> {/* Nuevo contenedor para agrupar */}
                         <div className={styles['item-quantity-buttons']}> {/* Botones para este tamaño */}
                             <button onClick={() => onDecreaseItemQuantity(size)}>-</button> {/* Nueva prop */}
-                            <span>{size.charAt(0).toUpperCase() + size.slice(1)}: ${quantity}</span>
+                            <span>{size.charAt(0).toUpperCase() + size.slice(1)}: {quantity}</span>
 
                             <button onClick={() => onIncreaseItemQuantity(size)}>+</button> {/* Nueva prop */}
                         </div>

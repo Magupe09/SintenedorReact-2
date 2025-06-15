@@ -18,15 +18,6 @@ function PizzaItem({ pizza ,onPizzaClick}) {
 
       <h3>{nombre}</h3> {/* Usamos 'nombre' en lugar de 'name' */}
       
-      {/* Mostramos los ingredientes. Como 'ingredientes' es un arreglo, usamos .join(', ') para mostrarlos como una cadena separada por comas. */}
-      {/*<p>Ingredientes: {ingredientes.join(', ')}</p>*/}
-
-      {/* Mostramos el precio del tamaño 'personal'. toFixed(2) asegura dos decimales. */}
-      {/* NOTA: Más adelante, si quieres mostrar o seleccionar otros tamaños (mediana, familiar), deberás modificar este componente o añadir un selector. Por ahora, solo mostramos el personal. */}
-      {/*<p>Precio (Personal): ${precios.personal.toFixed(2)}</p>*/}
-
-      {/* Aquí es donde añadiríamos la lógica para hacer clic y abrir el modal o añadir al carrito */}
-      
     </div>
   );
 }

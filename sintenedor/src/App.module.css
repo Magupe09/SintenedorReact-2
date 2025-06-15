@@ -10,3 +10,24 @@ body{
   text-align: center;
   background-color: var(--color-primary);
 }
+.cart-icon-button{
+  background: none; /* Elimina el fondo del botón si lo tiene */
+  border: none; /* Elimina el borde del botón */
+  cursor: pointer;
+  padding: 10px; /* Dale un poco de espacio alrededor del icono */
+  display: flex; /* Para centrar el SVG si el botón es más grande */
+  align-items: center;
+  justify-content: center
+}
+.cart-icon-button svg {
+  color: var(--color-secondary); /* Usa tu color primario o un color por defecto */
+  width: 30px; /* Ajusta el tamaño del icono (ej. 30px) */
+  height: 30px; /* Mantén la proporción */
+  transition: color 0.3s ease; /* Transición suave al pasar el mouse */
+}
+
+/* 
+.cart-icon-button:hover svg {
+  color: var(--color-third, darkgray); Cambia de color al pasar el mouse 
+}
+  */

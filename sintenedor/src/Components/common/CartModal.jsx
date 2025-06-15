@@ -56,22 +56,13 @@ const CartModal = ({ carrito, setCarrito, onClose, onRemoveFromCart, totalPrice 
     // Por ahora, solo loguearemos. La lógica de actualización la haremos después.
   };
   // --------------------------------------------------------
-
-
-
-
-
-
-  
-
-
-
-
   return (
     <div className={styles['cart-modal']}>
       {/* Aquí irá la lógica para mostrar los ítems del carrito */}
+      
+      <button className={styles['boton-close']} onClick={onClose}>Cerrar</button>
       {carrito.length === 0 ? (
-        <p>Tu carrito está vacío.</p>
+        <p className={styles['empty-cart-message']}>Tu carrito está vacío.</p>
       ) : (
 
         <div className={styles['cart-summary']}>

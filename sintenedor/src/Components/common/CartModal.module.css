@@ -67,7 +67,19 @@
    
 }
 
-
+/* En CartModal.module.css */
+.empty-cart-message {
+    text-align: center; /* Centra el texto horizontalmente */
+    width: 100%; /* Asegúrate de que ocupe todo el ancho disponible */
+    padding: 50px 20px; /* Dale espacio arriba, abajo y a los lados */
+    font-size: 1.5rem; /* Haz el texto un poco más grande para que destaque */
+    color: var(--color-third, #333); /* Elige un color que contraste bien */
+    /* Para centrarlo verticalmente si el padre es flex/grid */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Ocupa la altura completa del padre */
+}
 
 
 
@@ -102,8 +114,8 @@
 
     /* Ajustes para el Botón de Cerrar */
     .boton-close {
-        top: 5px; /* Más cerca de la esquina */
-        left: 5px; /* Más cerca de la esquina */
+        top: 30px; /* Más cerca de la esquina */
+        left: 34px; /* Más cerca de la esquina */
         padding: 3px 8px; /* Un poco más pequeño */
         font-size: 12px; /* Fuente más pequeña */
     }
@@ -148,5 +160,12 @@
     }
     .cart-summary p{
         font-size: 1rem;
+    }
+    .boton-close {
+        top: 15px; /* Más cerca de la esquina */
+        left: 12px; /* Más cerca de la esquina */
+        padding: 7px 5px; /* Un poco más pequeño */
+        font-size: 10px; /* Fuente más pequeña */
+        background-color: red;
     }
 }

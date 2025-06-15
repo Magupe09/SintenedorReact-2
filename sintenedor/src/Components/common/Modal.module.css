@@ -68,7 +68,7 @@
 .modal-header {
   margin-bottom: 0px;
   background-color: var(--color-secondary);
-  gap: 5px;
+  gap: 0px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
