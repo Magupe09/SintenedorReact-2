@@ -83,12 +83,6 @@
 
 
 
-/* Tus estilos actuales (para desktop o pantallas grandes) */
-
-/* ... (Todos los estilos que me pasaste antes para .cart-modal, .cart-summary, etc.) ... */
-
-
-/* --- Media Query para Tablets (ej. pantallas de hasta 900px de ancho) --- */
 @media (max-width: 900px) {
 
     /* Ajustes para el Contenedor Principal del Modal */
