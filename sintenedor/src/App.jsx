@@ -8,6 +8,7 @@ import PizzaList from './Components/menu/PizzaList'; // O tu ruta correcta
 import appStyles from './App.module.css'; // o App.css
 import Modal from './Components/common/Modal';
 import CartModal from './Components/common/CartModal';
+import Header from './Components/layout/header';
 
 function App() {
   // Estado para controlar el modal y la pizza seleccionada
@@ -89,8 +90,23 @@ const totalPrice = (carrito) => {
     setIsCartModalOpen(false); // Cierra el modal
   };
 
+  const totalItemsInCart = carrito.reduce((totalCount, item) => {
+    // 'item' es cada objeto de pizza en tu carrito
+    // 'item.selectedQuantities' es un objeto como { 'pequena': 1, 'grande': 2 }
+
+    // Suma las cantidades de todos los tamaños para la pizza actual
+    const quantitiesOfCurrentPizza = Object.values(item.selectedQuantities); // Obtiene un array de las cantidades [1, 2]
+    const sumQuantities = quantitiesOfCurrentPizza.reduce((sum, qty) => sum + qty, 0); // Suma esas cantidades (1 + 2 = 3)
+
+    return totalCount + sumQuantities; // Agrega la suma de esta pizza al total general
+  }, 0); // Empieza el conteo desde 0
+
   return (
     <> 
+        <Header
+        onOpenCartModal={() => setIsCartModalOpen(true)} // Pasa la función para abrir el modal
+        totalItemsInCart={totalItemsInCart} // Pasa el total de ítems para el contador
+      />
       <div className={appStyles.container}>
       <button className={appStyles["cart-icon-button"]}  onClick={() => setIsCartModalOpen(true)}>
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart">

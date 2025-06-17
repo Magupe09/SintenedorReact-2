@@ -1,0 +1,170 @@
+/* src/Components/common/Header/Header.module.css */
+
+/* --- Estilos por defecto (para MOBILE FIRST, y luego sobrescribir con tablet/desktop) --- */
+/* O si prefieres DESKTOP FIRST (como lo hemos hecho antes con max-width):
+   Estos serían los estilos DESKTOP, y luego usaríamos media queries para MOBILE/TABLET con max-width.
+   Vamos con Desktop-First para no cambiar tu flujo de trabajo previo, aunque Mobile-First es recomendado. */
+
+
+/* --- Estilos para Desktop (Valores por defecto para pantallas grandes) --- */
+.header {
+    display: flex;
+    justify-content: space-between; /* Logo a la izquierda, Navegación a la derecha */
+    align-items: center;
+    padding: 15px 40px; /* Espacio interno del header */
+    background-color: var(--color-primary); /* Un color de fondo para tu header */
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    position: sticky; /* O 'fixed' si quieres que siempre esté visible */
+    top: 0;
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: white;
+}
+
+.logo img {
+    height: 40px; /* Tamaño del logo */
+    width: auto;
+}
+
+.logo h1 {
+    font-size: 1.8rem; /* Tamaño del título del logo */
+    margin: 0;
+}
+
+/* Navegación para Desktop */
+.nav {
+    display: block; /* Visible por defecto en desktop */
+}
+
+.nav-list {
+    display: flex; /* Elementos de la lista en fila */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 30px; /* Espacio entre los enlaces */
+}
+
+.nav-list li a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.1rem;
+    padding: 5px 0;
+    transition: color 0.3s ease;
+}
+
+.nav-list li a:hover {
+    color: var(--color-third); /* Cambia de color al pasar el mouse */
+}
+
+/* Ocultar botón de hamburguesa en Desktop */
+.hamburger-menu-button {
+    display: none;
+}
+
+/* --- Estilos para el Botón de Carrito en el Header --- */
+.cart-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white; /* Color del icono del carrito */
+    padding: 0;
+    display: flex;
+    align-items: center;
+    position: relative; /* Para posicionar el contador de ítems */
+}
+
+.cart-button svg {
+    width: 28px;
+    height: 28px;
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px; /* Ajusta la posición para que esté encima del icono */
+    right: -5px;
+    background-color: var(--color-tertiary); /* Color de fondo del contador */
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.8rem;
+    line-height: 1; /* Asegura que el texto esté centrado verticalmente */
+    min-width: 18px; /* Ancho mínimo para números de un dígito */
+    text-align: center;
+}
+
+
+/* --- Media Query para Tablets y Móviles (max-width: 768px, por ejemplo) --- */
+@media (max-width: 768px) {
+    .header {
+        padding: 10px 20px; /* Menos padding en pantallas pequeñas */
+    }
+
+    .logo img {
+        height: 35px; /* Logo un poco más pequeño */
+    }
+
+    .logo h1 {
+        font-size: 1.5rem; /* Título del logo más pequeño */
+    }
+
+    /* Mostrar botón de hamburguesa */
+    .hamburger-menu-button {
+        display: flex; /* Hazlo visible */
+        flex-direction: column;
+        justify-content: space-around;
+        width: 30px;
+        height: 25px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: 1001; /* Asegura que esté por encima de la navegación */
+    }
+
+    .hamburger-menu-button .line {
+        width: 100%;
+        height: 3px;
+        background-color: white; /* Color de las líneas de la hamburguesa */
+        border-radius: 2px;
+        transition: all 0.3s ease; /* Para posibles animaciones del icono */
+    }
+
+    /* Ocultar la navegación principal en mobile por defecto */
+    .nav {
+        display: flex; /* Cambia a flex para el layout interno */
+        flex-direction: column; /* Links apilados verticalmente */
+        position: fixed; /* O 'absolute' si prefieres dentro del padre */
+        top: 0;
+        right: -100%; /* Inicia fuera de la pantalla, a la derecha */
+        width: 70%; /* Ancho del menú desplegado */
+        max-width: 300px; /* Máximo ancho para que no sea demasiado grande en tablets */
+        height: 100vh; /* Ocupa toda la altura de la ventana */
+        background-color: var(--color-primary); /* Fondo del menú desplegado */
+        padding: 80px 20px 20px; /* Padding para evitar que los links se peguen arriba */
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2); /* Sombra en el lateral */
+        transition: right 0.3s ease-in-out; /* Animación de deslizamiento */
+        z-index: 999; /* Por debajo del botón de hamburguesa */
+    }
+
+    /* Clase para cuando el menú está abierto */
+    .nav-open {
+        right: 0; /* Desliza el menú para que sea visible */
+    }
+
+    .nav-list {
+        flex-direction: column; /* Links verticalmente */
+        gap: 20px; /* Espacio entre links */
+        align-items: flex-start; /* Alinea los links a la izquierda */
+    }
+
+    .nav-list li a {
+        font-size: 1.3rem; /* Links más grandes para que sean fáciles de tocar */
+    }
+}

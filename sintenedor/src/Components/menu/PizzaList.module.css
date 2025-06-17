@@ -10,7 +10,33 @@
     align-items: start; 
     
   
-    /* Puedes añadir otros estilos como un fondo, borde, etc. al contenedor de la lista */
-    /* background-color: #f8f8f8; */
-    /* border-top: 1px solid #eee; */
   }
+
+@media (max-width: 600px){
+    
+.pizza-list-container {
+    
+  display: grid; 
+  grid-template-columns: repeat(2,1fr);
+  gap: 5px;
+  padding: 20px; 
+  justify-items: center; 
+  align-items: start; 
+  
+
+}
+  }
+
+@media (max-width: 350px){
+  .pizza-list-container {
+    
+    display: grid; 
+    grid-template-columns: repeat(1,1fr);
+    gap: 5px;
+    padding: 20px; 
+    justify-items: center; 
+    align-items: start; 
+    
+  
+  }
+}
