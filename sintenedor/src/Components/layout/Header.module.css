@@ -29,8 +29,9 @@
 }
 
 .logo img {
-    height: 40px; /* Tamaño del logo */
-    width: auto;
+    height: 80px; /* Tamaño del logo */
+    width: 100px;
+    border-radius: 10px;
 }
 
 .logo h1 {
@@ -81,8 +82,8 @@
 }
 
 .cart-button svg {
-    width: 28px;
-    height: 28px;
+    width: 36px;
+    height: 38px;
 }
 
 .cart-count {
@@ -93,9 +94,9 @@
     color: white;
     border-radius: 50%;
     padding: 2px 6px;
-    font-size: 0.8rem;
-    line-height: 1; /* Asegura que el texto esté centrado verticalmente */
-    min-width: 18px; /* Ancho mínimo para números de un dígito */
+    font-size: 1rem;
+    line-height: 0; /* Asegura que el texto esté centrado verticalmente */
+    min-width: 38px; /* Ancho mínimo para números de un dígito */
     text-align: center;
 }
 
@@ -107,11 +108,11 @@
     }
 
     .logo img {
-        height: 35px; /* Logo un poco más pequeño */
+        height: 70px; /* Logo un poco más pequeño */
     }
 
     .logo h1 {
-        font-size: 1.5rem; /* Título del logo más pequeño */
+        font-size: 2.5rem; /* Título del logo más pequeño */
     }
 
     /* Mostrar botón de hamburguesa */
@@ -167,4 +168,41 @@
     .nav-list li a {
         font-size: 1.3rem; /* Links más grandes para que sean fáciles de tocar */
     }
+}
+
+@media (max-width: 568px) {
+    .header {
+        padding: 5px 10px; /* Menos padding en pantallas pequeñas */
+    }
+
+    .logo img {
+        height: 60px; /* Logo un poco más pequeño */
+    }
+
+    .logo h1 {
+        font-size: 1.5rem; /* Título del logo más pequeño */
+    }
+
+    /* Mostrar botón de hamburguesa */
+    .hamburger-menu-button {
+        display: flex; /* Hazlo visible */
+        flex-direction: column;
+        justify-content: space-around;
+        width: 30px;
+        height: 25px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: 1001; /* Asegura que esté por encima de la navegación */
+    }
+
+    .hamburger-menu-button .line {
+        width: 100%;
+        height: 3px;
+        background-color: white; /* Color de las líneas de la hamburguesa */
+        border-radius: 2px;
+        transition: all 0.3s ease; /* Para posibles animaciones del icono */
+    }
+
 }

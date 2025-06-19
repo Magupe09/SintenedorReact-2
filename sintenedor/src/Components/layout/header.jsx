@@ -1,6 +1,7 @@
 // src/Components/common/Header/Header.jsx
 import React, { useState } from 'react';
 import styles from './Header.module.css'; // Crearemos este archivo CSS Module
+import logoPrincipal from '../../assets/logoSintenedor.webp';
 
 const Header = ({ onOpenCartModal, totalItemsInCart }) => { // Recibimos props para el botón de carrito
     const [isMenuOpen, setIsMenuOpen] = useState(false); // Estado para controlar si el menú móvil está abierto
@@ -14,8 +15,8 @@ const Header = ({ onOpenCartModal, totalItemsInCart }) => { // Recibimos props p
             {/* Sección del Logo */}
             <div className={styles.logo}>
                 <a href="/"> {/* Enlace al inicio */}
-                    <img src="/images/logo-pizza.png" alt="Logo de Tu Pizzería" /> {/* Asegúrate de tener una imagen de logo */}
-                    <h1>Tu Pizzería</h1>
+                    <img src={logoPrincipal} alt="Logo de Tu Pizzería" /> {/* Asegúrate de tener una imagen de logo */}
+                    <h1> Sintenedor </h1>
                 </a>
             </div>
 
