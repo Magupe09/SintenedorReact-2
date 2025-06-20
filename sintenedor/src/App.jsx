@@ -9,6 +9,8 @@ import appStyles from './App.module.css'; // o App.css
 import Modal from './Components/common/Modal';
 import CartModal from './Components/common/CartModal';
 import Header from './Components/layout/header';
+import Footer from './Components/layout/footer';
+
 
 function App() {
   // Estado para controlar el modal y la pizza seleccionada
@@ -107,7 +109,7 @@ const totalPrice = (carrito) => {
         onOpenCartModal={() => setIsCartModalOpen(true)} // Pasa la función para abrir el modal
         totalItemsInCart={totalItemsInCart} // Pasa el total de ítems para el contador
       />
-      <div className={appStyles.container}>
+      <div id="menu" className={appStyles.container}>
       
         <h1>Menú de Pizzas</h1>
         {/* Renderiza PizzaList una sola vez y pásale la función de click */}
@@ -134,6 +136,7 @@ const totalPrice = (carrito) => {
           onRemoveFromCart={handleRemoveFromCart}
         />
       )}
+      <Footer />
 
     </>
   );

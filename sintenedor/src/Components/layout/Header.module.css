@@ -1,23 +1,18 @@
-/* src/Components/common/Header/Header.module.css */
+/* src/Components/layout/Header.module.css */
 
-/* --- Estilos por defecto (para MOBILE FIRST, y luego sobrescribir con tablet/desktop) --- */
-/* O si prefieres DESKTOP FIRST (como lo hemos hecho antes con max-width):
-   Estos serían los estilos DESKTOP, y luego usaríamos media queries para MOBILE/TABLET con max-width.
-   Vamos con Desktop-First para no cambiar tu flujo de trabajo previo, aunque Mobile-First es recomendado. */
+/* --- Estilos Base (Desktop First) --- */
 
-
-/* --- Estilos para Desktop (Valores por defecto para pantallas grandes) --- */
 .header {
     display: flex;
-    justify-content: space-between; /* Logo a la izquierda, Navegación a la derecha */
+    justify-content: space-between;
     align-items: center;
-    padding: 15px 40px; /* Espacio interno del header */
-    background-color: var(--color-primary); /* Un color de fondo para tu header */
+    padding: 15px 40px;
+    background-color: var(--color-primary);
     color: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
-    position: sticky; /* O 'fixed' si quieres que siempre esté visible */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: sticky;
     top: 0;
-    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    z-index: 1000;
 }
 
 .logo a {
@@ -29,13 +24,13 @@
 }
 
 .logo img {
-    height: 80px; /* Tamaño del logo */
+    height: 80px;
     width: 100px;
     border-radius: 10px;
 }
 
 .logo h1 {
-    font-size: 1.8rem; /* Tamaño del título del logo */
+    font-size: 1.8rem;
     margin: 0;
 }
 
@@ -45,11 +40,11 @@
 }
 
 .nav-list {
-    display: flex; /* Elementos de la lista en fila */
+    display: flex;
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 30px; /* Espacio entre los enlaces */
+    gap: 30px;
 }
 
 .nav-list li a {
@@ -61,22 +56,46 @@
 }
 
 .nav-list li a:hover {
-    color: var(--color-third); /* Cambia de color al pasar el mouse */
+    color: var(--color-tertiary); /* Corregido: Usar --color-tertiary como en el footer */
 }
 
 /* Ocultar botón de hamburguesa en Desktop */
 .hamburger-menu-button {
     display: none;
+    /* Estilos de las líneas (default para desktop, pero necesarias para la transición en móvil) */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 30px; /* Tamaño del botón */
+    height: 25px; /* Altura del contenedor de las líneas */
+    flex-direction: column; /* Las líneas se apilan */
+    justify-content: space-between; /* Espacia las líneas */
+    z-index: 1001; /* Asegura que esté por encima de la navegación cuando se muestre */
 }
 
-/* --- Estilos para el Botón de Carrito en el Header --- */
+.hamburger-menu-button .line {
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center center;
+}
+
+/* --- Estilos para el Botón de Carrito Flotante (Por defecto oculto en Desktop) --- */
+.fixed-cart-button-wrapper {
+    display: none; /* Oculto por defecto en desktop */
+}
+
+/* Estilos del botón de carrito (compartidos para ambas versiones, desktop/fixed) */
 .cart-button {
     background: none;
     border: none;
     cursor: pointer;
-    color: white; /* Color del icono del carrito */
+    color: white;
     padding: 0;
-    display: flex;
+    display: flex; /* Para centrar el SVG y el contador */
     align-items: center;
     position: relative; /* Para posicionar el contador de ítems */
 }
@@ -86,123 +105,143 @@
     height: 38px;
 }
 
+/* Estilos del contador de ítems */
 .cart-count {
     position: absolute;
-    top: -5px; /* Ajusta la posición para que esté encima del icono */
+    top: -5px;
     right: -5px;
-    background-color: var(--color-tertiary); /* Color de fondo del contador */
+    background-color: var(--color-tertiary);
     color: white;
     border-radius: 50%;
     padding: 2px 6px;
     font-size: 1rem;
-    line-height: 0; /* Asegura que el texto esté centrado verticalmente */
-    min-width: 38px; /* Ancho mínimo para números de un dígito */
+    line-height: 1; /* Simplificado de 0 a 1 para mejor compatibilidad */
+    min-width: 25px; /* Ajustado el ancho mínimo para mejor apariencia con font-size */
     text-align: center;
+    box-sizing: border-box; /* Asegura que padding no aumente el tamaño */
 }
 
 
-/* --- Media Query para Tablets y Móviles (max-width: 768px, por ejemplo) --- */
+/* --- Media Query: Tablet y Mobile (max-width: 768px) --- */
 @media (max-width: 768px) {
     .header {
-        padding: 10px 20px; /* Menos padding en pantallas pequeñas */
+        padding: 10px 20px;
     }
 
     .logo img {
-        height: 70px; /* Logo un poco más pequeño */
+        height: 70px;
     }
 
     .logo h1 {
-        font-size: 2.5rem; /* Título del logo más pequeño */
+        /* Se mantiene el tamaño del logo h1 del desktop, para evitar sobrescribir con 2.5rem y luego 1.5rem */
+        /* Si quieres que sea más pequeño que desktop pero más grande que el último mobile, ajusta aquí */
     }
 
     /* Mostrar botón de hamburguesa */
     .hamburger-menu-button {
-        display: flex; /* Hazlo visible */
-        flex-direction: column;
-        justify-content: space-around;
-        width: 30px;
-        height: 25px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 0;
-        z-index: 1001; /* Asegura que esté por encima de la navegación */
-    }
-
-    .hamburger-menu-button .line {
-        width: 100%;
-        height: 3px;
-        background-color: white; /* Color de las líneas de la hamburguesa */
-        border-radius: 2px;
-        transition: all 0.3s ease; /* Para posibles animaciones del icono */
+        display: flex; /* Anula 'display: none' del desktop */
     }
 
     /* Ocultar la navegación principal en mobile por defecto */
     .nav {
-        display: flex; /* Cambia a flex para el layout interno */
-        flex-direction: column; /* Links apilados verticalmente */
-        position: fixed; /* O 'absolute' si prefieres dentro del padre */
+        display: flex;
+        flex-direction: column;
+        position: fixed;
         top: 0;
-        right: -100%; /* Inicia fuera de la pantalla, a la derecha */
-        width: 70%; /* Ancho del menú desplegado */
-        max-width: 300px; /* Máximo ancho para que no sea demasiado grande en tablets */
-        height: 100vh; /* Ocupa toda la altura de la ventana */
-        background-color: var(--color-primary); /* Fondo del menú desplegado */
-        padding: 80px 20px 20px; /* Padding para evitar que los links se peguen arriba */
-        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2); /* Sombra en el lateral */
-        transition: right 0.3s ease-in-out; /* Animación de deslizamiento */
-        z-index: 999; /* Por debajo del botón de hamburguesa */
+        right: -100%;
+        width: 70%;
+        max-width: 300px;
+        height: 100vh;
+        background-color: var(--color-primary);
+        padding: 80px 20px 20px;
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+        transition: right 0.3s ease-in-out;
+        z-index: 999;
     }
 
-    /* Clase para cuando el menú está abierto */
     .nav-open {
-        right: 0; /* Desliza el menú para que sea visible */
+        right: 0;
     }
 
     .nav-list {
-        flex-direction: column; /* Links verticalmente */
-        gap: 20px; /* Espacio entre links */
-        align-items: flex-start; /* Alinea los links a la izquierda */
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
     }
 
     .nav-list li a {
-        font-size: 1.3rem; /* Links más grandes para que sean fáciles de tocar */
+        font-size: 1.3rem;
+    }
+
+    /* --- Animación del botón hamburguesa (cuando el menú está activo) --- */
+    .hamburger-menu-button.menu-active .line:nth-child(1) {
+        transform: translateY(11px) rotate(45deg);
+    }
+
+    .hamburger-menu-button.menu-active .line:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger-menu-button.menu-active .line:nth-child(3) {
+        transform: translateY(-11px) rotate(-45deg);
+    }
+
+    /* --- Botón de Carrito Flotante --- */
+    .fixed-cart-button-wrapper {
+        display: block; /* Visible en pantallas pequeñas */
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+
+    .fixed-cart-button-wrapper .cart-button {
+        display: flex;
+        background-color: var(--color-tertiary);
+        border-radius: 50%;
+        width: 55px;
+        height: 55px;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .fixed-cart-button-wrapper .cart-button:hover {
+        transform: scale(1.05);
+    }
+
+    .fixed-cart-button-wrapper .cart-button svg {
+        width: 28px;
+        height: 28px;
+        color: white;
+    }
+
+    .fixed-cart-button-wrapper .cart-count {
+        top: 0px;
+        right: 0px;
+        font-size: 0.9rem;
+        padding: 3px 7px;
+        background-color: var(--color-primary);
     }
 }
 
+/* --- Media Query: Mobile Pequeño (max-width: 568px) --- */
+/* Este breakpoint hereda de 768px y solo sobrescribe lo necesario */
 @media (max-width: 568px) {
     .header {
-        padding: 5px 10px; /* Menos padding en pantallas pequeñas */
+        padding: 5px 10px;
     }
 
     .logo img {
-        height: 60px; /* Logo un poco más pequeño */
+        height: 60px;
     }
 
     .logo h1 {
-        font-size: 1.5rem; /* Título del logo más pequeño */
+        font-size: 1.5rem; /* El título del logo se hace más pequeño aquí */
     }
 
-    /* Mostrar botón de hamburguesa */
-    .hamburger-menu-button {
-        display: flex; /* Hazlo visible */
-        flex-direction: column;
-        justify-content: space-around;
-        width: 30px;
-        height: 25px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 0;
-        z-index: 1001; /* Asegura que esté por encima de la navegación */
-    }
-
-    .hamburger-menu-button .line {
-        width: 100%;
-        height: 3px;
-        background-color: white; /* Color de las líneas de la hamburguesa */
-        border-radius: 2px;
-        transition: all 0.3s ease; /* Para posibles animaciones del icono */
-    }
-
+    /* Si quieres el botón hamburguesa con estilos ligeramente diferentes en este tamaño, irían aquí */
+    /* .hamburger-menu-button { ... } */
+    /* Las líneas ya heredan los estilos de 768px y la animación sigue funcionando */
 }

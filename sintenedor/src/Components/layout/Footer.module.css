@@ -1,0 +1,96 @@
+/* src/Components/layout/Footer.module.css */
+
+.footer {
+    background-color: var(--color-primary); /* Color de fondo oscuro para el footer */
+    color: white; /* Color del texto */
+    padding: 40px 20px 20px; /* Espaciado interno: arriba, lados, abajo */
+    font-size: 0.9rem; /* Tamaño de fuente base */
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap; /* Permite que las secciones se envuelvan en pantallas pequeñas */
+    justify-content: space-around; /* Distribuye las secciones uniformemente */
+    gap: 30px; /* Espacio entre las secciones del footer */
+    max-width: 1200px; /* Ancho máximo para el contenido del footer */
+    margin: 0 auto; /* Centra el contenido */
+    padding-bottom: 30px; /* Espacio antes de la línea de copyright */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Línea divisoria sutil */
+}
+
+.footer-section {
+    flex: 1; /* Permite que las secciones crezcan y tomen espacio */
+    min-width: 200px; /* Ancho mínimo antes de envolverse */
+    padding: 10px; /* Espacio interno para cada sección */
+}
+
+.footer-section h3 {
+    color: var(--color-tertiary); /* Color para los títulos de sección */
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.footer-section p {
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: var(--color-tertiary); /* Cambio de color al pasar el mouse */
+}
+
+.social-links a {
+    color: white;
+    text-decoration: none;
+    margin-right: 15px;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--color-tertiary);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7); /* Color más tenue para el copyright */
+}
+
+/* --- Media Queries para responsividad del Footer --- */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Apila las secciones verticalmente en móviles/tablets */
+        align-items: center; /* Centra las secciones */
+        text-align: center; /* Centra el texto dentro de las secciones */
+    }
+
+    .footer-section {
+        min-width: unset; /* Reinicia el ancho mínimo */
+        width: 100%; /* Ocupa todo el ancho disponible */
+        margin-bottom: 20px; /* Espacio entre secciones apiladas */
+    }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 30px 15px 15px;
+    }
+}
