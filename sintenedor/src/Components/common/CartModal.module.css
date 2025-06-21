@@ -163,3 +163,14 @@
         background-color: red;
     }
 }
+@media (max-width: 349px) {
+    .cart-modal {
+        /* Podrías hacer el modal un poco más pequeño si 95% es demasiado grande */
+        max-width: 80%; /* Un poco menos ancho */
+        max-height: 73%; /* Un poco menos alto */
+    }
+    .cart-summary{
+        height: 450px;
+    }
+  
+}
