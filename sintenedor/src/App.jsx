@@ -9,6 +9,7 @@ import appStyles from './App.module.css'; // o App.css
 import Modal from './Components/common/Modal';
 import CartModal from './Components/common/CartModal';
 import Header from './Components/layout/header';
+import ContactForm from './Components/layout/ContactForm';
 import Footer from './Components/layout/footer';
 
 
@@ -136,6 +137,7 @@ const totalPrice = (carrito) => {
           onRemoveFromCart={handleRemoveFromCart}
         />
       )}
+      <ContactForm />
       <Footer />
 
     </>
