@@ -86,15 +86,15 @@ const ContactForm = () => {
 
         <div className={styles['info-item']}>
           <h3><i className="fas fa-map-marker-alt"></i> Dirección</h3>
-          <p>Calle Falsa 123, Pizzería Central, Ciudad Inventada</p>
+          <p>Bogota suba av cali con 139</p>
         </div>
         <div className={styles['info-item']}>
           <h3><i className="fas fa-phone-alt"></i> Teléfono</h3>
-          <p>(123) 456-7890</p>
+          <p>(+57) 3015347481</p>
         </div>
         <div className={styles['info-item']}>
           <h3><i className="fas fa-envelope"></i> Email</h3>
-          <p>contacto@tupizzeria.com</p>
+          <p>sintenedor.com</p>
         </div>
         <div className={styles['info-item']}>
           <h3><i className="fas fa-clock"></i> Horarios</h3>
@@ -102,21 +102,7 @@ const ContactForm = () => {
           <p>Sábados - Domingos: 12:00 PM - 11:00 PM</p>
         </div>
 
-        {/* Placeholder para el mapa */}
-        <div className={styles['map-placeholder']}>
-          {/* Aquí podrías integrar un mapa de Google Maps, Leaflet, etc. */}
-          <p>Mapa de ubicación</p>
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.60233488421!2d-74.06786012500001!3d4.675000000000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9a74421d0a51%3A0xf63a7f8b9e6c9c61!2sPlaza%20de%20Bol%C3%ADvar!5e0!3m2!1ses!2sco!4v1719131644754!5m2!1ses!2ses"
-            width="100%"
-            height="200"
-            style={{ border: 0 }}
-            allowFullScreen=""
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="Ubicación de nuestra pizzería"
-          ></iframe>
-        </div>
+        
       </div>
 
       <form className={styles['contact-form']} onSubmit={handleSubmit}>
@@ -177,6 +163,21 @@ const ContactForm = () => {
           {isSending ? 'Enviando...' : 'Enviar Mensaje'}
         </button>
       </form>
+      {/* Placeholder para el mapa */}
+      <div className={styles['map-placeholder']}>
+          {/* Aquí podrías integrar un mapa de Google Maps, Leaflet, etc. */}
+          <p>Mapa de ubicación</p>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.60233488421!2d-74.06786012500001!3d4.675000000000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9a74421d0a51%3A0xf63a7f8b9e6c9c61!2sPlaza%20de%20Bol%C3%ADvar!5e0!3m2!1ses!2sco!4v1719131644754!5m2!1ses!2ses"
+            width="100%"
+            height="200"
+            style={{ border: 0 }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Ubicación de nuestra pizzería"
+          ></iframe>
+        </div>
     </div>
   );
 };

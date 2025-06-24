@@ -21,7 +21,7 @@ function App() {
   const [carrito, setCarrito] = useState([]);
 
 
-const totalPrice = (carrito) => {
+  const totalPrice = (carrito) => {
     const suma = carrito.reduce((acumulador, valorActual) => {
       return acumulador + valorActual.totalItemPrice;
     }, 0);
@@ -32,17 +32,17 @@ const totalPrice = (carrito) => {
 
 
   const handleRemoveFromCart = (pizzaIdToRemove) => {
-    
+
     setCarrito(prevCarrito => {
       // Esto crea un nuevo array de carrito sin la pizza que tiene el id que queremos eliminar
-      const updatedCarrito =prevCarrito.filter(item => item.pizzaInfo.id !== pizzaIdToRemove);
-      if(updatedCarrito.length === 0){
+      const updatedCarrito = prevCarrito.filter(item => item.pizzaInfo.id !== pizzaIdToRemove);
+      if (updatedCarrito.length === 0) {
         console.log("DEBUG - CartModal: Carrito vacío detectado. Llamando a onClose().");
         handleCloseCartModal()
       }
       return updatedCarrito
     });
-    
+
 
   }
 
@@ -69,19 +69,19 @@ const totalPrice = (carrito) => {
         console.log("DEBUG - App.jsx: Carrito COMPLETO después de FUSIÓN (antes de setCarrito):", JSON.parse(JSON.stringify(updatedCarrito)));
         return updatedCarrito;
       }
-      const newCarritoState =[...prevCarrito, newItem];
+      const newCarritoState = [...prevCarrito, newItem];
       console.log("DEBUG - App.jsx: Carrito COMPLETO con ítem NUEVO (antes de setCarrito):", JSON.parse(JSON.stringify(newCarritoState)));
       return newCarritoState
     });
   };
-  
+
 
   const handlePizzaClick = (pizzaData) => {
     // *** ¡CORRECCIÓN CLAVE! Usa la función SET del estado ***
     setSelectedPizza(pizzaData); // Guarda los datos de LA pizza clicada en el estado
     // ***************************************************
     setIsModalOpen(true); // Abre el modal
-    
+
   };
 
   // Función para cerrar el modal (actualiza estado para cerrar)
@@ -105,28 +105,37 @@ const totalPrice = (carrito) => {
   }, 0); // Empieza el conteo desde 0
 
   return (
-    <> 
-        <Header
+    <>
+      <Header
         onOpenCartModal={() => setIsCartModalOpen(true)} // Pasa la función para abrir el modal
         totalItemsInCart={totalItemsInCart} // Pasa el total de ítems para el contador
       />
-      <div id="menu" className={appStyles.container}>
-      
-        <h1>Menú de Pizzas</h1>
-        {/* Renderiza PizzaList una sola vez y pásale la función de click */}
-        <PizzaList onPizzaClick={handlePizzaClick} />
-        {/* *** Elimina la segunda instancia de <PizzaList /> si la tienes *** */}
-        {/* <PizzaList />  <-- Elimina esta línea */}
-        {/* ************************************************************* */}
-      </div>
+      <main>
+        <section id="menu" className={appStyles.container}>
+
+          <h1>Menú de Pizzas</h1>
+          {/* Renderiza PizzaList una sola vez y pásale la función de click */}
+          <PizzaList onPizzaClick={handlePizzaClick} />
+        </section>
+        <section id="about" className={appStyles.aboutSection}> {/* Puedes crear un estilo 'aboutSection' */}
+          <h2>Conoce la Pasión Detrás de Cada Pizza</h2>
+          <p>En Sintenedor, usamos solo los ingredientes más frescos para crear la experiencia de pizza perfecta. Nuestra tradición y sabor nos distinguen.</p>
+          {/* Más contenido sobre la historia, valores, etc. */}
+        </section>
+        <section id="contact" className={appStyles.contactSection}> {/* Nueva sección para el formulario de contacto */}
+          <ContactForm />
+        </section>
+      </main>
+
+
 
       {isCartModalOpen && (
         <CartModal
-          carrito={carrito} 
+          carrito={carrito}
           setCarrito={setCarrito}// Estado del carrito
           onClose={handleCloseCartModal}
-         onRemoveFromCart={handleRemoveFromCart}
-         totalPrice={totalPrice(carrito)}
+          onRemoveFromCart={handleRemoveFromCart}
+          totalPrice={totalPrice(carrito)}
         />
       )}
       {isModalOpen && (
@@ -137,7 +146,7 @@ const totalPrice = (carrito) => {
           onRemoveFromCart={handleRemoveFromCart}
         />
       )}
-      <ContactForm />
+      
       <Footer />
 
     </>

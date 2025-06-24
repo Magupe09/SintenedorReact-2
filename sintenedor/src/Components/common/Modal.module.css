@@ -465,3 +465,187 @@
   }
   
 }
+@media (max-width: 400px){
+  .modal-box {
+    max-height: 300px;
+  }
+  .modal-header {
+    height: 200px;
+  }
+  .modal-header h3 {
+    font-size: 1rem;
+    color: var(--color-secondary);
+    margin: -3px;
+    background-color: var(--color-primary);
+    border-radius: 5px;
+  }
+  
+  .modal-header p {
+    color: var(--color-four);
+    font-size: 0.7rem;
+    margin: 4px;
+  }
+  
+  .modal-header h4 {
+    font-size: 0.8rem;
+    color: var(--color-four);
+    margin-bottom: -15px;
+    
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 100px;
+    right: 80px;
+    width: 35px;
+    height: 35px;
+    background-color: var(--color-four);
+    color: var(--color-third);
+    font-size: 1.8em;
+    border-radius: 20px;
+    transition: transform 0.2s ease-in-out;
+    z-index: 100;
+    /* Estilos para el botón 'x' */
+  }
+  
+  .close-button:hover {
+    
+    /* Levanta ligeramente el item */
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 5);
+    cursor: pointer;
+    /* Aumenta la sombra */
+  }
+  
+  .modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 5px;
+    position: relative;
+  }
+  
+  .modal-image {
+    /* Estilos para la imagen dentro del modal */
+    width: 100%;
+    /* La imagen ocupa todo el ancho de su contenedor (.pizza-item) */
+    height: 100px;
+    /* Define una altura fija para las imágenes (ajústala si lo necesitas) */
+    object-fit: cover;
+    /* Cubre el área definida sin deformar la imagen */
+    /* Elimina border-radius aquí si ya usas overflow: hidden en .pizza-item */
+    /* border-radius: 4px; */
+    margin-bottom: 0;
+    border-radius: 10px;
+    transition: transform 0.2s ease-in-out;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .modal-image:hover {
+    transform: translateY(-5px);
+    /* Levanta ligeramente el item */
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 5);
+    /* Aumenta la sombra */
+  }
+  
+  .price-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 16px;
+    margin-bottom: -7px;
+    /* Estilos para la lista ul de precios */
+    
+
+  }
+  
+  .price-item {
+    
+    /* Estilos para cada li de precio */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* Separa texto/precio de controles de cantidad */
+    align-items: center;
+    /* Alinea verticalmente */
+    padding: 0;
+    /* Añade padding arriba/abajo */
+    /* Añade un borde inferior para separar cada item */
+    border-bottom: 1px solid var(--color-four);
+    font-size: 0.8rem;
+    /* Tamaño base de la fuente para el item */
+    color: var(--color-four);
+    /* Color de texto base para el item */
+    margin-bottom: 2px;
+    /* flex-wrap: wrap; -- Ya lo definimos, asegura que esté */
+  }
+  
+  .quantity-controls {
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+    color: var(--color-four);
+    width: 25px;
+  }
+  
+  .buttonControls {
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 27px;
+    height: 15px;
+    background-color: var(--color-primary);
+    color: var(--color-four);
+    font-size: 0.7rem;
+    border-radius: 6px;
+   
+    top: 3px;
+    z-index: 100;
+    cursor: pointer;
+    color: var(--color-secondary);
+  }
+  
+  .buttonControls:hover {
+    
+    /* Levanta ligeramente el item */
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 5);
+    /* Aumenta la sombra */
+  }
+  
+  
+  .add-to-cart-button {
+    position: absolute;
+    bottom: 10px;
+    right: 5px;
+    transform: scale(1);
+    transition: transform 0.3s ease-out, background-color 0.3s ease-out;
+    transform-origin: center center;
+    /* Otros estilos base de tu botón aquí */
+    padding: 5px 10px;
+    background-color: var(--color-four); /* Un naranja agradable */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.7rem;
+    font-weight: bold;
+    /* Para que el botón no se mueva al escalar si está en un flex/grid */
+    flex-shrink: 0;
+  }
+  
+  
+  .animate-pulse {
+    transform: scale(1.2); /* Escala el botón un 5% más grande */
+    background-color: #4CAF50;
+    border: 2px solid var(--color-primary);
+    /* Puedes añadir un cambio de color si quieres, ej: */
+    /* background-color: #4CAF50; /* Verde de confirmación */
+  }
+  .span{
+    font-size: 1rem;
+    
+  }
+}

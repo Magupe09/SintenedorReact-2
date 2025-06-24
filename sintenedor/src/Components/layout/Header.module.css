@@ -30,7 +30,7 @@
 }
 
 .logo h1 {
-    font-size: 1.8rem;
+    font-size: 2rem;
     margin: 0;
 }
 
@@ -50,7 +50,7 @@
 .nav-list li a {
     text-decoration: none;
     color: white;
-    font-size: 1.1rem;
+    font-size: 1.8rem;
     padding: 5px 0;
     transition: color 0.3s ease;
 }
