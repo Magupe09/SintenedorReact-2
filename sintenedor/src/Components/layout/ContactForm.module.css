@@ -17,7 +17,7 @@
 .contact-form {
     flex: 1;
     /* Permite que ambas secciones tomen espacio */
-    min-width: 300px;
+    min-width: 180px;
     /* Ancho mínimo antes de envolverse */
     padding: 20px;
 }
@@ -154,7 +154,8 @@
         margin: 30px 15px;
         padding: 15px;
         border-radius: 10px;
-        background-color: var(--color-four);
+        background-color: var(--color-third);
+        
     }
 
     .contact-info {
@@ -181,6 +182,58 @@
     .info-item p{
         font-size: 1.2rem;
         color: var(--color-secondary);
+        margin-bottom: 5px;
+    }
+
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-width: unset;
+        width: 100%;
+        padding: 15px 0;
+        /* Menos padding en los lados */
+    }
+}
+@media (max-width: 450px){
+    
+    .contact-container {
+        flex-direction: column;
+        margin: 30px 15px;
+        padding: 15px;
+        border-radius: 10px;
+        background-color: var(--color-four);
+        max-width: 400px;
+    }
+
+    .contact-info {
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--color-secondary);
+        border-radius: 10px;
+        max-width: 80%;
+        margin: auto;
+
+    }
+    
+    .contact-info p{
+        
+        font-size: 1rem;
+        color: var(--color-four);
+    }
+
+    .info-item {
+        margin-bottom: 20px;
+        width: 150px;
+        color: var(--color-primary);
+    }
+    .info-item p{
+        font-size: 1rem;
+        color: var(--color-four);
         margin-bottom: 5px;
     }
 

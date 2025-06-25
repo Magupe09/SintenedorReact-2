@@ -165,13 +165,23 @@
 
     .nav-list {
         flex-direction: column;
-        gap: 20px;
-        align-items: flex-start;
+        gap: 50px;
+        align-items: stretch;
+       
     }
 
     .nav-list li a {
         font-size: 1.3rem;
+        display: block;
+        text-align: center;
     }
+    .nav-list li:hover {
+       background-color: var(--color-secondary);
+       border-radius: 10px;
+       color: var(--color-four);
+
+    }
+
 
     /* --- Animación del botón hamburguesa (cuando el menú está activo) --- */
     .hamburger-menu-button.menu-active .line:nth-child(1) {
