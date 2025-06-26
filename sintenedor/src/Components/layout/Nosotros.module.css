@@ -1,0 +1,175 @@
+/* src/Components/common/Nosotros.module.css */
+
+.nosotros-container {
+    display: flex;
+    flex-direction: row; /* Por defecto, en escritorio, en fila */
+    flex-wrap: wrap; /* Permite que los bloques se envuelvan en pantallas pequeñas */
+    gap: 40px; /* Espacio entre los bloques de contenido e imagen */
+    max-width: 1000px;
+    margin: 60px auto; /* Más margen arriba y abajo para destacar */
+    padding: 30px;
+    background-color: var(--color-background-secondary, #f8f8f8); /* Un fondo ligeramente diferente */
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+    align-items: center; /* Centra verticalmente los elementos flex */
+    justify-content: center; /* Centra horizontalmente los elementos flex */
+    text-align: center; /* Centra el texto por defecto en desktop */
+}
+
+.content-block {
+    flex: 2; /* Este bloque ocupará más espacio que el de la imagen */
+    min-width: 300px; /* Ancho mínimo para el contenido */
+    padding: 20px;
+    display: flex; /* Para controlar el texto */
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente */
+    align-items: center; /* Centra horizontalmente los elementos hijos (h2, p, quote) */
+    text-align: center; /* Asegura el centrado del texto si align-items no lo hace */
+}
+
+.content-block h2 {
+    color: var(--color-primary);
+    font-size: 2.5rem; /* Un poco más grande */
+    margin-bottom: 25px;
+    line-height: 1.2;
+    max-width: 600px; /* Limita el ancho del título para mejor lectura */
+}
+
+.content-block p {
+    color: var(--color-text-primary);
+    font-size: 1.15rem;
+    line-height: 1.7;
+    margin-bottom: 15px;
+    max-width: 650px; /* Limita el ancho de los párrafos para mejor lectura */
+    text-align: center; /* Asegura el centrado del texto */
+}
+
+.quote {
+    font-family: 'Georgia', serif; /* Una fuente diferente para la cita */
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--color-tertiary);
+    margin-top: 30px;
+    padding: 15px 25px;
+    border-left: 5px solid var(--color-four); /* Detalle visual */
+    background-color: var(--color-background-light, #fefefe);
+    border-radius: 8px;
+    max-width: 500px; /* Ancho para la cita */
+}
+
+.image-gallery {
+    flex: 1; /* Este bloque ocupará menos espacio que el de contenido */
+    min-width: 280px; /* Ancho mínimo para las imágenes */
+    display: flex;
+    flex-direction: column; /* Imágenes apiladas */
+    gap: 20px; /* Espacio entre las imágenes */
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.nosotros-image {
+    width: 100%; /* Las imágenes ocuparán el 100% de su contenedor */
+    max-width: 350px; /* Limita el tamaño máximo de las imágenes */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.nosotros-image:hover {
+    transform: scale(1.03); /* Efecto hover sutil */
+}
+
+/* --- Media Queries para Responsividad --- */
+
+/* Teléfonos y tabletas pequeñas (hasta 768px) */
+@media (max-width: 768px) {
+    .nosotros-container {
+        flex-direction: column; /* Apila los bloques en columna */
+        margin: 30px 15px; /* Menos margen en los lados */
+        padding: 20px;
+        gap: 30px; /* Menos espacio entre bloques */
+    }
+
+    .content-block {
+        padding: 10px;
+        min-width: unset; /* Reinicia el min-width */
+        flex: unset; /* Reinicia el flex para que no haya distribuciones extrañas */
+        width: 100%; /* Asegura que ocupe todo el ancho disponible */
+    }
+
+    .content-block h2 {
+        font-size: 2rem; /* Tamaño de fuente más pequeño para títulos */
+        margin-bottom: 20px;
+    }
+
+    .content-block p {
+        font-size: 1rem; /* Tamaño de fuente más pequeño para párrafos */
+        margin-bottom: 10px;
+    }
+
+    .quote {
+        font-size: 1.1rem;
+        padding: 10px 20px;
+        margin-top: 20px;
+    }
+
+    .image-gallery {
+        padding: 10px;
+        min-width: unset;
+        flex: unset;
+        width: 100%;
+        gap: 15px; /* Espacio más pequeño entre imágenes */
+    }
+
+    .nosotros-image {
+        max-width: 90%; /* Las imágenes pueden ocupar un poco menos de espacio en el móvil */
+    }
+}
+
+/* Teléfonos muy pequeños (hasta 480px) */
+@media (max-width: 480px) {
+    .nosotros-container {
+        padding: 15px;
+        gap: 25px;
+    }
+
+    .content-block h2 {
+        font-size: 1.8rem;
+    }
+
+    .content-block p {
+        font-size: 0.95rem;
+    }
+
+    .quote {
+        font-size: 1rem;
+    }
+}
+
+/* Teléfonos mínimos (hasta 320px) */
+@media (max-width: 320px) {
+    .nosotros-container {
+        margin: 20px 10px;
+        padding: 10px;
+        gap: 20px;
+    }
+
+    .content-block h2 {
+        font-size: 1.6rem;
+    }
+
+    .content-block p {
+        font-size: 0.9rem;
+    }
+
+    .quote {
+        font-size: 0.95rem;
+        padding: 8px 15px;
+    }
+
+    .nosotros-image {
+        max-width: 100%; /* Asegura que la imagen no se recorte */
+    }
+}

@@ -93,20 +93,12 @@ function Modal({ pizza, onClose, onAddToCart }) {
 
         <div className={styles['modal-body']}>
 
-          {/* Imagen de la pizza en el modal - usa la prop imagen */}
-          {imagen && <img src={imagen} alt={`Pizza ${nombre}`} className={styles['modal-image']} />} {/* Usa una clase para estilizar la imagen en el modal */}
+          {imagen && <img src={imagen} alt={`Pizza ${nombre}`} className={styles['modal-image']} />}
 
 
-          {/* *** Placeholder para mostrar el precio total calculado por cantidad (¡futuro!) *** */}
-          {/* <p>Precio Total Seleccionado: $XX.XX</p> */}
-
-
-          {/* *** Placeholder para el botón de añadir al carrito (¡futuro!) *** */}
-          {/* Puedes añadir un div.modal-footer para agrupar botones si quieres */}
-          {/* <div className={styles['modal-footer']}> */}
           <button className={`${styles['add-to-cart-button']} ${isAnimating ? styles['animate-pulse'] : ''}`}
             onClick={() => handleAddToCartClick(pizza, controles)}>Añadir al Carrito</button>
-          {/* </div> */}
+         
         </div>
 
         <div className={styles['modal-header']}>

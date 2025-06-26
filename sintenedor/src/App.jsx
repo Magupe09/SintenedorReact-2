@@ -11,6 +11,7 @@ import CartModal from './Components/common/CartModal';
 import Header from './Components/layout/header';
 import ContactForm from './Components/layout/ContactForm';
 import Footer from './Components/layout/footer';
+import Nosotros from './Components/layout/Nosotros';
 
 
 function App() {
@@ -118,8 +119,7 @@ function App() {
           <PizzaList onPizzaClick={handlePizzaClick} />
         </section>
         <section id="about" className={appStyles.aboutSection}> {/* Puedes crear un estilo 'aboutSection' */}
-          <h2>Conoce la Pasión Detrás de Cada Pizza</h2>
-          <p>En Sintenedor, usamos solo los ingredientes más frescos para crear la experiencia de pizza perfecta. Nuestra tradición y sabor nos distinguen.</p>
+        <Nosotros />
           {/* Más contenido sobre la historia, valores, etc. */}
         </section>
         <section id="contact" className={appStyles.contactSection}> {/* Nueva sección para el formulario de contacto */}

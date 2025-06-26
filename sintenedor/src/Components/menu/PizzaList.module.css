@@ -1,42 +1,43 @@
 /* src/Components/menu/PizzaList.module.css */
 
 .pizza-list-container {
-    
-    display: grid; 
-    grid-template-columns: repeat(3,1fr);
-    gap: 5px;
-    padding: 20px; 
-    justify-items: center; 
-    align-items: start; 
-    
-  
-  }
 
-@media (max-width: 600px){
-    
-.pizza-list-container {
-    
-  display: grid; 
-  grid-template-columns: repeat(2,1fr);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 5px;
-  padding: 20px; 
-  justify-items: center; 
-  align-items: start; 
-  
+  max-width: 1000px;
+  margin: auto;
+  justify-items: center;
+  align-items: center;
+
 
 }
-  }
 
-@media (max-width: 350px){
+@media (max-width: 600px) {
+
   .pizza-list-container {
-    
-    display: grid; 
-    grid-template-columns: repeat(1,1fr);
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 5px;
-    padding: 20px; 
-    justify-items: center; 
-    align-items: start; 
-    
-  
+    padding: 20px;
+    justify-items: center;
+    align-items: start;
+
+
+  }
+}
+
+@media (max-width: 350px) {
+  .pizza-list-container {
+
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 5px;
+    padding: 20px;
+    justify-items: center;
+    align-items: start;
+
+
   }
 }

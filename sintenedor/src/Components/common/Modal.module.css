@@ -472,15 +472,20 @@
 }
 @media (max-width: 400px){
   .modal-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
     margin: 0 15px;
-    max-height: 295px;
+    max-height: 300px;
     background-color: var(--color-primary);
   }
   .modal-header {
-    height: 200px;
+    height: 250px;
+    max-width: 200px;
   }
   .modal-header h3 {
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: var(--color-secondary);
     margin: -3px;
     background-color: var(--color-four);
@@ -489,7 +494,7 @@
   
   .modal-header p {
     color: var(--color-four);
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     margin: 4px;
   }
   
@@ -533,9 +538,9 @@
   
   .modal-image {
     /* Estilos para la imagen dentro del modal */
-    width: 100%;
+    width: 200px;
     /* La imagen ocupa todo el ancho de su contenedor (.pizza-item) */
-    height: 100px;
+    height: 80px;
     /* Define una altura fija para las imágenes (ajústala si lo necesitas) */
     object-fit: cover;
     /* Cubre el área definida sin deformar la imagen */
@@ -579,7 +584,7 @@
     /* Añade padding arriba/abajo */
     /* Añade un borde inferior para separar cada item */
     border-bottom: 1px solid var(--color-four);
-    font-size: 0.8rem;
+    font-size: 1rem;
     /* Tamaño base de la fuente para el item */
     color: var(--color-four);
     /* Color de texto base para el item */
@@ -606,7 +611,7 @@
     height: 15px;
     background-color: var(--color-primary);
     color: var(--color-four);
-    font-size: 0.7rem;
+    font-size: 1rem;
     border-radius: 6px;
    
     top: 3px;

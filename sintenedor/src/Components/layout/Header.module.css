@@ -165,13 +165,14 @@
 
     .nav-list {
         flex-direction: column;
-        gap: 50px;
+        gap: 20px;
         align-items: stretch;
        
     }
 
     .nav-list li a {
-        font-size: 1.3rem;
+        font-size: 1.7rem;
+       
         display: block;
         text-align: center;
     }
