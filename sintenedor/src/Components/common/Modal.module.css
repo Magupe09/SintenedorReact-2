@@ -1,663 +1,284 @@
 /* src/Components/common/Modal.module.css */
 
-/* Estilos para el fondo oscuro (overlay) */
+/* ------------------------------------- */
+/* 1. Estilos para el Fondo (Overlay) - Sin cambios, ya es perfecto */
+/* ------------------------------------- */
 .modal-overlay {
   position: fixed;
-  /* Fija el overlay en relación a la ventana del navegador */
   top: 0;
-  /* Lo pega al borde superior */
   left: 0;
-  /* Lo pega al borde izquierdo */
   width: 100%;
-  /* Ocupa todo el ancho de la ventana */
-  height: 100%;
-  /* Ocupa toda la altura de la ventana */
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.9);
-  /* Fondo negro semi-transparente (ajusta 0.7 para más/menos opacidad) */
-
-  /* Usamos flexbox para CENTRAR FÁCILMENTE la caja del modal dentro del overlay */
   display: flex;
   justify-content: center;
-  /* Centra horizontalmente los items hijos (el modal-box) */
   align-items: center;
-  /* Centra verticalmente los items hijos (el modal-box) */
-
   z-index: 1000;
+  overflow: hidden;
 }
 
-/* Estilos para la caja principal del modal (el contenido) */
+/* ------------------------------------- */
+/* 2. Estilos para la Caja del Modal (Contenedor Principal) */
+/* Este es el lienzo para la imagen y el contenido superpuesto */
+/* ------------------------------------- */
 .modal-box {
+  /* Reseteo: quitamos flex-direction, gap, background-color y padding originales */
+  background-color: transparent; /* No tiene fondo propio, la imagen lo es */
+  padding: 0; /* El padding lo manejará .modal-content-wrapper */
+  
+  position: relative; /* CRUCIAL: Necesario para que la imagen de fondo y la capa se posicionen con respecto a él */
+  overflow: hidden; /* Oculta cualquier parte de la imagen o capa que se desborde de los bordes redondeados */
 
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-  gap: 5px;
-  background-color: var(--color-third);
-  /* Fondo blanco para la caja */
-  padding: 10px;
-  /* Espacio dentro de la caja */
   border-radius: 10px;
-  /* Esquinas redondeadas */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  /* Sombra */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
 
-  /* Controlamos el tamaño de la caja del modal */
-  max-width: 100%;
-  /* Ancho máximo: 90% del ancho del overlay (viewport) */
-  width: 600px;
-  /* Ancho preferido */
-  max-height: 80vh;
-  /* Altura máxima: 90% de la altura de la ventana (vh = viewport height) */
-
-  /* Permite scroll interno si el contenido excede el max-height */
-  overflow-y: auto;
+  /* Control de tamaño Mobile-First */
+  width: 90%; /* Ocupa el 90% del ancho del viewport */
+  max-width: 368px; /* Límite para pantallas más grandes que un móvil pequeño */
+  max-height: 90vh; /* Límite de altura para que quepa en la pantalla */
 
   z-index: 1001;
-  /* Asegura que esté por encima del overlay */
-
-  /* Con display: flex en el overlay, no necesitas position/top/left/transform para centrar la caja.
-       Las propiedades justify-content y align-items en el overlay se encargan de eso.
-       Si NO USAS flexbox en el overlay, la técnica position: fixed/top/left/transform es la alternativa.
-       Vamos a asumir que usaste flexbox en el overlay como te sugerí.
-    */
+  display: flex; /* Ahora .modal-box es un flex container */
+  flex-direction: column; /* Apila los elementos principales */
+  justify-content: flex-end; /* Alinea el contenido al final (abajo) del modal-box */
+  align-items: stretch; /* Estira el contenido horizontalmente */
 }
 
-/* ... estilos adicionales para contenido como modal-header, modal-image, etc. (añadidos después) ... */
+/* ------------------------------------- */
+/* 3. La Imagen de Fondo del Modal */
+/* ------------------------------------- */
+.modal-background-image {
+  position: absolute; /* Posiciona la imagen absolutamente dentro de .modal-box */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* Ocupa el 100% del alto y ancho de .modal-box */
+  object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+  border-radius: 10px; /* Para que coincida con el borde del modal-box */
+  z-index: 1; /* Estará debajo de la capa de opacidad y el contenido */
+}
+
+/* ------------------------------------- */
+/* 4. Capa de Opacidad sobre la Imagen */
+/* ------------------------------------- */
+.modal-image-overlay {
+  position: absolute; /* Posicionada absolutamente sobre la imagen */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3); /* Color negro con 60% de opacidad */
+  border-radius: 10px; /* Para que coincida con el borde del modal-box */
+  z-index: 2; /* Estará entre la imagen y el contenido */
+}
+
+/* ------------------------------------- */
+/* 5. Contenedor de Todo el Contenido (Texto, Botones, etc.) */
+/* Este es el que se mostrará encima de la imagen */
+/* ------------------------------------- */
+.modal-content-wrapper {
+  position: relative; /* Es importante que sea 'relative' para su propio z-index */
+  z-index: 3; /* Asegura que esté encima de la imagen y la capa */
+  
+  display: flex; /* Organiza el contenido interno */
+  flex-direction: column;
+  padding: 20px; /* Padding interno para que el contenido no toque los bordes */
+  gap: 15px; /* Espacio entre las secciones de contenido */
+
+  /* Para manejar el scroll interno si el contenido es muy largo */
+  max-height: 90vh; /* Limita su altura */
+  overflow-y: auto; /* Permite el scroll interno */
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box; /* Asegura que el padding no aumente su tamaño total */
+}
+
+/* ------------------------------------- */
+/* 6. Estilos del Header del Modal (Nombre, Ingredientes, Precios) */
+/* Los colores de texto serán CLAROS para contrastar con el fondo oscuro */
+/* ------------------------------------- */
 .modal-header {
-  margin-bottom: 0px;
-  background-color: var(--color-four);
-  gap: 10px;
-  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.4); /* Fondo semi-transparente para el header */
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  color: white; /* Color de texto BLANCO */
+  gap: 5px; /* Espacio entre elementos del header */
   display: flex;
   flex-direction: column;
-  text-align: center;
-  
-  transition: transform 0.2s ease-in-out;
-  /* Estilos para el encabezado (nombre y cerrar) */
 }
 
 .modal-header h3 {
-  font-size: 2rem;
-  margin: 7px;
-  color: var(--color-secondary);
+  font-size: 1.8rem; /* Tamaño para el nombre de la pizza */
+  margin: 0;
+  color: white; /* Aseguramos blanco */
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.7); /* Sombra para mejor lectura */
 }
 
 .modal-header p {
-  
-  font-size: 1.2rem;
-  margin: 7px;
-  color: var(--color-secondary);
+  font-size: 0.95rem; /* Tamaño para los ingredientes */
+  margin: 0;
+  color: var(--color-light-gray, #eee); /* Blanco grisáceo */
 }
 
 .modal-header h4 {
-  font-size: 1.5rem;
-  margin: -3px 0;
-  
-  color: var(--color-secondary);
+  font-size: 1.2rem; /* Tamaño para el título de precios */
+  margin-top: 10px;
+  color: white; /* Aseguramos blanco */
 }
 
-.close-button {
-  position: absolute;
-  top: 100px;
-  right: 10px;
-  width: 45px;
-  height: 40px;
-  background-color: var(--color-four);
-  color: var(--color-third);
-  font-size: 1.8em;
-  border-radius: 20px;
-  transition: transform 0.2s ease-in-out;
-  z-index: 100;
-  /* Estilos para el botón 'x' */
-}
-
-.close-button:hover {
-  transform: translateY(-5px);
-  /* Levanta ligeramente el item */
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 5);
-  cursor: pointer;
-  /* Aumenta la sombra */
-}
-
-.modal-body {
-  display: flex;
-  flex-direction: column;
-  align-items: end;
-  gap: 10px;
-  position: relative;
-}
-
-.modal-image {
-  /* Estilos para la imagen dentro del modal */
-  width: 100%;
-  /* La imagen ocupa todo el ancho de su contenedor (.pizza-item) */
-  height: 400px;
-  /* Define una altura fija para las imágenes (ajústala si lo necesitas) */
-  object-fit: cover;
-  /* Cubre el área definida sin deformar la imagen */
-  /* Elimina border-radius aquí si ya usas overflow: hidden en .pizza-item */
-  /* border-radius: 4px; */
-  margin-bottom: 0;
-  border-radius: 10px;
-  transition: transform 0.2s ease-in-out;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.modal-image:hover {
-  transform: translateY(-5px);
-  /* Levanta ligeramente el item */
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 5);
-  /* Aumenta la sombra */
-}
-
+/* ------------------------------------- */
+/* 7. Estilos de la Lista de Precios */
+/* ------------------------------------- */
 .price-list {
   list-style: none;
   padding: 0;
-  margin-top: 16px;
-  margin-bottom: 15px;
-  /* Estilos para la lista ul de precios */
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.3); /* Fondo semi-transparente para la lista */
+  border-radius: 8px;
+  padding: 5px 10px;
 }
 
 .price-item {
-  /* Estilos para cada li de precio */
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  /* Separa texto/precio de controles de cantidad */
   align-items: center;
-  /* Alinea verticalmente */
-  padding: 0;
-  /* Añade padding arriba/abajo */
-  /* Añade un borde inferior para separar cada item */
-  border-bottom: 1px solid var(--color-four);
-  font-size: 1.5rem;
-  /* Tamaño base de la fuente para el item */
-  
-  color: var(--color-secondary);
-  /* Color de texto base para el item */
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Borde blanco semi-transparente */
+  font-size: 1rem;
+  color: white; /* Color de texto BLANCO */
+}
 
-  /* flex-wrap: wrap; -- Ya lo definimos, asegura que esté */
+.price-item:last-child {
+  border-bottom: none;
 }
 
 .quantity-controls {
   display: flex;
-  
-  justify-content: center;
   align-items: center;
-  gap: 18px;
-  
-  width: 40px;
+  gap: 10px;
 }
 
 .buttonControls {
-
+  background-color: var(--color-primary); /* Tu color primario (ej. rojo) */
+  color: white; /* Texto blanco en los botones */
+  border: none;
+  border-radius: 5px;
+  width: 35px;
+  height: 35px;
+  font-size: 1.3rem;
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 45px;
-  height: 21px;
-  background-color: var(--color-primary);
-  color: var(--color-four);
-  font-size: 1.8em;
-  border-radius: 5px;
- 
-  top: 3px;
-  z-index: 100;
-  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .buttonControls:hover {
- 
-  /* Levanta ligeramente el item */
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 5);
-  /* Aumenta la sombra */
+  background-color: var(--color-four); /* Cambia al color del botón de carrito */
 }
 
+.span {
+  font-size: 1.2rem;
+  color: white; /* Blanco para el número de cantidad */
+  min-width: 25px;
+  text-align: center;
+}
 
+/* ------------------------------------- */
+/* 8. Botón Añadir al Carrito */
+/* ------------------------------------- */
 .add-to-cart-button {
-  position: absolute;
-  bottom: 10px;
-  right: 5px;
-  transform: scale(1);
-  transition: transform 0.3s ease-out, background-color 0.3s ease-out;
-  transform-origin: center center;
-  /* Otros estilos base de tu botón aquí */
-  padding: 5px 10px;
-  background-color: var(--color-four); /* Un naranja agradable */
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  padding: 12px 20px;
+  background-color: var(--color-four); /* El color naranja/oro que usas */
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   font-weight: bold;
-  /* Para que el botón no se mueva al escalar si está en un flex/grid */
-  flex-shrink: 0;
+  text-transform: uppercase;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Sombra sutil debajo */
+  z-index: 10;
+  margin-top: auto; /* Empuja el botón al final del flex container */
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-
-.animate-pulse {
-  transform: scale(1.2); /* Escala el botón un 5% más grande */
-  background-color: #4CAF50;
-  border: 2px solid var(--color-primary);
-  /* Puedes añadir un cambio de color si quieres, ej: */
-  /* background-color: #4CAF50; /* Verde de confirmación */
+.add-to-cart-button.animate-pulse {
+  transform: scale(1.05);
+  background-color: #4CAF50; /* Verde de confirmación */
 }
 
-@media (max-width: 768px){
+/* ------------------------------------- */
+/* 9. Botón de Cierre (X) */
+/* ------------------------------------- */
+.close-button {
+  position: absolute; /* Posicionado respecto a .modal-content-wrapper */
+  top: 5px; /* Más cerca del borde superior */
+  right: 5px; /* Más cerca del borde derecho */
+  width: 30px;
+  height: 30px;
+  background-color:var(--color-four); /* Fondo semi-transparente claro */
+  color: white; /* Color de la 'x' */
+  font-size: 1.4em;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.close-button:hover {
+  background-color: rgba(255, 255, 255, 0.4); /* Más opaco al hover */
+  transform: scale(1.1);
+}
+
+/* ------------------------------------- */
+/* Media Query para móvil (máx. 400px) - Ajustes finos */
+/* ------------------------------------- */
+@media (max-width: 400px) {
   .modal-box {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    background-color: var(--color-third);
-    /* Fondo blanco para la caja */
-    padding: 10px;
-    /* Espacio dentro de la caja */
-    border-radius: 10px;
-    /* Esquinas redondeadas */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    /* Sombra */
-  
-    /* Controlamos el tamaño de la caja del modal */
-    max-width: 100%;
-    /* Ancho máximo: 90% del ancho del overlay (viewport) */
-    width: 300px;
-    /* Ancho preferido */
-    max-height: 70vh;
-    /* Altura máxima: 90% de la altura de la ventana (vh = viewport height) */
-  
-    /* Permite scroll interno si el contenido excede el max-height */
-    overflow-y: auto;
-  
-    z-index: 1001;
-    /* Asegura que esté por encima del overlay */
-  
-    /* Con display: flex en el overlay, no necesitas position/top/left/transform para centrar la caja.
-         Las propiedades justify-content y align-items en el overlay se encargan de eso.
-         Si NO USAS flexbox en el overlay, la técnica position: fixed/top/left/transform es la alternativa.
-         Vamos a asumir que usaste flexbox en el overlay como te sugerí.
-      */
+      padding: 0; /* Sin padding aquí, lo maneja el content wrapper */
   }
-  .modal-header {
-    
-    margin-bottom: 0px;
-    background-color: var(--color-secondary);
-    gap: 0px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    margin: 0;
-    transition: transform 0.2s ease-in-out;
-    /* Estilos para el encabezado (nombre y cerrar) */
-  }
-  
-  .modal-header h3 {
-    font-size: 1.4rem;
-    color: var(--color-secondary);
-    margin: -3px;
-    background-color: var(--color-primary);
-    border-radius: 5px;
-  }
-  
-  .modal-header p {
-    color: var(--color-four);
-    font-size: 0.9rem;
-    margin: 4px;
-  }
-  
-  .modal-header h4 {
-    font-size: 1rem;
-    color: var(--color-four);
-    margin-bottom: -15px;
-    
-  }
-  
-  .close-button {
-    position: absolute;
-    top: 100px;
-    right: 80px;
-    width: 35px;
-    height: 35px;
-    background-color: var(--color-four);
-    color: var(--color-third);
-    font-size: 1.8em;
-    border-radius: 20px;
-    transition: transform 0.2s ease-in-out;
-    z-index: 100;
-    /* Estilos para el botón 'x' */
-  }
-  
-  .close-button:hover {
-    
-    /* Levanta ligeramente el item */
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 5);
-    cursor: pointer;
-    /* Aumenta la sombra */
-  }
-  
-  .modal-body {
-    display: flex;
-    flex-direction: column;
-    align-items: end;
-    gap: 5px;
-    position: relative;
-  }
-  
-  .modal-image {
-    /* Estilos para la imagen dentro del modal */
-    width: 100%;
-    /* La imagen ocupa todo el ancho de su contenedor (.pizza-item) */
-    height: 100px;
-    /* Define una altura fija para las imágenes (ajústala si lo necesitas) */
-    object-fit: cover;
-    /* Cubre el área definida sin deformar la imagen */
-    /* Elimina border-radius aquí si ya usas overflow: hidden en .pizza-item */
-    /* border-radius: 4px; */
-    margin-bottom: 0;
-    border-radius: 10px;
-    transition: transform 0.2s ease-in-out;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .modal-image:hover {
-    transform: translateY(-5px);
-    /* Levanta ligeramente el item */
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 5);
-    /* Aumenta la sombra */
-  }
-  
-  .price-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 16px;
-    margin-bottom: -7px;
-    /* Estilos para la lista ul de precios */
-    
-
-  }
-  
-  .price-item {
-    
-    /* Estilos para cada li de precio */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    /* Separa texto/precio de controles de cantidad */
-    align-items: center;
-    /* Alinea verticalmente */
-    padding: 0;
-    /* Añade padding arriba/abajo */
-    /* Añade un borde inferior para separar cada item */
-    border-bottom: 1px solid var(--color-four);
-    font-size: 1rem;
-    /* Tamaño base de la fuente para el item */
-    color: var(--color-four);
-    /* Color de texto base para el item */
-    margin-bottom: 2px;
-    /* flex-wrap: wrap; -- Ya lo definimos, asegura que esté */
-  }
-  
-  .quantity-controls {
-    display: flex;
-    
-    justify-content: center;
-    align-items: center;
-    gap: 42px;
-    color: var(--color-four);
-    width: 35px;
-  }
-  
-  .buttonControls {
-  
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 37px;
-    height: 25px;
-    background-color: var(--color-primary);
-    color: var(--color-four);
-    font-size: 0.9rem;
-    border-radius: 6px;
-   
-    top: 3px;
-    z-index: 100;
-    cursor: pointer;
-    color: var(--color-secondary);
-  }
-  
-  .buttonControls:hover {
-    
-    /* Levanta ligeramente el item */
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 5);
-    /* Aumenta la sombra */
-  }
-  
-  
-  .add-to-cart-button {
-    position: absolute;
-    bottom: 10px;
-    right: 5px;
-    transform: scale(1);
-    transition: transform 0.3s ease-out, background-color 0.3s ease-out;
-    transform-origin: center center;
-    /* Otros estilos base de tu botón aquí */
-    padding: 5px 10px;
-    background-color: var(--color-four); /* Un naranja agradable */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.7rem;
-    font-weight: bold;
-    /* Para que el botón no se mueva al escalar si está en un flex/grid */
-    flex-shrink: 0;
-  }
-  
-  
-  .animate-pulse {
-    transform: scale(1.2); /* Escala el botón un 5% más grande */
-    background-color: #4CAF50;
-    border: 2px solid var(--color-primary);
-    /* Puedes añadir un cambio de color si quieres, ej: */
-    /* background-color: #4CAF50; /* Verde de confirmación */
-  }
-  .span{
-    font-size: 1.5rem;
-    
-  }
-  
-}
-@media (max-width: 400px){
-  .modal-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    margin: 0 15px;
-    max-height: 300px;
-    background-color: var(--color-primary);
-  }
-  .modal-header {
-    height: 250px;
-    max-width: 200px;
+  .modal-content-wrapper {
+      padding: 15px; /* Un poco menos de padding para pantallas más pequeñas */
+      gap: 10px;
   }
   .modal-header h3 {
-    font-size: 1.2rem;
-    color: var(--color-secondary);
-    margin: -3px;
-    background-color: var(--color-four);
-    border-radius: 5px;
+      font-size: 1.6rem;
   }
-  
   .modal-header p {
-    color: var(--color-four);
-    font-size: 0.8rem;
-    margin: 4px;
+      font-size: 0.8rem;
   }
-  
   .modal-header h4 {
-    font-size: 0.8rem;
-    color: var(--color-four);
-    margin-bottom: -15px;
-    
+      font-size: 1.1rem;
   }
-  
-  .close-button {
-    position: absolute;
-    top: 100px;
-    right: 80px;
-    width: 35px;
-    height: 35px;
-    background-color: var(--color-four);
-    color: var(--color-third);
-    font-size: 1.8em;
-    border-radius: 20px;
-    transition: transform 0.2s ease-in-out;
-    z-index: 100;
-    /* Estilos para el botón 'x' */
-  }
-  
-  .close-button:hover {
-    
-    /* Levanta ligeramente el item */
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 5);
-    cursor: pointer;
-    /* Aumenta la sombra */
-  }
-  
-  .modal-body {
-    display: flex;
-    flex-direction: column;
-    align-items: end;
-    gap: 5px;
-    position: relative;
-  }
-  
-  .modal-image {
-    /* Estilos para la imagen dentro del modal */
-    width: 200px;
-    /* La imagen ocupa todo el ancho de su contenedor (.pizza-item) */
-    height: 80px;
-    /* Define una altura fija para las imágenes (ajústala si lo necesitas) */
-    object-fit: cover;
-    /* Cubre el área definida sin deformar la imagen */
-    /* Elimina border-radius aquí si ya usas overflow: hidden en .pizza-item */
-    /* border-radius: 4px; */
-    margin-bottom: 0;
-    border-radius: 10px;
-    transition: transform 0.2s ease-in-out;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .modal-image:hover {
-    transform: translateY(-5px);
-    /* Levanta ligeramente el item */
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 5);
-    /* Aumenta la sombra */
-  }
-  
-  .price-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 16px;
-    margin-bottom: -7px;
-    /* Estilos para la lista ul de precios */
-    
-
-  }
-  
   .price-item {
-    
-    /* Estilos para cada li de precio */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    /* Separa texto/precio de controles de cantidad */
-    align-items: center;
-    /* Alinea verticalmente */
-    padding: 0;
-    /* Añade padding arriba/abajo */
-    /* Añade un borde inferior para separar cada item */
-    border-bottom: 1px solid var(--color-four);
-    font-size: 1rem;
-    /* Tamaño base de la fuente para el item */
-    color: var(--color-four);
-    /* Color de texto base para el item */
-    margin-bottom: 2px;
-    /* flex-wrap: wrap; -- Ya lo definimos, asegura que esté */
+      font-size: 0.9rem;
+      padding: 6px 0;
   }
-  
-  .quantity-controls {
-    display: flex;
-    
-    justify-content: center;
-    align-items: center;
-    gap: 22px;
-    color: var(--color-four);
-    width: 25px;
+  .span {
+      font-size: 1rem;
   }
-  
   .buttonControls {
-  
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 27px;
-    height: 15px;
-    background-color: var(--color-primary);
-    color: var(--color-four);
-    font-size: 1rem;
-    border-radius: 6px;
-   
-    top: 3px;
-    z-index: 100;
-    cursor: pointer;
-    color: var(--color-secondary);
+      width: 30px;
+      height: 30px;
+      font-size: 1.1rem;
   }
-  
-  .buttonControls:hover {
-    
-    /* Levanta ligeramente el item */
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 5);
-    /* Aumenta la sombra */
-  }
-  
-  
   .add-to-cart-button {
-    position: absolute;
-    bottom: 10px;
-    right: 5px;
-    transform: scale(1);
-    transition: transform 0.3s ease-out, background-color 0.3s ease-out;
-    transform-origin: center center;
-    /* Otros estilos base de tu botón aquí */
-    padding: 5px 10px;
-    background-color: var(--color-four); /* Un naranja agradable */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.7rem;
-    font-weight: bold;
-    /* Para que el botón no se mueva al escalar si está en un flex/grid */
-    flex-shrink: 0;
+      font-size: 1rem;
+      padding: 10px 15px;
   }
-  
-  
-  .animate-pulse {
-    transform: scale(1.2); /* Escala el botón un 5% más grande */
-    background-color: #4CAF50;
-    border: 2px solid var(--color-primary);
-    /* Puedes añadir un cambio de color si quieres, ej: */
-    /* background-color: #4CAF50; /* Verde de confirmación */
-  }
-  .span{
-    font-size: 1rem;
-    
+  .close-button {
+      width: 28px;
+      height: 28px;
+      font-size: 1.3em;
+      top: 8px;
+      right: 8px;
   }
 }

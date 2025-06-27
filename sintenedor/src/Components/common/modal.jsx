@@ -90,52 +90,41 @@ function Modal({ pizza, onClose, onAddToCart }) {
     <div className={styles['modal-overlay']} onClick={onClose}>
 
       <div className={styles['modal-box']} onClick={(e) => e.stopPropagation()}>
+        {/* La imagen que ocupará el 100% */}
+        {imagen && <img src={imagen} alt={`Pizza ${nombre}`} className={styles['modal-background-image']} />}
+        {/* Contenedor para la capa de opacidad */}
+        <div className={styles['modal-image-overlay']}></div>
 
-        <div className={styles['modal-body']}>
+        {/* NUEVO: Contenedor para todo el contenido que irá SOBRE la imagen */}
+        <div className={styles['modal-content-wrapper']}>
 
-          {imagen && <img src={imagen} alt={`Pizza ${nombre}`} className={styles['modal-image']} />}
+          {/* El botón de cierre ahora está aquí, dentro del wrapper de contenido */}
+          <button className={styles['close-button']} onClick={onClose}>&times;</button>
 
+          <div className={styles['modal-header']}>
+            <h3>{nombre}</h3> {/* Muestra el nombre de la pizza */}
+            <p><strong>Ingredientes:</strong> {ingredientes.join(', ')}</p>
+            <h4>Precios:</h4>
+            <ul className={styles['price-list']}>
+              {Object.entries(precios).map(([size, price]) => (
+                <li key={size} className={styles['price-item']}>
+                  {size.charAt(0).toUpperCase() + size.slice(1)}: ${price.toFixed(3)}
+                  <div className={styles['quantity-controls']}>
+                    <button className={styles['buttonControls']} onClick={() => handleDecreaseQuantity(size)}>-</button>
+                    <span className={styles['span']} >{controles[size]}</span>
+                    <button className={styles['buttonControls']} onClick={() => handleIncreaseQuantity(size)}>+</button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
 
+          {/* El botón de añadir al carrito se queda aquí */}
           <button className={`${styles['add-to-cart-button']} ${isAnimating ? styles['animate-pulse'] : ''}`}
             onClick={() => handleAddToCartClick(pizza, controles)}>Añadir al Carrito</button>
-         
-        </div>
 
-        <div className={styles['modal-header']}>
-          <h3>{nombre}</h3> {/* Muestra el nombre de la pizza */}
-
-          {/* Ingredientes - usa la propiedad ingredientes del objeto pizza */}
-          {/* .join(', ') convierte el arreglo de ingredientes en una cadena de texto separada por comas */}
-          <p><strong>Ingredientes:</strong> {ingredientes.join(', ')}</p>
-
-          {/* Precios por tamaño */}
-          <h4>Precios:</h4>
-          {/* Usamos una clase para estilizar esta lista después */}
-          <ul className={styles['price-list']}>
-            {/* Object.entries(precios) convierte el objeto { personal: 10, ... } en un arreglo como [ ['personal', 10], ['mediana', 15], ... ] */}
-            {/* map itera sobre cada par [tamaño, precio] */}
-            {Object.entries(precios).map(([size, price]) => (
-              // key es importante para las listas en React; el 'size' (ej. 'personal') es único
-              <li key={size} className={styles['price-item']}>
-
-                {size.charAt(0).toUpperCase() + size.slice(1)}: ${price.toFixed(3)}
-                <div className={styles['quantity-controls']}>
-                  <button className={styles['buttonControls']} onClick={() => handleDecreaseQuantity(size)}>-</button>
-                  <span className={styles['span']} >{controles[size]}</span>
-                  <button className={styles['buttonControls']} onClick={() => handleIncreaseQuantity(size)}>+</button>
-                </div>
-              </li>
-
-            ))}
-
-          </ul>
-        </div>
-
-
-
-
-      </div>
-
+        </div> {/* Fin de modal-content-wrapper */}
+      </div> {/* Fin de modal-box */}
     </div>
   );
 }
