@@ -14,7 +14,7 @@
   overflow: hidden;
 
   /* Ajusta el ancho si lo necesitas. El grid en PizzaList ya le da un ancho base. */
-  max-width:300px; /* Mantenemos el ancho base del item */
+  max-width:310px; /* Mantenemos el ancho base del item */
   aspect-ratio: 2 / 3;
 
   cursor: pointer; /* Añade un cursor de mano para indicar que es clickeable */

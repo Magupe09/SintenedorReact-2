@@ -7,12 +7,16 @@
     justify-content: space-between;
     align-items: center;
     padding: 15px 40px;
-    background-color: var(--color-primary);
+    max-width: 1000px;
+    background-color: rgba(0, 0, 0, 0.4);
     color: white;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     position: sticky;
     top: 0;
     z-index: 1000;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
 }
 
 .logo a {
@@ -21,6 +25,9 @@
     gap: 10px;
     text-decoration: none;
     color: white;
+}
+.logo a:hover{
+    color: var(--color-third);
 }
 
 .logo img {
@@ -56,7 +63,7 @@
 }
 
 .nav-list li a:hover {
-    color: var(--color-tertiary); /* Corregido: Usar --color-tertiary como en el footer */
+    color: var(--color-third); /* Corregido: Usar --color-tertiary como en el footer */
 }
 
 /* Ocultar botón de hamburguesa en Desktop */

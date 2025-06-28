@@ -9,7 +9,7 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 1);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,7 +30,7 @@
   overflow: hidden; /* Oculta cualquier parte de la imagen o capa que se desborde de los bordes redondeados */
 
   border-radius: 10px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
 
   /* Control de tamaño Mobile-First */
   width: 90%; /* Ocupa el 90% del ancho del viewport */

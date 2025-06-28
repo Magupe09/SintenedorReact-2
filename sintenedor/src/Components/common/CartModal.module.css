@@ -108,8 +108,8 @@
 
     /* Ajustes para el Botón de Cerrar */
     .boton-close {
-        top: 30px; /* Más cerca de la esquina */
-        left: 34px; /* Más cerca de la esquina */
+        top: 26px; /* Más cerca de la esquina */
+        left: 13px; /* Más cerca de la esquina */
         padding: 3px 8px; /* Un poco más pequeño */
         font-size: 12px; /* Fuente más pequeña */
     }
@@ -147,30 +147,4 @@
         padding: 4px 8px; /* Haz los botones de +/- más pequeños */
         font-size: 0.9rem;
     }
-}
-@media (max-width: 350px) {
-    .cart-summary h2{
-        font-size: 1rem;
-    }
-    .cart-summary p{
-        font-size: 1rem;
-    }
-    .boton-close {
-        top: 15px; /* Más cerca de la esquina */
-        left: 12px; /* Más cerca de la esquina */
-        padding: 7px 5px; /* Un poco más pequeño */
-        font-size: 10px; /* Fuente más pequeña */
-        background-color: red;
-    }
-}
-@media (max-width: 349px) {
-    .cart-modal {
-        /* Podrías hacer el modal un poco más pequeño si 95% es demasiado grande */
-        max-width: 80%; /* Un poco menos ancho */
-        max-height: 73%; /* Un poco menos alto */
-    }
-    .cart-summary{
-        height: 450px;
-    }
-  
 }

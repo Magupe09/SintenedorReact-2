@@ -5,11 +5,17 @@ body{
 
 .container {
   max-width: 1000px;
-  margin: 0 auto;
-  padding: 1rem;
+  
+  margin-left: auto;
+  margin-right: auto;
   text-align: center;
+  
   background-color: var(--color-primary);
 }
+.container h1{
+  font-size: 2.5rem;
+}
+
 .cart-icon-button{
   background: none; /* Elimina el fondo del botón si lo tiene */
   border: none; /* Elimina el borde del botón */
@@ -31,3 +37,9 @@ body{
   color: var(--color-third, darkgray); Cambia de color al pasar el mouse 
 }
   */
+@media (max-width: 600px) {
+  .container h1{
+    font-size: 2rem;
+    margin-top: 10px;
+  }
+}

@@ -7,7 +7,7 @@
     gap: 40px; /* Espacio entre los bloques de contenido e imagen */
     max-width: 1000px;
     margin: 60px auto; /* Más margen arriba y abajo para destacar */
-    padding: 30px;
+    padding: 0px;
     background-color: var(--color-background-secondary, #f8f8f8); /* Un fondo ligeramente diferente */
     border-radius: 12px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
