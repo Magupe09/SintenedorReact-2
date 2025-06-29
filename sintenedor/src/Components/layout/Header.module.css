@@ -90,10 +90,44 @@
     transform-origin: center center;
 }
 
-/* --- Estilos para el Botón de Carrito Flotante (Por defecto oculto en Desktop) --- */
 .fixed-cart-button-wrapper {
-    display: none; /* Oculto por defecto en desktop */
+     /* Visible en pantallas pequeñas */
+    position: fixed;
+   top: 20px;
+    left: 400px;
+    z-index: 1000;
 }
+
+.fixed-cart-button-wrapper .cart-button {
+    display: flex;
+    background-color: var(--color-four);
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease-in-out;
+}
+.fixed-cart-button-wrapper .cart-button:hover {
+    transform: scale(1.05);
+}
+
+.fixed-cart-button-wrapper .cart-button svg {
+    width: 28px;
+    height: 28px;
+    color: white;
+}
+
+.fixed-cart-button-wrapper .cart-count {
+    top: 0px;
+    right: 0px;
+    font-size: 0.9rem;
+    padding: 3px 7px;
+    background-color: var(--color-primary);
+}
+
+
 
 /* Estilos del botón de carrito (compartidos para ambas versiones, desktop/fixed) */
 .cart-button {
@@ -205,43 +239,8 @@
     }
 
     /* --- Botón de Carrito Flotante --- */
-    .fixed-cart-button-wrapper {
-        display: block; /* Visible en pantallas pequeñas */
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 1000;
-    }
-
-    .fixed-cart-button-wrapper .cart-button {
-        display: flex;
-        background-color: var(--color-tertiary);
-        border-radius: 50%;
-        width: 55px;
-        height: 55px;
-        justify-content: center;
-        align-items: center;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        transition: transform 0.2s ease-in-out;
-    }
-
-    .fixed-cart-button-wrapper .cart-button:hover {
-        transform: scale(1.05);
-    }
-
-    .fixed-cart-button-wrapper .cart-button svg {
-        width: 28px;
-        height: 28px;
-        color: white;
-    }
-
-    .fixed-cart-button-wrapper .cart-count {
-        top: 0px;
-        right: 0px;
-        font-size: 0.9rem;
-        padding: 3px 7px;
-        background-color: var(--color-primary);
-    }
+    
+    
 }
 
 /* --- Media Query: Mobile Pequeño (max-width: 568px) --- */
