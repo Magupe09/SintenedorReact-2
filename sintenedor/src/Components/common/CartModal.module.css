@@ -148,3 +148,52 @@
         font-size: 0.9rem;
     }
 }
+/* --- Estilos para el botón de WhatsApp --- */
+.whatsapp-button {
+    display: flex; /* Para centrar el texto si añades un ícono */
+    align-items: center;
+    justify-content: center;
+    width: 60%; /* Ocupa la mayor parte del ancho disponible */
+    max-width: 200px; /* Limita el ancho en pantallas más grandes */
+    padding: 12px 25px;
+    background-color: #25D366; /* Verde icónico de WhatsApp */
+    color: white; /* Texto blanco */
+    text-decoration: none; /* Elimina el subrayado por defecto de los enlaces */
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
+}
+
+.whatsapp-button:hover {
+    background-color: #1DA851; /* Un verde ligeramente más oscuro al pasar el ratón */
+    transform: translateY(-2px); /* Pequeño efecto "pop-up" */
+}
+
+/* --- Estilos para el botón "Ir a Pagar" (deshabilitado) --- */
+.checkout-button {
+    width: 60%;
+    max-width: 200px;
+    padding: 12px 25px;
+    background-color: var(--color-four); /* Tu color naranja/oro */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: not-allowed; /* Cambia el cursor para indicar que está deshabilitado */
+    transition: background-color 0.3s ease;
+    margin-top: 10px; /* Para separarlo del botón de WhatsApp */
+    opacity: 0.6; /* Lo hace visualmente menos prominente */
+}
+
+/* Asegura que el botón deshabilitado no reaccione a eventos de ratón */
+.checkout-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* ... (resto de tus estilos del CartModal) ... */

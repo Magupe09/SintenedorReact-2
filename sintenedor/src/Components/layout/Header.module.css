@@ -90,43 +90,6 @@
     transform-origin: center center;
 }
 
-.fixed-cart-button-wrapper {
-     /* Visible en pantallas pequeñas */
-    position: fixed;
-   top: 20px;
-    left: 400px;
-    z-index: 1000;
-}
-
-.fixed-cart-button-wrapper .cart-button {
-    display: flex;
-    background-color: var(--color-four);
-    border-radius: 50%;
-    width: 55px;
-    height: 55px;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    transition: transform 0.2s ease-in-out;
-}
-.fixed-cart-button-wrapper .cart-button:hover {
-    transform: scale(1.05);
-}
-
-.fixed-cart-button-wrapper .cart-button svg {
-    width: 28px;
-    height: 28px;
-    color: white;
-}
-
-.fixed-cart-button-wrapper .cart-count {
-    top: 0px;
-    right: 0px;
-    font-size: 0.9rem;
-    padding: 3px 7px;
-    background-color: var(--color-primary);
-}
-
 
 
 /* Estilos del botón de carrito (compartidos para ambas versiones, desktop/fixed) */
@@ -261,4 +224,84 @@
     /* Si quieres el botón hamburguesa con estilos ligeramente diferentes en este tamaño, irían aquí */
     /* .hamburger-menu-button { ... } */
     /* Las líneas ya heredan los estilos de 768px y la animación sigue funcionando */
+}/* Estilos base para el botón fijo del carrito (Mobile-First) */
+
+
+
+.fixed-cart-button-wrapper {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    /* ... otros estilos base del botón ... */
+}
+
+
+.fixed-cart-button-wrapper .cart-button {
+    display: flex;
+    background-color: var(--color-four);
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease-in-out;
+}
+.fixed-cart-button-wrapper .cart-button:hover {
+    transform: scale(1.05);
+}
+
+.fixed-cart-button-wrapper .cart-button svg {
+    width: 28px;
+    height: 28px;
+    color: white;
+}
+
+.fixed-cart-button-wrapper .cart-count {
+    top: 0px;
+    right: 0px;
+    font-size: 0.9rem;
+    padding: 3px 7px;
+    background-color: var(--color-primary);
+}
+
+
+
+/* --- Media Queries (DEBEN IR DESPUÉS DE LOS ESTILOS BASE) --- */
+
+/* Para pantallas medianas (tabletas) */
+@media (min-width: 768px) {
+    .fixed-cart-button-wrapper {
+        top: 80px; /* Un poco más abajo */
+        right: 46px; /* Un poco más a la derecha */
+        /* ... otros ajustes para tabletas ... */
+    }
+}
+
+/* Para pantallas grandes (escritorio) */
+@media (min-width: 1000px) {
+    .fixed-cart-button-wrapper {
+        top: 80px; /* Aún más abajo */
+        right: 46px; /* Aún más a la derecha */
+        /* ... otros ajustes para escritorio ... */
+    }
+}
+@media (min-width: 1024px) {
+    .fixed-cart-button-wrapper {
+        top: 80px; /* Aún más abajo */
+        right: 168px; /* Aún más a la derecha */
+        /* ... otros ajustes para escritorio ... */
+    }
+}
+
+/* O si tienes una media query para pantallas muy pequeñas */
+@media (max-width: 480px) {
+    .fixed-cart-button-wrapper {
+        bottom: 50px; /* Más cerca del borde superior */
+        right: 20px; /* Más cerca del borde derecho */
+        /* Reduce el tamaño si es necesario */
+        width: 40px;
+        height: 40px;
+    }
 }
