@@ -270,31 +270,6 @@
 
 /* --- Media Queries (DEBEN IR DESPUÉS DE LOS ESTILOS BASE) --- */
 
-/* Para pantallas medianas (tabletas) */
-@media (min-width: 768px) {
-    .fixed-cart-button-wrapper {
-        top: 80px; /* Un poco más abajo */
-        right: 46px; /* Un poco más a la derecha */
-        /* ... otros ajustes para tabletas ... */
-    }
-}
-
-/* Para pantallas grandes (escritorio) */
-@media (min-width: 1000px) {
-    .fixed-cart-button-wrapper {
-        top: 80px; /* Aún más abajo */
-        right: 46px; /* Aún más a la derecha */
-        /* ... otros ajustes para escritorio ... */
-    }
-}
-@media (min-width: 1024px) {
-    .fixed-cart-button-wrapper {
-        top: 80px; /* Aún más abajo */
-        right: 168px; /* Aún más a la derecha */
-        /* ... otros ajustes para escritorio ... */
-    }
-}
-
 /* O si tienes una media query para pantallas muy pequeñas */
 @media (max-width: 480px) {
     .fixed-cart-button-wrapper {
@@ -305,3 +280,23 @@
         height: 40px;
     }
 }
+
+/* Para pantallas medianas (tabletas) */
+@media (min-width: 1000px) {
+    .fixed-cart-button-wrapper {
+        top: 80px; /* Un poco más abajo */
+        right: 46px; /* Un poco más a la derecha */
+        /* ... otros ajustes para tabletas ... */
+    }
+}
+
+@media (min-width: 1024px) {
+    .fixed-cart-button-wrapper {
+        top: 556px; /* Aún más abajo */
+        right: 168px;
+        
+        
+        /* ... otros ajustes para escritorio ... */
+    }
+}
+
