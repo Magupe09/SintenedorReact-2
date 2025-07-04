@@ -23,9 +23,12 @@ function Modal({ pizza, onClose, onAddToCart }) {
         totalItemPrice += controles[clave] * pizza.precios[clave]
       }
     }
+     // AÑADE ESTE CONSOLE.LOG JUSTO AQUÍ
+     console.log("DEBUG: selectedQuantities antes de crear el item:", selectedQuantities);
+     console.log("DEBUG: totalItemPrice antes de crear el item:", totalItemPrice);
     const item = { pizzaInfo, selectedQuantities, totalItemPrice }
-    console.log("DEBUG - Modal.jsx: Item antes de añadir al carrito:", JSON.parse(JSON.stringify(item)));
-    console.log('Item siendo añadido al carrito', item)
+    //console.log("DEBUG - Modal.jsx: Item antes de añadir al carrito:", JSON.parse(JSON.stringify(item)));
+    //console.log('Item siendo añadido al carrito', item)
     if (item.totalItemPrice > 0) {
       onAddToCart(item);
       setControles({ personal: 0, mediana: 0, familiar: 0 });

@@ -42,6 +42,7 @@ const CartModal = ({ carrito, setCarrito, onClose, onRemoveFromCart, totalPrice 
             totalItemPrice: newTotalItemPrice
           };
         }
+        return item; // Si no es el ítem que buscamos, lo retornamos sin cambios
       });
       const finalCarrito = updatedCarrito.filter(item =>
         Object.keys(item.selectedQuantities).length > 0);
