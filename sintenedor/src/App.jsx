@@ -1,6 +1,6 @@
 // src/App.jsx
 // Importamos useState desde React
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 //import './index.css';
 
 // *** Asegúrate de que las rutas y capitalización sean CORRECTAS según tu explorador de archivos ***
