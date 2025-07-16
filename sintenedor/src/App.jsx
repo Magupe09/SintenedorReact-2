@@ -105,6 +105,38 @@ function App() {
     return totalCount + sumQuantities; // Agrega la suma de esta pizza al total general
   }, 0); // Empieza el conteo desde 0
 
+  // --- INICIO de la lógica para obtener productos (integrar esto) ---
+  const [products, setProducts] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const API_URL = 'http://localhost:3000/products';
+
+    setLoading(true);
+    fetch(API_URL)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Productos obtenidos del backend:', data); // ¡Esta es la línea que buscamos en la consola!
+        setProducts(data);
+        setError(null);
+      })
+      .catch(error => {
+        console.error('Error al obtener los productos:', error);
+        setError(error.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+  // --- FIN de la lógica para obtener productos ---
+
+
   return (
     <>
       <Header
