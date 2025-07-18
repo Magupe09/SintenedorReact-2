@@ -12,6 +12,7 @@ import Header from './Components/layout/header';
 import ContactForm from './Components/layout/ContactForm';
 import Footer from './Components/layout/footer';
 import Nosotros from './Components/layout/Nosotros';
+import LoginScreen from './components/Auth/LoginScreen';
 
 
 function App() {
@@ -144,6 +145,10 @@ function App() {
         totalItemsInCart={totalItemsInCart} // Pasa el total de ítems para el contador
       />
       <main>
+        {/* *** CON ESTO *** */}
+        <section id="login-section" className={appStyles.container}>
+          <LoginScreen />
+        </section>
         <section id="menu" className={appStyles.container}>
 
           <h1>Menú de Pizzas</h1>
@@ -151,7 +156,7 @@ function App() {
           <PizzaList onPizzaClick={handlePizzaClick} />
         </section>
         <section id="about" className={appStyles.aboutSection}> {/* Puedes crear un estilo 'aboutSection' */}
-        <Nosotros />
+          <Nosotros />
           {/* Más contenido sobre la historia, valores, etc. */}
         </section>
         <section id="contact" className={appStyles.contactSection}> {/* Nueva sección para el formulario de contacto */}
@@ -178,7 +183,7 @@ function App() {
           onRemoveFromCart={handleRemoveFromCart}
         />
       )}
-      
+
       <Footer />
 
     </>
