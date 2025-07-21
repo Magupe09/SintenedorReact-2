@@ -12,7 +12,8 @@ import Header from './Components/layout/header';
 import ContactForm from './Components/layout/ContactForm';
 import Footer from './Components/layout/footer';
 import Nosotros from './Components/layout/Nosotros';
-import LoginScreen from './components/Auth/LoginScreen';
+import LoginScreen from './Components/Auth/LoginScreen';
+import { AuthProvider } from './Context/AuthContext';
 
 
 function App() {
@@ -139,7 +140,7 @@ function App() {
 
 
   return (
-    <>
+    <AuthProvider>
       <Header
         onOpenCartModal={() => setIsCartModalOpen(true)} // Pasa la función para abrir el modal
         totalItemsInCart={totalItemsInCart} // Pasa el total de ítems para el contador
@@ -186,7 +187,7 @@ function App() {
 
       <Footer />
 
-    </>
+      </AuthProvider>
   );
 }
 

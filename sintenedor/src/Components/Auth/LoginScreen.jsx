@@ -1,74 +1,77 @@
 // src/components/Auth/LoginScreen.jsx
 
-import React, { useState } from 'react'; // <--- IMPORTA useState aquí
+import React, { useState } from 'react';
+import { useAuth } from '../../Context/AuthContext';
 
 function LoginScreen() {
-  // *** DECLARA LOS ESTADOS PARA LOS VALORES DE LOS INPUTS ***
-  const [email, setEmail] = useState(''); // Estado para el correo electrónico, inicializado como cadena vacía
-  const [password, setPassword] = useState(''); // Estado para la contraseña, inicializado como cadena vacía
-  const [error, setError] = useState(null); 
-  // Opcional: un estado para manejar el estado de carga del botón
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  // *** OBTIENE LA FUNCIÓN 'login' DEL CONTEXTO ***
+  const { login } = useAuth();
 
-
-
-  const handleSubmit = async (event) => { // <--- AÑADE 'async' aquí porque haremos una operación asíncrona
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Reinicia cualquier error previo y activa el estado de carga
     setError(null);
     setIsLoading(true);
 
     try {
-      // *** 1. DEFINE LA URL DE TU ENDPOINT DE LOGIN ***
-      // Asegúrate de que esta URL coincida con la ruta de tu backend de Node.js
-      // Ejemplo: si tu backend corre en http://localhost:5000 y tu ruta de login es /api/login
-      const response = await fetch('http://localhost:3000/login', { // <--- ¡CAMBIA ESTA URL!
-        method: 'POST', // Las solicitudes de login suelen ser POST
+      // Asegúrate de que esta URL sea la correcta de tu backend
+      const response = await fetch('http://localhost:3000/login', {
+        method: 'POST',
         headers: {
-          'Content-Type': 'application/json', // Le dice al servidor que estamos enviando JSON
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }), // Convierte el objeto JS a una cadena JSON
+        body: JSON.stringify({ email, password }),
       });
 
-      // *** 2. MANEJA LA RESPUESTA DEL SERVIDOR ***
-      if (!response.ok) { // Si la respuesta no es 2xx (ej. 400, 401, 500)
-        const errorData = await response.json(); // Intenta leer el mensaje de error del servidor
-        throw new Error(errorData.message || 'Error en el inicio de sesión'); // Lanza un error
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Error en el inicio de sesión');
       }
 
-      const data = await response.json(); // Si la respuesta es exitosa, parsea el JSON
-      
-      // *** 3. LOGIN EXITOSO ***
+      const data = await response.json();
+
+      // *** 3. LOGIN EXITOSO - ¡CAMBIOS AQUÍ! ***
       console.log('Inicio de sesión exitoso:', data);
-      // Aquí es donde en el futuro:
-      // - Guardarías el token JWT (data.token) en localStorage.
-      // - Redirigirías al usuario a otra página.
-      // - Actualizarías un estado global de autenticación.
+
+      // PASO 5.1: Extraer el token del objeto 'data'
+      // Asume que tu backend envía el token en una propiedad llamada 'token' (ej. { token: "..." })
+      // Si tu backend lo llama diferente (ej. 'accessToken', 'jwt'), ¡ajusta 'data.token' aquí!
+      const token = data.token; 
+
+      if (token) {
+     // *** LLAMA A LA FUNCIÓN 'login' DEL CONTEXTO ***
+        // Esto guarda el token en localStorage y actualiza el estado global de autenticación
+        login(token); 
+
+        // Ya no necesitamos window.location.reload() ni el alert aquí,
+        // porque el AuthProvider y App.jsx se encargarán de la redirección/renderizado condicional
+        console.log('Usuario logueado y token guardado a través del contexto.');
+
+      } else {
+        throw new Error('No se recibió token de autenticación del servidor.');
+      }
 
     } catch (err) {
       // *** 4. MANEJO DE ERRORES ***
       console.error('Error al iniciar sesión:', err.message);
-      setError(err.message); // Muestra el error en la UI
+      setError(err.message);
     } finally {
       // *** 5. FINALIZA EL ESTADO DE CARGA SIEMPRE ***
       setIsLoading(false);
     }
   };
 
-
-
-
-
-  // Función para manejar el cambio en el input del email
   const handleEmailChange = (event) => {
-    setEmail(event.target.value); // Actualiza el estado 'email' con el valor actual del input
+    setEmail(event.target.value);
   };
 
-  // Función para manejar el cambio en el input de la contraseña
   const handlePasswordChange = (event) => {
-    setPassword(event.target.value); // Actualiza el estado 'password' con el valor actual del input
+    setPassword(event.target.value);
   };
 
   return (
@@ -81,9 +84,10 @@ function LoginScreen() {
             type="email"
             id="email"
             name="email"
-            value={email} // <--- EL VALOR DEL INPUT AHORA ES CONTROLADO POR EL ESTADO 'email'
-            onChange={handleEmailChange} // <--- CADA VEZ QUE ESCRIBE, SE LLAMA A handleEmailChange
+            value={email}
+            onChange={handleEmailChange}
             required
+            disabled={isLoading}
           />
         </div>
         <div className="form-group">
@@ -92,12 +96,16 @@ function LoginScreen() {
             type="password"
             id="password"
             name="password"
-            value={password} // <--- EL VALOR DEL INPUT AHORA ES CONTROLADO POR EL ESTADO 'password'
-            onChange={handlePasswordChange} // <--- CADA VEZ QUE ESCRIBE, SE LLAMA A handlePasswordChange
+            value={password}
+            onChange={handlePasswordChange}
             required
+            disabled={isLoading}
           />
         </div>
-        <button type="submit">Iniciar Sesión</button>
+        {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? 'Cargando...' : 'Iniciar Sesión'}
+        </button>
       </form>
     </div>
   );
