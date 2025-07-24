@@ -13,15 +13,17 @@ import ContactForm from './Components/layout/ContactForm';
 import Footer from './Components/layout/footer';
 import Nosotros from './Components/layout/Nosotros';
 import LoginScreen from './Components/Auth/LoginScreen';
-import { AuthProvider } from './Context/AuthContext';
+import { AuthProvider, useAuth  } from './Context/AuthContext';
 
 
-function App() {
+function AppContent() {
   // Estado para controlar el modal y la pizza seleccionada
   const [isModalOpen, setIsModalOpen] = useState(false); // Booleano: true si modal abierto
   const [isCartModalOpen, setIsCartModalOpen] = useState(false); // Booleano: true si CartModal abierto
   const [selectedPizza, setSelectedPizza] = useState(null);
   const [carrito, setCarrito] = useState([]);
+
+  const { isAuthenticated, isLoading } = useAuth(); 
 
 
   const totalPrice = (carrito) => {
@@ -138,57 +140,79 @@ function App() {
   }, []);
   // --- FIN de la lógica para obtener productos ---
 
+// *** LÓGICA DE RENDERIZADO CONDICIONAL ***
+  // 1. Mostrar pantalla de carga mientras se verifica el token en localStorage.
+  if (isLoading) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '24px' }}>
+        Cargando autenticación...
+      </div>
+    );
+  }
 
-  return (
-    <AuthProvider>
-      <Header
-        onOpenCartModal={() => setIsCartModalOpen(true)} // Pasa la función para abrir el modal
-        totalItemsInCart={totalItemsInCart} // Pasa el total de ítems para el contador
-      />
+  // 2. Si el usuario NO está autenticado, muestra solo la pantalla de login.
+  if (!isAuthenticated) {
+    return (
       <main>
-        {/* *** CON ESTO *** */}
         <section id="login-section" className={appStyles.container}>
           <LoginScreen />
         </section>
-        <section id="menu" className={appStyles.container}>
+      </main>
+    );
+  }
 
+  // 3. Si el usuario SÍ está autenticado, muestra todo el contenido de la aplicación.
+  return (
+    <>
+      <Header
+        onOpenCartModal={() => setIsCartModalOpen(true)}
+        totalItemsInCart={totalItemsInCart}
+      />
+      <main>
+        {/* Descomenta o añade de nuevo la sección del menú de pizzas */}
+        <section id="menu" className={appStyles.container}>
           <h1>Menú de Pizzas</h1>
-          {/* Renderiza PizzaList una sola vez y pásale la función de click */}
           <PizzaList onPizzaClick={handlePizzaClick} />
         </section>
-        <section id="about" className={appStyles.aboutSection}> {/* Puedes crear un estilo 'aboutSection' */}
+
+        <section id="about" className={appStyles.aboutSection}>
           <Nosotros />
-          {/* Más contenido sobre la historia, valores, etc. */}
         </section>
-        <section id="contact" className={appStyles.contactSection}> {/* Nueva sección para el formulario de contacto */}
+        <section id="contact" className={appStyles.contactSection}>
           <ContactForm />
         </section>
       </main>
 
-
-
       {isCartModalOpen && (
         <CartModal
           carrito={carrito}
-          setCarrito={setCarrito}// Estado del carrito
+          setCarrito={setCarrito}
           onClose={handleCloseCartModal}
           onRemoveFromCart={handleRemoveFromCart}
-          totalPrice={totalPrice(carrito)}
+          totalPrice={totalPrice}
         />
       )}
       {isModalOpen && (
         <Modal
-          pizza={selectedPizza} // Pasamos los datos de la pizza seleccionada al Modal
-          onClose={handleCloseModal} // Pasamos la función para que el Modal pueda cerrarse
+          pizza={selectedPizza}
+          onClose={handleCloseModal}
           onAddToCart={handleAddToCart}
-          onRemoveFromCart={handleRemoveFromCart}
         />
       )}
-
       <Footer />
-
-      </AuthProvider>
+    </>
   );
 }
+
+// *** IMPORTANTE: EL NUEVO COMPONENTE 'App' SOLO ENVUELVE A 'AppContent' CON 'AuthProvider' ***
+// Este es el componente que se exporta como 'App'.
+function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
+  );
+}
+
 
 export default App;

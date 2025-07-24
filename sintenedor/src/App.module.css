@@ -31,7 +31,43 @@ body{
   height: 30px; /* Mantén la proporción */
   transition: color 0.3s ease; /* Transición suave al pasar el mouse */
 }
+/* src/App.module.css */
 
+/* ... tus estilos existentes ... */
+
+.logoutButton {
+  background-color: #dc3545; /* Rojo para el botón de logout */
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease;
+  margin-left: 10px; /* Espacio entre el carrito y logout */
+  white-space: nowrap; /* Evita que el texto se rompa */
+}
+
+.logoutButton:hover {
+  background-color: #c82333; /* Rojo más oscuro al hover */
+}
+
+/* Ajuste para el botón del carrito si lo estás estilizando en App.module.css */
+.cartButton {
+  background-color: #28a745; /* Verde para el botón del carrito */
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease;
+  white-space: nowrap; /* Evita que el texto se rompa */
+}
+
+.cartButton:hover {
+  background-color: #218838; /* Verde más oscuro al hover */
+}
 /* 
 .cart-icon-button:hover svg {
   color: var(--color-third, darkgray); Cambia de color al pasar el mouse 

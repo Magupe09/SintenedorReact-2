@@ -1,7 +1,8 @@
 // src/components/Auth/LoginScreen.jsx
 
 import React, { useState } from 'react';
-import { useAuth } from '../../Context/AuthContext';
+import { useAuth } from '../../Context/AuthContext.jsx';
+import styles from './LoginScreen.module.css'; // <--- IMPORTA LOS ESTILOS AQUÍ
 
 function LoginScreen() {
   const [email, setEmail] = useState('');
@@ -9,7 +10,6 @@ function LoginScreen() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  // *** OBTIENE LA FUNCIÓN 'login' DEL CONTEXTO ***
   const { login } = useAuth();
 
   const handleSubmit = async (event) => {
@@ -35,33 +35,21 @@ function LoginScreen() {
 
       const data = await response.json();
 
-      // *** 3. LOGIN EXITOSO - ¡CAMBIOS AQUÍ! ***
       console.log('Inicio de sesión exitoso:', data);
 
-      // PASO 5.1: Extraer el token del objeto 'data'
-      // Asume que tu backend envía el token en una propiedad llamada 'token' (ej. { token: "..." })
-      // Si tu backend lo llama diferente (ej. 'accessToken', 'jwt'), ¡ajusta 'data.token' aquí!
-      const token = data.token; 
+      const token = data.token;
 
       if (token) {
-     // *** LLAMA A LA FUNCIÓN 'login' DEL CONTEXTO ***
-        // Esto guarda el token en localStorage y actualiza el estado global de autenticación
         login(token); 
-
-        // Ya no necesitamos window.location.reload() ni el alert aquí,
-        // porque el AuthProvider y App.jsx se encargarán de la redirección/renderizado condicional
         console.log('Usuario logueado y token guardado a través del contexto.');
-
       } else {
         throw new Error('No se recibió token de autenticación del servidor.');
       }
 
     } catch (err) {
-      // *** 4. MANEJO DE ERRORES ***
       console.error('Error al iniciar sesión:', err.message);
       setError(err.message);
     } finally {
-      // *** 5. FINALIZA EL ESTADO DE CARGA SIEMPRE ***
       setIsLoading(false);
     }
   };
@@ -75,10 +63,10 @@ function LoginScreen() {
   };
 
   return (
-    <div className="login-container">
+    <div className={styles.loginContainer}> {/* <--- APLICA LA CLASE DEL MÓDULO CSS */}
       <h2>Iniciar Sesión</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
+      <form onSubmit={handleSubmit} className={styles.form}> {/* <--- APLICA LA CLASE DEL MÓDULO CSS */}
+        <div className={styles.formGroup}> {/* <--- APLICA LA CLASE DEL MÓDULO CSS */}
           <label htmlFor="email">Correo Electrónico:</label>
           <input
             type="email"
@@ -90,7 +78,7 @@ function LoginScreen() {
             disabled={isLoading}
           />
         </div>
-        <div className="form-group">
+        <div className={styles.formGroup}> {/* <--- APLICA LA CLASE DEL MÓDULO CSS */}
           <label htmlFor="password">Contraseña:</label>
           <input
             type="password"
@@ -102,8 +90,8 @@ function LoginScreen() {
             disabled={isLoading}
           />
         </div>
-        {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
-        <button type="submit" disabled={isLoading}>
+        {error && <p className={styles.errorText}>{error}</p>} {/* <--- APLICA LA CLASE DEL MÓDULO CSS */}
+        <button type="submit" disabled={isLoading} className={styles.submitButton}> {/* <--- APLICA LA CLASE DEL MÓDULO CSS */}
           {isLoading ? 'Cargando...' : 'Iniciar Sesión'}
         </button>
       </form>

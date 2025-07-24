@@ -2,6 +2,9 @@
 import React, { useState } from 'react';
 import styles from './Header.module.css'; // Crearemos este archivo CSS Module
 import logoPrincipal from '../../assets/logoSintenedor.webp';
+import appStyles from '../../App.module.css';
+
+import { useAuth } from '../../Context/AuthContext.jsx';
 
 const Header = ({ onOpenCartModal, totalItemsInCart }) => { // Recibimos props para el botón de carrito
     const [isMenuOpen, setIsMenuOpen] = useState(false); // Estado para controlar si el menú móvil está abierto
@@ -9,6 +12,12 @@ const Header = ({ onOpenCartModal, totalItemsInCart }) => { // Recibimos props p
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
+    const { isAuthenticated, logout } = useAuth(); // Obtenemos isAuthenticated y logout
+
+    const handleLogout = () => {
+      logout(); // Llama a la función logout del contexto
+    };
+  
 
     return (
         <> {/* Usamos un Fragmento porque ahora hay dos elementos hermanos: header y el div del botón */}
@@ -41,6 +50,22 @@ const Header = ({ onOpenCartModal, totalItemsInCart }) => { // Recibimos props p
             <li><a href="#menu" onClick={toggleMenu}>Menú</a></li>
             <li><a href="#about" onClick={toggleMenu}>Nosotros</a></li>
             <li><a href="#contact" onClick={toggleMenu}>Contacto</a></li>
+            {/* *** RENDERIZADO CONDICIONAL PARA EL BOTÓN DE CARRITO Y LOGOUT *** */}
+            {isAuthenticated && ( // Solo muestra estos elementos si el usuario está autenticado
+              <>
+                <li>
+                  <button className={appStyles.cartButton} onClick={onOpenCartModal}>
+                    Carrito ({totalItemsInCart})
+                  </button>
+                </li>
+                <li>
+                  {/* Botón para cerrar sesión */}
+                  <button className={appStyles.logoutButton} onClick={handleLogout}>
+                    Cerrar Sesión
+                  </button>
+                </li>
+              </>
+            )}
             {/* NOTA: El botón del carrito YA NO ESTÁ AQUÍ. Se ha movido fuera del Header. */}
           </ul>
         </nav>

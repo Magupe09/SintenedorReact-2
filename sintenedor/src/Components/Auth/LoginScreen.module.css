@@ -1,0 +1,103 @@
+/* src/components/Auth/LoginScreen.module.css */
+
+.loginContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - var(--header-height, 80px) - var(--footer-height, 60px)); /* Ajusta según tus alturas de header/footer */
+    background-color: #f4f7f6; /* Un color de fondo suave */
+    padding: 20px;
+  }
+  
+  .loginContainer h2 {
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2.2em;
+  }
+  
+  .form {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px; /* Ancho máximo para el formulario */
+    box-sizing: border-box; /* Incluye padding en el ancho */
+  }
+  
+  .formGroup {
+    margin-bottom: 20px;
+  }
+  
+  .formGroup label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: bold;
+  }
+  
+  .formGroup input[type="email"],
+  .formGroup input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box; /* Incluye padding en el ancho */
+  }
+  
+  .formGroup input[type="email"]:focus,
+  .formGroup input[type="password"]:focus {
+    border-color: #007bff; /* Color al enfocar */
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+  }
+  
+  .formGroup input:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+  }
+  
+  .errorText {
+    color: #dc3545; /* Rojo para mensajes de error */
+    font-size: 0.9em;
+    margin-top: 10px;
+    text-align: center;
+  }
+  
+  .submitButton {
+    width: 100%;
+    padding: 12px 20px;
+    background-color: #007bff; /* Azul primario */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .submitButton:hover:not(:disabled) {
+    background-color: #0056b3; /* Azul más oscuro al hover */
+    transform: translateY(-2px); /* Pequeño efecto lift */
+  }
+  
+  .submitButton:disabled {
+    background-color: #a0c4ff; /* Azul claro cuando está deshabilitado */
+    cursor: not-allowed;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 600px) {
+    .loginContainer {
+      padding: 15px;
+    }
+    .form {
+      padding: 25px;
+    }
+    .loginContainer h2 {
+      font-size: 1.8em;
+    }
+  }
