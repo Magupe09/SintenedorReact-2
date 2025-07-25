@@ -6,11 +6,11 @@ import listStyles from './PizzaList.module.css';
 
 // Importamos la función para obtener el arreglo de pizzas desde donde la guardaste
 // Asumiendo que guardaste tus datos en src/data/pizzas.js
-import { getPizzasArray } from '../../data/pizzas'; // La ruta sube dos niveles (../..), entra a data, e importa getPizzasArray
+//import { getPizzasArray } from '../../data/pizzas'; // La ruta sube dos niveles (../..), entra a data, e importa getPizzasArray
 
-function PizzaList({ onPizzaClick }) {
+function PizzaList({ onPizzaClick ,pizzas}) {
   // Obtenemos el arreglo de pizzas usando tu función
-  const pizzas = getPizzasArray();
+  //const pizzas = getPizzasArray();
 
   // Verificación simple: si no hay pizzas, mostramos un mensaje (opcional pero útil)
   if (pizzas.length === 0) {
