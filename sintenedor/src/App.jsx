@@ -86,7 +86,7 @@ function AppContent() {
       <main>
         {/* --- ESTA SECCIÓN SIEMPRE VISIBLE: EL MENÚ DE PIZZAS --- */}
         <section id="menu" className={appStyles.container}>
-          <h1>Menú de Pizzas</h1>
+          <h1>Menú de Pizzas Las mejores</h1>
           <PizzaList pizzas={pizzas} onPizzaClick={handlePizzaClick} />
         </section>
 
