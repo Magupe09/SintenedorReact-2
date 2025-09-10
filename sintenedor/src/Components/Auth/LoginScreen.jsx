@@ -1,6 +1,6 @@
 // src/components/Auth/LoginScreen.jsx
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../../Context/AuthContext.jsx';
 import styles from './LoginScreen.module.css'; // <--- IMPORTA LOS ESTILOS AQUÍ
 
@@ -11,6 +11,41 @@ function LoginScreen() {
   const [isLoading, setIsLoading] = useState(false);
 
   const { login } = useAuth();
+  const googleButtonRef = useRef(null);
+  useEffect(() => {
+    window.google.accounts.id.initialize({
+      client_id: 'TU_GOOGLE_CLIENT_ID', // <-- Pega tu Client ID aquí
+      callback: async (response) => {
+        const idToken = response.credential;
+        try {
+          const res = await fetch('http://localhost:3000/auth/google', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ token: idToken }),
+          });
+          if (!res.ok) {
+            const errorData = await res.json();
+            throw new Error(errorData.error || 'Error al autenticar.');
+          }
+          const data = await res.json();
+          console.log('Login con Google exitoso:', data);
+          login(data.token, data.user_id);
+        } catch (error) {
+          console.error('Error durante la autenticación de Google:', error);
+        }
+      },
+    });
+
+    window.google.accounts.id.renderButton(
+      googleButtonRef.current,
+      { theme: 'outline', size: 'large' }
+    );
+  }, [login]);
+  // --- Fin de la lógica de Google Login ---
+
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -94,6 +129,10 @@ function LoginScreen() {
         <button type="submit" disabled={isLoading} className={styles.submitButton}> {/* <--- APLICA LA CLASE DEL MÓDULO CSS */}
           {isLoading ? 'Cargando...' : 'Iniciar Sesión'}
         </button>
+        <p>O</p>
+
+{/* Este es el contenedor donde se renderizará el botón de Google */}
+<div ref={googleButtonRef}></div>
       </form>
     </div>
   );
