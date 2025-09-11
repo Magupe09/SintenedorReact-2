@@ -14,7 +14,8 @@ function LoginScreen() {
   const googleButtonRef = useRef(null);
   useEffect(() => {
     window.google.accounts.id.initialize({
-      client_id: 'TU_GOOGLE_CLIENT_ID', // <-- Pega tu Client ID aquí
+      client_id: '912737213054-926628emttindeth5eadqp0lcumoukgq.apps.googleusercontent.com',
+       // <-- Pega tu Client ID aquí
       callback: async (response) => {
         const idToken = response.credential;
         try {
