@@ -14,7 +14,7 @@ import Footer from './Components/layout/footer';
 import Nosotros from './Components/layout/Nosotros';
 import LoginScreen from './Components/Auth/LoginScreen';
 import { AuthProvider, useAuth  } from './Context/AuthContext';
-import { getPizzasArray } from './data/pizzas'; 
+//import { getPizzasArray } from './data/pizzas'; 
 
 // Este componente AppContent contendrá la lógica de renderizado condicional.
 // Necesita estar DENTRO del <AuthProvider> para poder usar useAuth().
@@ -23,23 +23,42 @@ function AppContent() {
   const [selectedPizza, setSelectedPizza] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
-  const [pizzas, setPizzas] = useState(getPizzasArray())
-
-  const { isAuthenticated, isLoading, user } = useAuth(); 
+  const [pizzas, setPizzas] = useState([]);
+  const [isLoadingPizzas, setIsLoadingPizzas] = useState(true);
+  const { isAuthenticated, isLoading: isLoadingAuth, user } = useAuth(); 
 
   const totalPrice = carrito.reduce((sum, item) => sum + item.totalItemPrice, 0);
   const totalItemsInCart = carrito.length;
   //console.log(pizzas)
+  useEffect(() => {
+    const fetchPizzas = async () => {
+      try {
+        const response = await fetch('http://localhost:4000/products');
+        if (!response.ok) {
+          throw new Error('No se pudo obtener la información de las pizzas.');
+        }
+        const data = await response.json();
+        setPizzas(data);
+      } catch (error) {
+        console.error("Error al obtener las pizzas:", error);
+      } finally {
+        setIsLoadingPizzas(false);
+      }
+    };
+    fetchPizzas();
+  }, []);
+
+
+
   const handlePizzaClick = (pizzaId) => {
     if (!Array.isArray(pizzas)) {
       console.error("Error: 'pizzas' no es un array. No se puede buscar la pizza.");
-      //console.log(pizza)
-      return; // Detener la ejecución de la función
+      return;
     }
-    const pizza = pizzas.find(p => p.id === pizzaId);
+    // El id del producto en la base de datos es 'pizza_id'
+    const pizza = pizzas.find(p => p.pizza_id === pizzaId);
     setSelectedPizza(pizza);
     setIsModalOpen(true);
-    
   };
 
   const handleCloseModal = () => {
@@ -67,13 +86,14 @@ function AppContent() {
     });
   };
 
-  if (isLoading) {
-    return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '24px' }}>
-        Cargando autenticación...
-      </div>
-    );
-  }
+ // 4. Cambiamos la lógica del isLoading para que combine ambos estados
+ if (isLoadingAuth || isLoadingPizzas) {
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '24px' }}>
+      Cargando...
+    </div>
+  );
+}
 
   return (
     <>
