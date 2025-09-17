@@ -18,6 +18,7 @@ function PizzaList({ onPizzaClick ,pizzas}) {
   }
 
 
+  console.log(pizzas)
   // Retornamos la estructura JSX para la lista de pizzas
   return (
     // Este div puede servir como contenedor para aplicar estilos de grid después
@@ -27,8 +28,9 @@ function PizzaList({ onPizzaClick ,pizzas}) {
         // Para cada objeto 'pizza' en el arreglo, renderizamos un PizzaItem.
         // Es CRUCIAL pasar la prop 'key' única. Usamos el id de la pizza.
         // NOTA: Si tu 'id' es un número o string único (como 'marinera'), es perfecto.
+      
         <PizzaItem
-          key={pizza.id} // Usa el id único de cada pizza como key
+          key={pizza.pizza_id} // Usa el id único de cada pizza como key
           pizza={pizza} // Le pasamos el objeto pizza completo al componente PizzaItem
           onPizzaClick={onPizzaClick}
         />
