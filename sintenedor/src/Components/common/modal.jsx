@@ -7,7 +7,52 @@ import { useState } from 'react';
 function Modal({ pizza, onClose, onAddToCart }) {
   const [controles, setControles] = useState({ personal: 0, mediana: 0, familiar: 0 });
   const [isAnimating, setIsAnimating] = useState(false)
-  console.log("Objeto pizza que llega al Modal:", pizza);
+  //console.log("Objeto pizza que llega al Modal:", pizza);
+
+  function handleAddToCartClick(pizza, controles) {
+    // Inicializamos las variables para la información del pedido
+    const selectedQuantities = {};
+    let totalItemPrice = 0;
+    const itemsToAdd = [];
+
+    for (const clave in controles) {
+      if (controles[clave] > 0) {
+        // 1. Buscamos el objeto de precio que coincida con el tamaño (clave)
+        const precioItem = pizza.precios.find(p => p.tamano === clave);
+
+        // 2. Si se encuentra, calculamos el precio y agregamos el item
+        if (precioItem) {
+          totalItemPrice += controles[clave] * precioItem.precio;
+          // Creamos un objeto para cada item del pedido
+          itemsToAdd.push({
+            pizzaId: pizza.pizza_id,
+            nombre: pizza.nombre,  // <-- AÑADE ESTA LÍNEA
+            imagen: pizza.imagen,
+            size: clave,
+            quantity: controles[clave],
+            price: precioItem.precio,
+          });
+        }
+      }
+    }
+
+    // Si se seleccionó al menos un ítem
+    if (itemsToAdd.length > 0) {
+      // onAddToCart ahora recibirá el array de ítems en lugar de un solo objeto
+      onAddToCart(itemsToAdd);
+      setControles({ personal: 0, mediana: 0, familiar: 0 });
+      setIsAnimating(true);
+      setTimeout(() => {
+        setIsAnimating(false);
+      }, 300);
+    } else {
+      alert('Debes definir las cantidades.');
+    }
+  }
+
+
+
+  /*
 
   function handleAddToCartClick(pizza, controles) {
 
@@ -23,9 +68,7 @@ function Modal({ pizza, onClose, onAddToCart }) {
         totalItemPrice += controles[clave] * pizza.precios[clave]
       }
     }
-     // AÑADE ESTE CONSOLE.LOG JUSTO AQUÍ
-     console.log("DEBUG: selectedQuantities antes de crear el item:", selectedQuantities);
-     console.log("DEBUG: totalItemPrice antes de crear el item:", totalItemPrice);
+    
     const item = { pizzaInfo, selectedQuantities, totalItemPrice }
     //console.log("DEBUG - Modal.jsx: Item antes de añadir al carrito:", JSON.parse(JSON.stringify(item)));
     //console.log('Item siendo añadido al carrito', item)
@@ -40,10 +83,13 @@ function Modal({ pizza, onClose, onAddToCart }) {
       alert('Debes definir las cantidades. ')
     }
 
-
-
-
   }
+
+  */
+
+
+
+
   function handleIncreaseQuantity(size) {
 
     setControles(prevControles => {
@@ -108,18 +154,20 @@ function Modal({ pizza, onClose, onAddToCart }) {
             <h3>{nombre}</h3> {/* Muestra el nombre de la pizza */}
             <p><strong>Ingredientes:</strong> {ingredientes.join(', ')}</p>
             <h4>Precios:</h4>
+
             <ul className={styles['price-list']}>
-              {Object.entries(precios).map(([size, price]) => (
-                <li key={size} className={styles['price-item']}>
-                  {size.charAt(0).toUpperCase() + size.slice(1)}: ${price.toFixed(3)}
+              {pizza.precios.map((precioItem) => ( // Cambiamos la forma de iterar
+                <li key={precioItem.tamano} className={styles['price-item']}>
+                  {precioItem.tamano.charAt(0).toUpperCase() + precioItem.tamano.slice(1)}: ${precioItem.precio.toFixed(2)}
                   <div className={styles['quantity-controls']}>
-                    <button className={styles['buttonControls']} onClick={() => handleDecreaseQuantity(size)}>-</button>
-                    <span className={styles['span']} >{controles[size]}</span>
-                    <button className={styles['buttonControls']} onClick={() => handleIncreaseQuantity(size)}>+</button>
+                    <button className={styles['buttonControls']} onClick={() => handleDecreaseQuantity(precioItem.tamano)}>-</button>
+                    <span className={styles['span']} >{controles[precioItem.tamano]}</span>
+                    <button className={styles['buttonControls']} onClick={() => handleIncreaseQuantity(precioItem.tamano)}>+</button>
                   </div>
                 </li>
               ))}
             </ul>
+
           </div>
 
           {/* El botón de añadir al carrito se queda aquí */}

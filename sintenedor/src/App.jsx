@@ -53,17 +53,17 @@ function AppContent() {
   const handlePizzaClick = (pizzaId) => {
     console.log("El ID recibido es:", pizzaId); 
     if (!Array.isArray(pizzas)) {
-      console.error("Error: 'pizzas' no es un array. No se puede buscar la pizza.");
+     // console.error("Error: 'pizzas' no es un array. No se puede buscar la pizza.");
       return;
     }
-    console.log("El array de pizzas es:", pizzas); 
+   // console.log("El array de pizzas es:", pizzas); 
 
 
 
 
     // El id del producto en la base de datos es 'pizza_id'
     const pizza = pizzas.find(p => p.pizza_id === pizzaId);
-    console.log("La pizza encontrada es:", pizza);
+    //console.log("La pizza encontrada es:", pizza);
     setSelectedPizza(pizza);
     setIsModalOpen(true);
   };
@@ -77,14 +77,14 @@ function AppContent() {
     setIsCartModalOpen(false);
   };
 
-  const handleAddToCart = (itemToAdd) => {
+  const handleAddToCart = (itemsToAdd) => {
+    // itemsToAdd ahora es un array. Usamos 'flat' para aplanarlo
+    // y 'filter' para evitar duplicados si se da el caso
     setCarrito(prevCarrito => {
-     
-      const newCarrito = [...prevCarrito, itemToAdd];
-    
-      return newCarrito;
+        // Combinamos el carrito anterior con el nuevo array de ítems
+        return [...prevCarrito, ...itemsToAdd];
     });
-  };
+};
 
   const handleRemoveFromCart = (itemIdToRemove) => {
     setCarrito(prevCarrito => {

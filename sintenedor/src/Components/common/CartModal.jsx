@@ -1,3 +1,100 @@
+import React from 'react';
+import styles from './CartModal.module.css';
+import CartItem from './CartItem';
+import { useAuth } from '../../Context/AuthContext'; // Importar useAuth
+
+const CartModal = ({ carrito, onClose, onRemoveFromCart, totalPrice, setCarrito }) => {
+    const { user } = useAuth(); // Obtener el usuario del contexto
+
+    // Función para enviar el pedido al backend
+    const handleCheckout = async () => {
+        // items está listo con el formato que el backend espera
+        const items = carrito.map(item => ({
+            pizzaId: item.pizzaId,
+            quantity: item.quantity,
+            size: item.size
+        }));
+
+        // El userId lo obtenemos del contexto de autenticación
+        const userId = user.id;
+
+        try {
+            const response = await fetch('http://localhost:4000/orders', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ userId, items }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al enviar el pedido.');
+            }
+
+            const data = await response.json();
+            console.log('Pedido enviado con éxito:', data);
+            alert('¡Pedido enviado con éxito! ID del pedido: ' + data.orderId);
+            
+            // Vaciar el carrito después de un pedido exitoso
+            setCarrito([]);
+            onClose();
+
+        } catch (error) {
+            console.error('Hubo un problema con el envío del pedido:', error);
+            alert('No se pudo completar el pedido. Intente nuevamente.');
+        }
+    };
+
+    return (
+        <div className={styles['cart-modal']}>
+            <button className={styles['boton-close']} onClick={onClose}>Cerrar</button>
+            {carrito.length === 0 ? (
+                <p className={styles['empty-cart-message']}>Tu carrito está vacío.</p>
+            ) : (
+                <div className={styles['cart-summary']}>
+                    <h2>Tu Carrito de Pizza</h2>
+                    <ul className={styles['cart-list']}>
+                        {carrito.map((item, index) => (
+                            <li className={styles['cart-item']} key={`${item.pizzaId}-${item.size}-${index}`}>
+                                <CartItem
+                                    item={item}
+                                    onRemoveFromCart={onRemoveFromCart}
+                                />
+                            </li>
+                        ))}
+                    </ul>
+                    <p>Total del Carrito: ${totalPrice.toFixed(2)}</p>
+                    <button 
+                        className={styles['checkout-button']}
+                        onClick={handleCheckout}
+                    >
+                        Pagar
+                    </button>
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default CartModal;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+
 import React from 'react'; // Solo necesitas React si no usas Hooks como useState aquí
 import styles from './CartModal.module.css';
 import CartItem from './CartItem';
@@ -91,7 +188,7 @@ const CartModal = ({ carrito, setCarrito, onClose, onRemoveFromCart, totalPrice 
 
   return (
     <div className={styles['cart-modal']}>
-      {/* Aquí irá la lógica para mostrar los ítems del carrito */}
+     
 
       <button className={styles['boton-close']} onClick={onClose}>Cerrar</button>
       {carrito.length === 0 ? (
@@ -133,7 +230,7 @@ const CartModal = ({ carrito, setCarrito, onClose, onRemoveFromCart, totalPrice 
             Pedir por WhatsApp
           </a>
 
-          {/* Puedes mantener un botón de "Ir a Pagar" para el futuro, pero deshabilitado por ahora */}
+          
           <button className={styles['checkout-button']} disabled>
             Ir a Pagar (No funcional aún)
           </button>
@@ -149,3 +246,4 @@ const CartModal = ({ carrito, setCarrito, onClose, onRemoveFromCart, totalPrice 
 };
 
 export default CartModal;
+*/
