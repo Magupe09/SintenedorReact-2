@@ -3,7 +3,7 @@ import styles from './CartModal.module.css';
 import CartItem from './CartItem';
 import { useAuth } from '../../Context/AuthContext'; // Importar useAuth
 
-const CartModal = ({ carrito, onClose, onRemoveFromCart, totalPrice, setCarrito }) => {
+const CartModal = ({ carrito, onClose, onRemoveFromCart, onUpdateItemQuantity, totalPrice, setCarrito }) => {
     const { user } = useAuth(); // Obtener el usuario del contexto
 
     // Función para enviar el pedido al backend
@@ -59,6 +59,7 @@ const CartModal = ({ carrito, onClose, onRemoveFromCart, totalPrice, setCarrito 
                                 <CartItem
                                     item={item}
                                     onRemoveFromCart={onRemoveFromCart}
+                                    onUpdateItemQuantity={onUpdateItemQuantity}
                                 />
                             </li>
                         ))}

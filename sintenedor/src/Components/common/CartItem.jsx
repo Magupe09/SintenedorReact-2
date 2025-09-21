@@ -1,38 +1,29 @@
 import React from 'react';
 import styles from './CartItem.module.css';
 
-function CartItem({ item, onRemoveFromCart, onIncreaseItemQuantity, onDecreaseItemQuantity }) {
-    // La nueva estructura de datos es plana. Usamos directamente las propiedades del 'item'.
+
+
+
+function CartItem({ item, onRemoveFromCart, onUpdateItemQuantity }) {
     return (
         <div className={styles['cart-item']}>
+            <img src={item.imagen} alt={item.nombre} />
             <div className={styles['cart-item-details']}>
-                <h3>{item.nombre}</h3> {/* Usamos el nombre de la pizza */}
-                <img src={item.imagen} alt={item.nombre} /> {/* Usamos la imagen */}
-                
-                {/* Iteramos sobre el item, ya que ahora es un objeto plano y cada uno representa un ítem en el carrito */}
-                <div key={item.size} className={styles['quantity-control-display']}>
-                    <div className={styles['item-quantity-buttons']}>
-                        {/* Pasamos directamente el ID y el tamaño del ítem actual */}
-                        <button onClick={() => onDecreaseItemQuantity(item.pizzaId, item.size)}>-</button>
-                        <span>
-                            {item.size.charAt(0).toUpperCase() + item.size.slice(1)}: {item.quantity}
-                        </span>
-                        <button onClick={() => onIncreaseItemQuantity(item.pizzaId, item.size)}>+</button>
-                    </div>
+                <h3>{item.nombre}</h3>
+                <p>Tamaño: {item.size}</p>
+                <div className={styles['item-quantity-buttons']}>
+                    <button onClick={() => onUpdateItemQuantity(item.pizzaId, item.size, 'decrease')}>-</button>
+                    <span>{item.quantity}</span>
+                    <button onClick={() => onUpdateItemQuantity(item.pizzaId, item.size, 'increase')}>+</button>
                 </div>
-
-                <p>Total: ${item.price.toFixed(2)}</p>
-                {/* Pasamos el ID del ítem para eliminarlo */}
-                <button onClick={() => onRemoveFromCart(item.pizzaId)}>Eliminar</button>
+                <p>Precio: ${item.price.toFixed(2)}</p>
+                <button onClick={() => onRemoveFromCart(item.pizzaId, item.size)}>Eliminar</button>
             </div>
         </div>
     );
 }
 
 export default CartItem;
-
-
-
 
 
 /*

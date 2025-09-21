@@ -27,8 +27,44 @@ function AppContent() {
   const [isLoadingPizzas, setIsLoadingPizzas] = useState(true);
   const { isAuthenticated, isLoading: isLoadingAuth, user } = useAuth(); 
 
-  const totalPrice = carrito.reduce((sum, item) => sum + item.totalItemPrice, 0);
+ // const totalPrice = carrito.reduce((sum, item) => sum + item.totalItemPrice, 0);
+
+
   const totalItemsInCart = carrito.length;
+  const [totalPrice, setTotalPrice] = useState(0);
+
+// Esta es la función que necesitas agregar
+const handleUpdateCartItemQuantity = (pizzaId, size, type) => {
+    setCarrito(prevCarrito => {
+        const updatedCarrito = prevCarrito.map(item => {
+            // Buscamos el ítem específico por su ID y su tamaño
+            if (item.pizzaId === pizzaId && item.size === size) {
+                const newQuantity = type === 'increase'
+                    ? item.quantity + 1
+                    : Math.max(1, item.quantity - 1);
+                
+                // Retornamos una copia del objeto con la nueva cantidad
+                return { ...item, quantity: newQuantity };
+            }
+            return item; // Retornamos el ítem sin cambios
+        });
+        return updatedCarrito;
+    });
+};
+
+
+useEffect(() => {
+  const newTotalPrice = carrito.reduce((sum, item) => {
+    // Por cada ítem, multiplica la cantidad por el precio y lo suma al total
+    return sum + (item.quantity * item.price);
+  }, 0); // El 0 es el valor inicial de la suma
+  setTotalPrice(newTotalPrice);
+}, [carrito]);
+
+
+
+
+
   //console.log(pizzas)
   useEffect(() => {
     const fetchPizzas = async () => {
@@ -86,12 +122,13 @@ function AppContent() {
     });
 };
 
-  const handleRemoveFromCart = (itemIdToRemove) => {
-    setCarrito(prevCarrito => {
-      const newCarrito = prevCarrito.filter(item => item.id !== itemIdToRemove);
-      return newCarrito;
-    });
-  };
+ // En tu archivo src/App.js
+const handleRemoveFromCart = (pizzaId, size) => {
+  setCarrito(prevCarrito => {
+      // Filtramos el carrito para eliminar el ítem que coincide tanto en ID como en tamaño
+      return prevCarrito.filter(item => !(item.pizzaId === pizzaId && item.size === size));
+  });
+};
 
  // 4. Cambiamos la lógica del isLoading para que combine ambos estados
  if (isLoadingAuth || isLoadingPizzas) {
@@ -137,6 +174,7 @@ function AppContent() {
           carrito={carrito}
           setCarrito={setCarrito}
           onClose={handleCloseCartModal}
+          onUpdateItemQuantity={handleUpdateCartItemQuantity} 
           onRemoveFromCart={handleRemoveFromCart}
           totalPrice={totalPrice}
         />
