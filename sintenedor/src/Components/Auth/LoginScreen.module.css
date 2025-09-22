@@ -36,7 +36,7 @@
     color: #555;
     font-weight: bold;
   }
-  
+  .formGroup input[type="text"],
   .formGroup input[type="email"],
   .formGroup input[type="password"] {
     width: 100%;
@@ -88,16 +88,40 @@
     background-color: #a0c4ff; /* Azul claro cuando está deshabilitado */
     cursor: not-allowed;
   }
+
+
+  /* --- NUEVOS ESTILOS PARA EL ENLACE DE ALTERNANCIA --- */
+
+.toggleAuth {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.95em;
+  color: #555;
+  }
+  
+  .toggleLink {
+  color: #007bff; /* Mismo color que el botón para consistencia /
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none; / Elimina el subrayado por defecto */
+  transition: color 0.3s ease;
+  }
+  
+  .toggleLink:hover {
+  color: #0056b3; /* Azul oscuro en hover /
+  text-decoration: underline; / Agrega un subrayado al pasar el cursor */
+  }
   
   /* Responsive adjustments */
   @media (max-width: 600px) {
-    .loginContainer {
-      padding: 15px;
-    }
-    .form {
-      padding: 25px;
-    }
-    .loginContainer h2 {
-      font-size: 1.8em;
-    }
+  .loginContainer {
+  padding: 15px;
   }
+  .form {
+  padding: 25px;
+  }
+  .loginContainer h2 {
+  font-size: 1.8em;
+  }
+  }
+  
