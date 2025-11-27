@@ -13,53 +13,65 @@ import ContactForm from './Components/layout/ContactForm';
 import Footer from './Components/layout/footer';
 import Nosotros from './Components/layout/Nosotros';
 import LoginScreen from './Components/Auth/LoginScreen';
-import { AuthProvider, useAuth  } from './Context/AuthContext';
+import ForgotPassword from './Components/Auth/ForgotPassword';
+import ResetPassword from './Components/Auth/ResetPassword';
+import { AuthProvider, useAuth } from './Context/AuthContext';
 //import { getPizzasArray } from './data/pizzas'; 
 
 // Este componente AppContent contendrá la lógica de renderizado condicional.
 // Necesita estar DENTRO del <AuthProvider> para poder usar useAuth().
-function AppContent() { 
+function AppContent() {
   const [carrito, setCarrito] = useState([]);
   const [selectedPizza, setSelectedPizza] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   const [pizzas, setPizzas] = useState([]);
   const [isLoadingPizzas, setIsLoadingPizzas] = useState(true);
-  const { isAuthenticated, isLoading: isLoadingAuth, user } = useAuth(); 
+  const { isAuthenticated, isLoading: isLoadingAuth, user } = useAuth();
 
- // const totalPrice = carrito.reduce((sum, item) => sum + item.totalItemPrice, 0);
+  const [resetToken, setResetToken] = useState(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("resetToken");
+
+    if (token) {
+      setResetToken(token);
+    }
+  }, []);
+
 
 
   const totalItemsInCart = carrito.length;
   const [totalPrice, setTotalPrice] = useState(0);
 
-// Esta es la función que necesitas agregar
-const handleUpdateCartItemQuantity = (pizzaId, size, type) => {
+  // Esta es la función que necesitas agregar
+  const handleUpdateCartItemQuantity = (pizzaId, size, type) => {
     setCarrito(prevCarrito => {
-        const updatedCarrito = prevCarrito.map(item => {
-            // Buscamos el ítem específico por su ID y su tamaño
-            if (item.pizzaId === pizzaId && item.size === size) {
-                const newQuantity = type === 'increase'
-                    ? item.quantity + 1
-                    : Math.max(1, item.quantity - 1);
-                
-                // Retornamos una copia del objeto con la nueva cantidad
-                return { ...item, quantity: newQuantity };
-            }
-            return item; // Retornamos el ítem sin cambios
-        });
-        return updatedCarrito;
+      const updatedCarrito = prevCarrito.map(item => {
+        // Buscamos el ítem específico por su ID y su tamaño
+        if (item.pizzaId === pizzaId && item.size === size) {
+          const newQuantity = type === 'increase'
+            ? item.quantity + 1
+            : Math.max(1, item.quantity - 1);
+
+          // Retornamos una copia del objeto con la nueva cantidad
+          return { ...item, quantity: newQuantity };
+        }
+        return item; // Retornamos el ítem sin cambios
+      });
+      return updatedCarrito;
     });
-};
+  };
 
 
-useEffect(() => {
-  const newTotalPrice = carrito.reduce((sum, item) => {
-    // Por cada ítem, multiplica la cantidad por el precio y lo suma al total
-    return sum + (item.quantity * item.price);
-  }, 0); // El 0 es el valor inicial de la suma
-  setTotalPrice(newTotalPrice);
-}, [carrito]);
+  useEffect(() => {
+    const newTotalPrice = carrito.reduce((sum, item) => {
+      // Por cada ítem, multiplica la cantidad por el precio y lo suma al total
+      return sum + (item.quantity * item.price);
+    }, 0); // El 0 es el valor inicial de la suma
+    setTotalPrice(newTotalPrice);
+  }, [carrito]);
 
 
 
@@ -87,12 +99,12 @@ useEffect(() => {
 
 
   const handlePizzaClick = (pizzaId) => {
-    console.log("El ID recibido es:", pizzaId); 
+    console.log("El ID recibido es:", pizzaId);
     if (!Array.isArray(pizzas)) {
-     // console.error("Error: 'pizzas' no es un array. No se puede buscar la pizza.");
+      // console.error("Error: 'pizzas' no es un array. No se puede buscar la pizza.");
       return;
     }
-   // console.log("El array de pizzas es:", pizzas); 
+    // console.log("El array de pizzas es:", pizzas); 
 
 
 
@@ -117,36 +129,36 @@ useEffect(() => {
     // itemsToAdd ahora es un array. Usamos 'flat' para aplanarlo
     // y 'filter' para evitar duplicados si se da el caso
     setCarrito(prevCarrito => {
-        // Combinamos el carrito anterior con el nuevo array de ítems
-        return [...prevCarrito, ...itemsToAdd];
+      // Combinamos el carrito anterior con el nuevo array de ítems
+      return [...prevCarrito, ...itemsToAdd];
     });
-};
+  };
 
- // En tu archivo src/App.js
-const handleRemoveFromCart = (pizzaId, size) => {
-  setCarrito(prevCarrito => {
+  // En tu archivo src/App.js
+  const handleRemoveFromCart = (pizzaId, size) => {
+    setCarrito(prevCarrito => {
       // Filtramos el carrito para eliminar el ítem que coincide tanto en ID como en tamaño
       return prevCarrito.filter(item => !(item.pizzaId === pizzaId && item.size === size));
-  });
-};
+    });
+  };
 
- // 4. Cambiamos la lógica del isLoading para que combine ambos estados
- if (isLoadingAuth || isLoadingPizzas) {
-  return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '24px' }}>
-      Cargando...
-    </div>
-  );
-}
+  // 4. Cambiamos la lógica del isLoading para que combine ambos estados
+  if (isLoadingAuth || isLoadingPizzas) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '24px' }}>
+        Cargando...
+      </div>
+    );
+  }
 
   return (
     <>
       <Header
         onOpenCartModal={() => setIsCartModalOpen(true)}
         totalItemsInCart={totalItemsInCart}
-        isAuthenticated={isAuthenticated} 
+        isAuthenticated={isAuthenticated}
       />
-      
+
       <main>
         {/* --- ESTA SECCIÓN SIEMPRE VISIBLE: EL MENÚ DE PIZZAS --- */}
         <section id="menu" className={appStyles.container}>
@@ -154,12 +166,23 @@ const handleRemoveFromCart = (pizzaId, size) => {
           <PizzaList pizzas={pizzas} onPizzaClick={handlePizzaClick} />
         </section>
 
-        {/* --- LA PANTALLA DE LOGIN SOLO SI NO ESTÁ AUTENTICADO --- */}
+
         {!isAuthenticated && (
           <section id="login-section" className={appStyles.container}>
-            <LoginScreen />
+
+            {/* Si llegó token, solo muestra ResetPassword */}
+            {resetToken ? (
+              <ResetPassword token={resetToken} />
+            ) : (
+              <>
+                <LoginScreen />
+                <ForgotPassword />
+              </>
+            )}
+
           </section>
         )}
+
 
         <section id="about" className={appStyles.aboutSection}>
           <Nosotros />
@@ -174,7 +197,7 @@ const handleRemoveFromCart = (pizzaId, size) => {
           carrito={carrito}
           setCarrito={setCarrito}
           onClose={handleCloseCartModal}
-          onUpdateItemQuantity={handleUpdateCartItemQuantity} 
+          onUpdateItemQuantity={handleUpdateCartItemQuantity}
           onRemoveFromCart={handleRemoveFromCart}
           totalPrice={totalPrice}
         />
@@ -186,7 +209,7 @@ const handleRemoveFromCart = (pizzaId, size) => {
           onAddToCart={handleAddToCart}
         />
       )}
-      
+
       <Footer />
     </>
   );
