@@ -1,9 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-export default function ResetPassword() {
-  const [token, setToken] = useState("");
+export default function ResetPassword({ token: initialToken }) {
+  const [token, setToken] = useState(initialToken || "");
   const [newPassword, setNewPassword] = useState("");
   const [message, setMessage] = useState(null);
+
+  // ⬇️ LEER TOKEN DESDE LA URL (Fallback si no viene como prop)
+  useEffect(() => {
+    if (!token) {
+      const params = new URLSearchParams(window.location.search);
+      const urlToken = params.get("token") || params.get("resetToken"); // Buscamos ambos por si acaso
+
+      if (urlToken) {
+        setToken(urlToken);
+      }
+    }
+  }, [token]);
+
+
+
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
